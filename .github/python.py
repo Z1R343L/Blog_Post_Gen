@@ -37,7 +37,7 @@ from pathlib import Path
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
 
 dirName = ".github/cms/blog_posts"
-outputFolder = "blog_posts"
+outputFolder = "/blog_posts/"
 
 os.makedirs(os.path.dirname(outputFolder), exist_ok=True)
 ## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
