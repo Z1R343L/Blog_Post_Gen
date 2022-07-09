@@ -64,7 +64,7 @@ for file in getListOfFiles(dirName):
         # Grab only the file name from the string
 
 
-        for line in conf:
+        for line in file:
             if ":" in line:
                     name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
                     var[name] = str(value).rstrip() # needs a value added
