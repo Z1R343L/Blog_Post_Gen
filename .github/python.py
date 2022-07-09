@@ -74,44 +74,44 @@ for file in getListOfFiles(dirName):
 
         
 
-        if not data['BlogTitle']:
+        if data['BlogTitle']:
             BlogTitle = "Blog Post"
         else:
             BlogTitle = data['BlogTitle']
-        if not data['BlogDate']:
+        if data['BlogDate']:
             BlogDate = ""
         else:
           BlogDate = data['BlogDate']
 
-        if not data['SEO_Title']:
+        if data['SEO_Title']:
            SiteTitle = "Site Name"
         else:
            SiteTitle = data['SEO_Title'] + "| Site Name"
 
         Facebook_Meta = ""
 
-        if not data['OG_Title']:
+        if data['OG_Title']:
           pass
         else:
           Facebook_Meta += """<meta property="og:title" content="Simply Docs Demo">"""
 
-        if not data['OG_Image']:
+        if data['OG_Image']:
           pass
         else:
           Facebook_Meta += """<meta property="og:image" content="./assets/images/OG_image.png">"""
 
 
-        if not data['OG_URL']:
+        if data['OG_URL']:
           pass
         else:
           Facebook_Meta += """<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">"""
 
-        if not data['OG_Type']:
+        if data['OG_Type']:
           pass
         else:
           Facebook_Meta += """<meta property="og:type" content="article">"""
 
-        if not data['OG_Description']:
+        if data['OG_Description']:
           pass
         else:
           Facebook_Meta += """<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">"""
