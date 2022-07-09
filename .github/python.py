@@ -73,10 +73,11 @@ for file in getListOfFiles(dirName):
         data = var 
 
         
-	if not data['BlogTitle']:
+
+        if not data['BlogTitle']:
             BlogTitle = "Blog Post"
         else:
-          BlogTitle = data['BlogTitle']
+            BlogTitle = data['BlogTitle']
         if not data['BlogDate']:
             BlogDate = ""
         else:
