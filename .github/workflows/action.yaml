@@ -1,0 +1,30 @@
+name: Markdown
+
+on: push
+
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+
+    steps: 
+    - uses: actions/checkout@v2
+
+
+     # Setup Python
+    - run: sudo apt-get install python3
+    - uses: actions/checkout@v2
+    - name: Convert Markdown To HTML 
+    # Run the Python Script
+      run: python3 .github/markdown-to-html.py
+
+
+
+    - name: Commit and Push Updated Content 
+      run: |
+         git config --global user.name "github-actions[bot]"
+         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+         git add -A
+         git commit -m "Updated Static Content"
+         git push
