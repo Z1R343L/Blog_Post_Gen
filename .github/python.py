@@ -15,20 +15,20 @@ from pathlib import Path
 
 ## Permalink Settings
 
-permalinks_file= ".github/static-gen/settings/permalinks.md"
-permalinks_file_contents = None
+#permalinks_file= ".github/static-gen/settings/permalinks.md"
+#permalinks_file_contents = None
 
 ## NEEDS IMPROVEMENT
 
-PermaLinks = {}
-with open(permalinks_file) as f:
-        for line in f:
-                if ":" in line:
-                        PermaLink, value = line.split('=================END OF PERMALINK SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-                        PermaLinks[PermaLink] = str(value).rstrip() # needs a value added					
+#PermaLinks = {}
+#with open(permalinks_file) as f:
+ #       for line in f:
+  #              if ":" in line:
+   #                     PermaLink, value = line.split('=================END OF PERMALINK SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+    #                    PermaLinks[PermaLink] = str(value).rstrip() # needs a value added					
 			
-globals().update(PermaLinks)
-output_file = PermaLinks['Blog_PermaLink']
+#globals().update(PermaLinks)
+#output_file = PermaLinks['Blog_PermaLink']
 
 
 
@@ -36,7 +36,7 @@ output_file = PermaLinks['Blog_PermaLink']
 
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
 
-dirName = ".github/static-gen/content"
+dirName = ".github/cms/blog_posts"
 
 ## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
 ## Need to remove paths that were changed for perma links automacially?
@@ -56,7 +56,7 @@ def getListOfFiles(dirName):
     return allFiles
 
 
-
+var = {}
 for file in getListOfFiles(dirName):
     with open(file, 'r') as f:
         file_contents = f.read()
@@ -64,319 +64,61 @@ for file in getListOfFiles(dirName):
         # Grab only the file name from the string
 
 
-        # Need to work on putting files in right locations with permalink functions 
-        if ".github/static-gen/content/" in file:
-          try:
-             file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1] # Get all after before SEO settings
-          except:
-            ## If file does not contain settings (pass) for now. Will be future requirement 
-            pass
-
-
-       ## This does NOT work 
+        for line in conf:
+            if ":" in line:
+                    name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+                    var[name] = str(value).rstrip() # needs a value added
+                    globals().update(var)
         
-      #  if ".github/static-gen/content/blog_posts/" in file: 
-     #     ## If blog post - define template & grab file path and more here.
-    #      Template = f"""<link rel="stylesheet" href="./assets/style.css">
-   #       <h1> Example Blop Post</h1>
-	#<body>{file_contents}</body>
-	 #  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
-	#"""
+        data = var 
 
-        if "index" in file: 
-          Template = f"""<link rel="stylesheet" href="./assets/style.css">
-	<body>{file_contents}</body>
-	   <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
-	"""
-          FilePath = ""
+        BlogTitle = data['BlogTitle']
+        if not data['BlogDate']:
+            BlogDate = ""
         else:
-          Template = f"""<link rel="stylesheet" href="./assets/style.css">
-	<body>{file_contents}</body>
-	   <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
-	"""
-          FilePath = "test/"   
+          BlogDate = data['BlogDate']
 
-        file_name = FilePath + Path(file).stem + ".html"
+        if not data['SEO_Title']:
+           SiteTitle = "Site Name"
+        else:
+           SiteTitle = data['SEO_Title'] + "| Site Name"
+
+        Facebook_Meta = ""
+
+        if not data['OG_Title']:
+          pass
+        else:
+          Facebook_Meta += """<meta property="og:title" content="Simply Docs Demo">"""
+
+        if not data['OG_Image']:
+          pass
+        else:
+          Facebook_Meta += """<meta property="og:image" content="./assets/images/OG_image.png">"""
+
+
+        if not data['OG_URL']:
+          pass
+        else:
+          Facebook_Meta += """<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">"""
+
+        if not data['OG_Type']:
+          pass
+        else:
+          Facebook_Meta += """<meta property="og:type" content="article">"""
+
+        if not data['OG_Description']:
+          pass
+        else:
+          Facebook_Meta += """<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">"""
+
+
+	
+
+        file_name = Path(file).stem + ".html"
 
         try:
           with codecs.open(file_name, 'w', encoding='utf-8') as f:
-            f.write(Template)
-        except IOError: 
-         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
-  
-
-    
-
-
-
-# Permalinks for File Paths
-
-## Permalink Settings
-
-#permalinks_file= ".github/static-gen/settings/permalinks.md"
-#permalinks_file_contents = None
-
-## NEEDS IMPROVEMENT
-
-#PermaLinks = {}
-#with open(permalinks_file) as f:
- #       for line in f:
-  #              if ":" in line:
-   #                     PermaLink, value = line.split('=================END OF PERMALINK SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-    #                    PermaLinks[PermaLink] = str(value).rstrip() # needs a value added					
-			
-#globals().update(PermaLinks)
-#output_file = PermaLinks['Blog_PermaLink'] + "blog_post.html"
-# Define Input File Names / Paths Here
-
-
-#os.makedirs(os.path.dirname(output_file), exist_ok=True)
-
-# Blog File Example
-input_file = ".github/static-gen/content/blog_posts/EXAMPLE.MD"
-input_file_contents = None
-
-# Index File
-#index_file = ".github/static-gen/content/index.md"
-#index_file_contents = None
-
-# Setting(s) Files
-
-## Nav Menu
-#nav_menu_settings_file= "./content/settings/nav_menu.md"
-#nav_menu_settings_file_contents = None
-
-
-
-
-# Define Output File Names Here
-#index_output_file = "index.html"
-
-
-# Open the templates
-#blog_post_template = ".github/static-gen/html_templates/blog_post.html"
-
-#try:
- #   with open(blog_post_template, 'r') as f:
-  #      blog_post_template_contents = f.read()
-#except IOError:
- #   sys.exit('Template does not exist, or has no content.  Exiting')
-
-
-
-# Open our file and
-#try:
-   # with open(input_file, 'r') as f:
-  #      input_file_contents = f.read()
- #       input_file_contents = input_file_contents.split("=================END OF SEO SETTINGS============",1)[1] # Get all after before SEO settings
-        
-#except IOError:
- #   sys.exit('Input file does not exist, or has no content.  Exiting')
-
-# Open Index File
-
-#try:
-  #  with open(index_file, 'r') as f:
- #       index_file_contents = f.read()
-        
-        
-#except IOError:
- #   sys.exit('Input file does not exist, or has no content.  Exiting')
-
-
-
-
-
-#var = {}
-#with open(input_file) as conf:
- #       for line in conf:
- #               if ":" in line:
-  #                      name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-   #                     var[name] = str(value).rstrip() # needs a value added
-
-#globals().update(var)	
-
-#NavMenuLinks = {}
-#with open(nav_menu_settings_file) as nav_menu_file:
- #       for line in nav_menu_file:
-  #              if ":" in line:
-   #                     Link, value = line.split('=================END OF NAV MENU============')[0].split(':')  # Needs replaced with regex match 
-    #                    NavMenuLinks[Link] = str(value).rstrip() # needs a value added		
-			
-			
-
-    
-# Set github url
-#github_url = PUBLIC_GITHUB_MARKDOWN_URL
-
-# Make the request to github to create markdown
-#payload = {"text": input_file_contents, "mode": "markdown"}
-#html_response = requests.post(github_url, json=payload)
-
-# Determine our output file
-#if output_file:
- #   output_file = output_file
-#else:
- #   output_file = u'{0}.html'.format(input_file)
-
-# ensure we have a .html suffix on our file
-#if index_output_file[-5:] != '.html':
-#    index_output_file += '.html'
-
-#if index_output_file:
- #   index_output_file = index_output_file
-#else:
- #   index_output_file = u'{0}.html'.format(index_file)
-
-# ensure we have a .html suffix on our file
-#if index_output_file[-5:] != '.html':
- #   index_output_file += '.html'
-
-
-
-#NavMenu = NavMenuLinks
-
-#if not NavMenu['Link']:
- # NavMenu_Content = ""
-#else:
- # NavMenu_Content = NavMenu['Link']
-
-
-#for value in NavMenu:
-#	print(value)
-
-
-
-
-# Open our file and
-try:
-    with open(input_file, 'r') as f:
-        input_file_contents = f.read()
-        input_file_contents = input_file_contents.split("=================END OF SEO SETTINGS============",1)[1] # Get all after before SEO settings
-        
-except IOError:
-    sys.exit('Input file does not exist, or has no content.  Exiting')
-
-# Open Index File
-
-#try:
-  #  with open(index_file, 'r') as f:
- #       index_file_contents = f.read()
-        
-        
-#except IOError:
-   # sys.exit('Input file does not exist, or has no content.  Exiting')
-
-
-
-
-
-var = {}
-with open(input_file) as conf:
-        for line in conf:
-                if ":" in line:
-                        name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-                        var[name] = str(value).rstrip() # needs a value added
-
-globals().update(var)	
-
-#NavMenuLinks = {}
-#with open(nav_menu_settings_file) as nav_menu_file:
- #       for line in nav_menu_file:
-  #              if ":" in line:
-   #                     Link, value = line.split('=================END OF NAV MENU============')[0].split(':')  # Needs replaced with regex match 
-    #                    NavMenuLinks[Link] = str(value).rstrip() # needs a value added		
-			
-			
-
-    
-# Set github url
-#github_url = PUBLIC_GITHUB_MARKDOWN_URL
-
-# Make the request to github to create markdown
-#payload = {"text": input_file_contents, "mode": "markdown"}
-#html_response = requests.post(github_url, json=payload)
-
-# Determine our output file
-#if output_file:
- #   output_file = output_file
-#else:
- #   output_file = u'{0}.html'.format(input_file)
-
-# ensure we have a .html suffix on our file
-#if index_output_file[-5:] != '.html':
-#    index_output_file += '.html'
-
-#if index_output_file:
- #   index_output_file = index_output_file
-#else:
- #   index_output_file = u'{0}.html'.format(index_file)
-
-# ensure we have a .html suffix on our file
-#if index_output_file[-5:] != '.html':
- #   index_output_file += '.html'
-
-
-
-#NavMenu = NavMenuLinks
-
-#if not NavMenu['Link']:
- # NavMenu_Content = ""
-#else:
- # NavMenu_Content = NavMenu['Link']
-
-
-#for value in NavMenu:
-#	print(value)
-
-data = var 
-
-BlogTitle = data['BlogTitle']
-if not data['BlogDate']:
-  BlogDate = ""
-else:
-  BlogDate = data['BlogDate']
-
-if not data['SEO_Title']:
-  SiteTitle = "Site Name"
-else:
-  SiteTitle = data['SEO_Title'] + "| Site Name"
-
-Facebook_Meta = ""
-
-if not data['OG_Title']:
-  pass
-else:
-  Facebook_Meta += """<meta property="og:title" content="Simply Docs Demo">"""
-
-if not data['OG_Image']:
-  pass
-else:
-  Facebook_Meta += """<meta property="og:image" content="./assets/images/OG_image.png">"""
-
-
-if not data['OG_URL']:
-  pass
-else:
-  Facebook_Meta += """<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">"""
-
-if not data['OG_Type']:
-  pass
-else:
-  Facebook_Meta += """<meta property="og:type" content="article">"""
-
-if not data['OG_Description']:
-  pass
-else:
-  Facebook_Meta += """<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">"""
-
-
-output_file = output_file + "blog_post_SEO_test.html"
-
-# Write the file out that we have created
-try:
-    with codecs.open(output_file, 'w', encoding='utf-8') as f:
-        f.write(f"""<head><title>{SiteTitle}</title>
+            f.write(f"""<head><title>{SiteTitle}</title>
             <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -551,24 +293,14 @@ pre[class*="language-"] {
       </div>
     </div>
     <div class="container blogpost-content"> """ +
-   input_file_contents + """
+   file_contents + """
     </div>
 	</body>
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
 	""")
-except IOError:
-    sys.exit(u'Unable to write to file: {0}'.format(output_file))
+        except IOError: 
+         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
+  
 
+    
 
-
-
-# Write the index file out
-#try:
- #   with codecs.open(index_output_file, 'w', encoding='utf-8') as f:
-  #      f.write(f"""
-	#<link rel="stylesheet" href="./assets/style.css">
-	#<body>{index_file_contents}</body>
-	#   <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
-	#""")
-#except IOError: 
- #   sys.exit(u'Unable to write to file: {0}'.format(index_output_file))
