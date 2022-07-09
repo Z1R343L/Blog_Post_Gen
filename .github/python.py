@@ -62,7 +62,7 @@ for file in getListOfFiles(dirName):
     with open(file, 'r') as f:
         file_contents = f.read()
         file_contents = file_contents
-        # Grab only the file name from the string
+
 
 
         for line in file:
@@ -89,7 +89,10 @@ for file in getListOfFiles(dirName):
 	
 
         file_name = outputFolder + Path(file).stem + ".html"
-
+        try:
+           input_file_contents = input_file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+        except:
+          pass
         try:
           with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
