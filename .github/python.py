@@ -71,52 +71,20 @@ for file in getListOfFiles(dirName):
                     
         globals().update(var)
         data = var 
-
-        
-
-        if data['BlogTitle']:
-            BlogTitle = "Blog Post"
-        else:
-            BlogTitle = data['BlogTitle']
-        if data['BlogDate']:
-            BlogDate = ""
-        else:
-          BlogDate = data['BlogDate']
-
-        if data['SEO_Title']:
-           SiteTitle = "Site Name"
-        else:
-           SiteTitle = data['SEO_Title'] + "| Site Name"
-
         Facebook_Meta = ""
+        BlogTitle = "Blog Post"
+        BlogDate = ""
+        SiteTitle = "Site Name"
 
-        if data['OG_Title']:
+        Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
+        try:
+           BlogTitle = data['BlogTitle']
+           BlogDate = data['BlogDate']
+           SiteTitle = data['SEO_Title'] + "| Site Name"
+        except KeyError:
           pass
-        else:
-          Facebook_Meta += """<meta property="og:title" content="Simply Docs Demo">"""
 
-        if data['OG_Image']:
-          pass
-        else:
-          Facebook_Meta += """<meta property="og:image" content="./assets/images/OG_image.png">"""
-
-
-        if data['OG_URL']:
-          pass
-        else:
-          Facebook_Meta += """<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">"""
-
-        if data['OG_Type']:
-          pass
-        else:
-          Facebook_Meta += """<meta property="og:type" content="article">"""
-
-        if data['OG_Description']:
-          pass
-        else:
-          Facebook_Meta += """<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">"""
-
-
+      
 	
 
         file_name = Path(file).stem + ".html"
