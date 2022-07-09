@@ -37,11 +37,8 @@ from pathlib import Path
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
 
 dirName = ".github/cms/blog_posts"
-outputFolder = Path("blog_posts/")
-
-
-outputFolder.mkdir(parents=True, exist_ok=True)
-
+outputFolder = "blog_posts/"
+os.makedirs(outputFolder, exist_ok=True)  # succeeds even if directory exists.
 ## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
 ## Need to remove paths that were changed for perma links automacially?
 def getListOfFiles(dirName):
