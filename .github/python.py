@@ -41,9 +41,7 @@ outputFolder = Path("blog_posts/")
 
 
 outputFolder.mkdir(parents=True, exist_ok=True)
-import os
-if not os.path.exists(directory):
-    os.makedirs(directory)
+
 ## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
 ## Need to remove paths that were changed for perma links automacially?
 def getListOfFiles(dirName):
