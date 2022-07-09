@@ -90,7 +90,7 @@ for file in getListOfFiles(dirName):
 
         file_name = outputFolder + Path(file).stem + ".html"
         try:
-           input_file_contents = input_file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+           file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
         except:
           pass
         try:
