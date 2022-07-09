@@ -37,7 +37,9 @@ from pathlib import Path
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
 
 dirName = ".github/cms/blog_posts"
+outputFolder = "blog_posts"
 
+os.makedirs(os.path.dirname(outputFolder), exist_ok=True)
 ## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
 ## Need to remove paths that were changed for perma links automacially?
 def getListOfFiles(dirName):
@@ -87,7 +89,7 @@ for file in getListOfFiles(dirName):
       
 	
 
-        file_name = Path(file).stem + ".html"
+        file_name = outputFolder + Path(file).stem + ".html"
 
         try:
           with codecs.open(file_name, 'w', encoding='utf-8') as f:
