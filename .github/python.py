@@ -61,12 +61,11 @@ var = {}
 
 varCounter = 0 
 for file in getListOfFiles(dirName):
-	varCounter + 1 
-	name = name + varCounter
-    with open(file, 'r') as f:
-      for line in f:
+  with open(file, 'r') as f:
+    varCounter + 1
+    name = name + varCounter
+    for line in f:
         if ":" in line:
-
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
                  
@@ -77,8 +76,8 @@ globals().update(var)
 
 varCounter = 0 
 for file in getListOfFiles(dirName):
-	varCounter + 1
     with open(file, 'r') as f:
+        varCounter + 1
         file_contents = f.read()
         file_contents = file_contents
 
