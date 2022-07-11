@@ -63,6 +63,7 @@ varCounter = 0
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     varCounter + 1
+    name = ""
     name = name + varCounter
     for line in f:
         if ":" in line:
