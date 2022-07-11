@@ -92,9 +92,9 @@ for file in getListOfFiles(dirName):
         Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
         try:
 
-           BlogTitle = data["SEO_Title"]
+           BlogTitle = data["Blog_Title"]
            BlogDate =  data["BlogDate"]
-           SiteTitle = data["BlogDate"]
+           SiteTitle = data["SEO_Title"]
         except KeyError:
           pass
 
