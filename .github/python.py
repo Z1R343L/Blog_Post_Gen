@@ -61,6 +61,8 @@ var = {}
 
 varCounter = 0 
 for file in getListOfFiles(dirName):
+	varCounter + 1 
+	name = name + varCounter
     with open(file, 'r') as f:
       for line in f:
         if ":" in line:
@@ -73,8 +75,9 @@ for file in getListOfFiles(dirName):
     
 globals().update(var)
 
-varCounter2 = 0 
+varCounter = 0 
 for file in getListOfFiles(dirName):
+	varCounter + 1
     with open(file, 'r') as f:
         file_contents = f.read()
         file_contents = file_contents
@@ -91,10 +94,9 @@ for file in getListOfFiles(dirName):
 
         Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
         try:
-           varCounter2 = varCounter2 + 1 
-           BlogTitle = data['BlogTitle']
-           BlogDate =  data['BlogDate']
-           SiteTitle = data['SEO_Title']
+           BlogTitle = data['BlogTitle'] + varCounter
+           BlogDate =  data['BlogDate'] + varCounter
+           SiteTitle = data['SEO_Title'] + varCounter
         except KeyError:
           pass
 
