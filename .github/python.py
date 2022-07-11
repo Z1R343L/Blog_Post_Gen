@@ -64,7 +64,7 @@ for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     varCounter + 1
     name = ""
-    name = name + int(varCounter)
+    name = name + str(varCounter)
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
@@ -94,9 +94,9 @@ for file in getListOfFiles(dirName):
 
         Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
         try:
-           BlogTitle = data['BlogTitle'] + int(varCounter)
-           BlogDate =  data['BlogDate'] + int(varCounter)
-           SiteTitle = data['SEO_Title'] + int(varCounter)
+           BlogTitle = data['BlogTitle'] + str(varCounter)
+           BlogDate =  data['BlogDate'] + str(varCounter)
+           SiteTitle = data['SEO_Title'] + str(varCounter)
         except KeyError:
           pass
 
