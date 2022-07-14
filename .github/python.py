@@ -61,7 +61,6 @@ var = {}
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    file_contents = f.read()
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
@@ -71,4 +70,5 @@ for file in getListOfFiles(dirName):
           
     
 globals().update(var)
+
 print(var)
