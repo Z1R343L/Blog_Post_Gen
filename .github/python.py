@@ -67,49 +67,33 @@ for file in getListOfFiles(dirName):
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var["name"] = str(value).rstrip() # needs a value added    
-                 
-          
-          
-    
-globals().update(var)
-
-varCounter = 0 
-for file in getListOfFiles(dirName):
-    with open(file, 'r') as f:
-        varCounter + 1
-        file_contents = f.read()
-        file_contents = file_contents
+  globals().update(var)
+  file_contents = f.read()
+  file_contents = file_contents
 
 
+  data = var 
+  Facebook_Meta = ""
+  BlogTitle = "Blog Post"
+  BlogDate = ""
+  SiteTitle = "Site Name"
 
-
-			
-        data = var 
-        Facebook_Meta = ""
-        BlogTitle = "Blog Post"
-        BlogDate = ""
-        SiteTitle = "Site Name"
-
-        Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
-        try:
+  Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
+  try:
            
-           BlogTitle = data["Blog_Title"]
-           BlogDate =  data["BlogDate"]
-           SiteTitle = data["SEO_Title"]
-        except KeyError:
-          pass
-
-      
-	
-
-        file_name = outputFolder + Path(file).stem + ".html"
-        try:
-           file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
-        except:
-          pass
-        try:
-          with codecs.open(file_name, 'w', encoding='utf-8') as f:
-            f.write(f"""<head><title>{SiteTitle}</title>
+      BlogTitle = data["Blog_Title"]
+      BlogDate =  data["BlogDate"]
+      SiteTitle = data["SEO_Title"]
+  except KeyError:
+      pass
+  file_name = outputFolder + Path(file).stem + ".html"
+  try:
+      file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+  except:
+      pass
+  try:
+      with codecs.open(file_name, 'w', encoding='utf-8') as f:
+           f.write(f"""<head><title>{SiteTitle}</title>
             <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -289,9 +273,11 @@ pre[class*="language-"] {
 	</body>
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
 	""")
-        except IOError: 
-         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
+  except IOError: 
+      sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
   
 
-    
-
+         
+                 
+          
+       
