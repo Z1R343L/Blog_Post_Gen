@@ -35,9 +35,9 @@ from pathlib import Path
 
 
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
-outputFolder = "blog_posts/"
-dirName = ".github/cms/blog_posts"
 
+dirName = ".github/cms/blog_posts"
+outputFolder = "blog_posts/"
 os.makedirs(outputFolder, exist_ok=True)  # succeeds even if directory exists.
 ## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
 ## Need to remove paths that were changed for perma links automacially?
@@ -57,46 +57,58 @@ def getListOfFiles(dirName):
     return allFiles
 
 
-
+var = {}
 
 varCounter = 0 
 for file in getListOfFiles(dirName):
-  var = {}
   with open(file, 'r') as f:
-    file_contents = f.read()
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
-  var.update(var)
-  ## 
-  			
-  data = var 
-  Facebook_Meta = ""
-  BlogTitle = "Blog Post"
-  BlogDate = ""
-  SiteTitle = "Site Name"
+                 
+          
+          
+    
+globals().update(var)
 
-  Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
-  try:
+varCounter = 0 
+for file in getListOfFiles(dirName):
+    with open(file, 'r') as f:
+        varCounter + 1
+        file_contents = f.read()
+        file_contents = file_contents
 
-      BlogTitle = data["SEO_Title"]
-      BlogDate =  data["BlogDate"]
-      SiteTitle = data["BlogDate"]
-  except KeyError:
-        pass
+
+
+
+			
+        data = var 
+        Facebook_Meta = ""
+        BlogTitle = "Blog Post"
+        BlogDate = ""
+        SiteTitle = "Site Name"
+
+        Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
+        try:
+
+           BlogTitle = data["SEO_Title"]
+           BlogDate =  data["BlogDate"]
+           SiteTitle = data["BlogDate"]
+        except KeyError:
+          pass
 
       
 	
-  outputFolder = "blog_posts/"
-  file_name = outputFolder + Path(file).stem + ".html"
-  try:
-      file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
-  except:
-      pass
-  try:
-    with codecs.open(file_name, 'w', encoding='utf-8') as f:
-      f.write(f"""<head><title>{SiteTitle}</title>
+
+        file_name = outputFolder + Path(file).stem + ".html"
+        try:
+           file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+        except:
+          pass
+        try:
+          with codecs.open(file_name, 'w', encoding='utf-8') as f:
+            f.write(f"""<head><title>{SiteTitle}</title>
             <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -276,11 +288,6 @@ pre[class*="language-"] {
 	</body>
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
 	""")
-    globals().clear()
-
-  except IOError: 
-        sys.exit(u'Unable to write to files: {0}'.format(file_contents)) 
-         
-
-                 
-       
+        except IOError: 
+         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
+  
