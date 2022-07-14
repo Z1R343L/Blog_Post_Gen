@@ -72,16 +72,14 @@ for file in getListOfFiles(dirName):
     
 globals().update(var)
 
-
-data = var     
-print(data)
-print(data["SEO_Title"])
+   
 Facebook_Meta = ""
 BlogTitle = "Blog Post"
 BlogDate = ""
 SiteTitle = "Site Name"
 Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
 try:
+  data = var  
   BlogTitle = data["SEO_Title"]
   BlogDate =  data["BlogDate"]
   SiteTitle = data["BlogDate"]
