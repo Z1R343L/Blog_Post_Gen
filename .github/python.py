@@ -35,7 +35,7 @@ from pathlib import Path
 
 
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
-
+outputFolder = "blog_posts/"
 dirName = ".github/cms/blog_posts"
 
 os.makedirs(outputFolder, exist_ok=True)  # succeeds even if directory exists.
