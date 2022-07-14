@@ -1,4 +1,4 @@
-
+import codecs
 # Open Index File
 index_file_contents = ".github/index.md"
 try:
