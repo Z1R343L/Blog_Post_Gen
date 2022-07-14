@@ -68,3 +68,4 @@ for file in getListOfFiles(dirName):
           globals().update(var)
           print(var)
           var.clear()
+    print("hello")
