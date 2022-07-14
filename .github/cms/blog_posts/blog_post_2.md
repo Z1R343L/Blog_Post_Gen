@@ -2,7 +2,7 @@
 
 <code>Blog Title</code>
 
-BlogTitle:Hell2o World
+BlogTitle:Coool 
 
 <code>Blog Post Date</code>
 
@@ -10,7 +10,7 @@ BlogDate:Test 2, 2020
 
 <code>Site Title</code>
 
-SEO_Title:Helloo
+SEO_Title:Hellodo
 
 <code>OG Data (Optional)</code>
 
