@@ -275,7 +275,7 @@ pre[class*="language-"] {
 	</body>
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
 	""")
-    data.clear()
+    globals().clear(var)
 
   except IOError: 
         sys.exit(u'Unable to write to files: {0}'.format(file_contents)) 
