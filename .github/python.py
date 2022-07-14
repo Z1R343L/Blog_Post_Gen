@@ -61,7 +61,6 @@ var = {}
 
 for file in getListOfFiles(dirName):
     with open(file, 'r') as f:
-        varCounter + 1
         file_contents = f.read()
         file_contents = file_contents
 
