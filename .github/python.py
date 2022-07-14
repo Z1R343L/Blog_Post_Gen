@@ -59,30 +59,18 @@ def getListOfFiles(dirName):
 
 var = {}
 
-varCounter = 0 
-for file in getListOfFiles(dirName):
-  with open(file, 'r') as f:
-    for line in f:
-        if ":" in line:
-          name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-          var[name] = str(value).rstrip() # needs a value added    
-                 
-          
-          
-    
-globals().update(var)
-
-varCounter = 0 
 for file in getListOfFiles(dirName):
     with open(file, 'r') as f:
         varCounter + 1
         file_contents = f.read()
         file_contents = file_contents
 
+        for line in f:
+          if ":" in line:
+            name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+            var[name] = str(value).rstrip() # needs a value added    
 
-
-
-			
+        globals().update(var)
         data = var 
         Facebook_Meta = ""
         BlogTitle = "Blog Post"
@@ -287,7 +275,8 @@ pre[class*="language-"] {
     </div>
 	</body>
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
-	""")
+	""")  
+          globals.clear()
         except IOError: 
          sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
   
