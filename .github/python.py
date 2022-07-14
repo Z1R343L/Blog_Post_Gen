@@ -71,7 +71,7 @@ for file in getListOfFiles(dirName):
 
         globals().update(var)
         data = var 
-	print(data)
+	      print(data)
         Facebook_Meta = ""
         BlogTitle = "Blog Post"
         BlogDate = ""
