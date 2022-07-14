@@ -17,7 +17,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Convert Markdown To HTML 
     # Run the Python Script
-      run: python3 .github/python.py
+      run: |
+         python3 .github/python.py 
+         python3 .github/create_index_file.py
 
 
 
