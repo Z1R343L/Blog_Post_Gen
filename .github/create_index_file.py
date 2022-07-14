@@ -9,9 +9,10 @@ try:
 except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')
 
+index_file_name = "index.html"
     
 try:
-    with codecs.open(file_name, 'w', encoding='utf-8') as f:
+    with codecs.open(index_file_name, 'w', encoding='utf-8') as f:
         f.write(f"""{index_file_contents}""")
 except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')  
