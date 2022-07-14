@@ -66,5 +66,5 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
           globals().update(var)
-	        print(var)
-          var.clear()		
+          print(var)
+          var.clear()
