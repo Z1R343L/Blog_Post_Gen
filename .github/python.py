@@ -65,10 +65,11 @@ for file in getListOfFiles(dirName):
     for line in f:
       name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
       var[name] = str(value).rstrip() # needs a value added    
+      globals().update(var)
 
-    globals().update(var)
     data = var     
     print(data)
+    print(data["SEO_Title"])
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     BlogDate = ""
