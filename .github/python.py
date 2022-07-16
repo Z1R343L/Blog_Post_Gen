@@ -15,7 +15,7 @@ var = {}
 
 # Open main settings file
 settings_file = ".github/settings.md" 
-with open(file, 'r') as f:
+with open(settings_file, 'r') as f:
   for line in f:
    print(line)
    if ":" in line:
