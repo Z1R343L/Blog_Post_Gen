@@ -43,9 +43,9 @@ try:
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simply Docs Demo | Home</title>
-<script src="/Blog_Post_Gen/assets/js/toc-generator.js"></script>   
+<script src="/Blog_Post_Gen/assets/js/toc_generator.js"></script>   
 <meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
-<link rel="stylesheet" href="/Blog_Post_Gen//assets/style.css">
+<link rel="stylesheet" href="/Blog_Post_Gen/assets/style.css">
 </head>
         
         <header>
@@ -68,11 +68,13 @@ try:
 
 </ul>
 
- {index_file_contents}
 
         
         
       </fieldset>
+      
+      
+ {index_file_contents}
 <a href="https://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip"><button>Download This Template</button></a>
 <footer>
       <p>Simply Docs was created by <a href="https://github.com/MarketingPipeline/">Marketing Pipeline</a> and is licensed under the MIT license.</p>
