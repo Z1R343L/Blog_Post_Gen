@@ -53,7 +53,12 @@ with open(permalinks_file) as f:
 
 dirName = ".github/cms/blog_posts"
 outputFolder = "blog_posts/"
-os.makedirs(outputFolder, exist_ok=True)  # succeeds even if directory exists.
+os.makedirs(outputFolder, exist_ok=True)
+
+outputFolder2 = "pages/"
+os.makedirs(outputFolder, exist_ok=True)
+
+# succeeds even if directory exists.
 ## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
 ## Need to remove paths that were changed for perma links automacially?
 def getListOfFiles(dirName):
