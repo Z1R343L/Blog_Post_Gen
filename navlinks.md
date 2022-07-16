@@ -1,8 +1,11 @@
 
-Link: ./blog_posts/blog_post_2.html New_Window:True Title:ello Position:1 
+
+Link: null New_Window:False Title:Home Position:1 
+
+Link: pages/blog_posts/ New_Window:True Title:Blog Position:1 
 
 
-Link: dfsssssssssshttp://Link2.com/ New_Window:True Title:elld Position:2
+Link:github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip New_Window:True Title:elld Position:2
 
 
 Link: testtwo.com New_Window:True Title:ello Position:3 
