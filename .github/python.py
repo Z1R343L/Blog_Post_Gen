@@ -19,7 +19,7 @@ with open(settings_file) as f:
   file_contents = f.read()
   for line in f:
     if ":" in line:
-     name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+     name, value = line.split('=================END OF SETTINGS============')[0].split(':')  # Needs replaced with regex match 
      var[name] = str(value).rstrip() # needs a value added  
   globals().update(var)
 	
