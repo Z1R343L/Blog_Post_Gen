@@ -21,7 +21,7 @@ permalinks_file_contents = None
 ## NEEDS IMPROVEMENT
 
 #PermaLinks = {}
-pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?) '
+pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?)'
 with open(permalinks_file) as f:
   file_contents = f.read()
   for line in file_contents:
