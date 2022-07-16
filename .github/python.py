@@ -111,7 +111,7 @@ for file in getListOfFiles(dirName):
     ## Another github error / ms code error
     try:
         data = var 
-	      AssetPath = data["Asset_Path"] 
+	AssetPath = data["Asset_Path"] 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
         SiteTitle = data["BlogDate"]
