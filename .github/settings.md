@@ -1,6 +1,8 @@
 =================START OF SETTINGS============
 
-AssetPath: /Blog_Post_Gen/
+Test: hello
+
+weird: hello
 
 
 =================END OF SETTINGS============
