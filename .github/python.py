@@ -21,8 +21,8 @@ with open(file, 'r') as f:
    if ":" in line:
     name, value = line.split('=================END OF SETTINGS============')[0].split(':')  # Needs replaced with regex match 
     var[name] = str(value).rstrip() # needs a value added    
- globals().update(var)
- print(var)
+  globals().update(var)
+  print(var)
 print(var)
 # Blog Posts for Blog Page
 
