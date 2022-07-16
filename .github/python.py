@@ -11,6 +11,10 @@ import json
 from pathlib import Path
 
 
+# Blog Posts for Blog Page
+
+blog_posts = ""
+
 # Permalinks for File Paths
 
 ## Permalink Settings
@@ -78,10 +82,12 @@ for file in getListOfFiles(dirName):
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
     file_contents = f.read()       
-    #
+
+
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     BlogDate = ""
+    BlogDescription = ""
     SiteTitle = "Site Name"
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     try:
@@ -92,6 +98,11 @@ for file in getListOfFiles(dirName):
     except KeyError:
         pass
     file_name = outputFolder + Path(file).stem + ".html"
+    # For writing blog posts to other page
+    blog_posts += f"""  <p class="notice"><strong><a href=".{file_name}">{BlogTitle}</a></strong> <br><br>
+{BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
+"""	
+	
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
     except:
@@ -104,183 +115,106 @@ for file in getListOfFiles(dirName):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"></script>
 {Facebook_Meta}         
-     </head>""" + """
-	<style>
-	
-	/**
- * GHColors theme by Avi Aryan (http://aviaryan.in)
- * Inspired by Github syntax coloring
- */
-code[class*="language-"],
-pre[class*="language-"] {
-	color: #393A34;
-	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	font-size: .9em;
-	line-height: 1.2em;
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-pre > code[class*="language-"] {
-	font-size: 1em;
-}
-pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-	background: #b3d4fc;
-}
-pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
-code[class*="language-"]::selection, code[class*="language-"] ::selection {
-	background: #b3d4fc;
-}
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
-	border: 1px solid #dddddd;
-	background-color: white;
-}
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .2em;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	background: #f8f8f8;
-	border: 1px solid #dddddd;
-}
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: #999988;
-	font-style: italic;
-}
-.token.namespace {
-	opacity: .7;
-}
-.token.string,
-.token.attr-value {
-	color: #e3116c;
-}
-.token.punctuation,
-.token.operator {
-	color: #393A34; /* no highlight */
-}
-.token.entity,
-.token.url,
-.token.symbol,
-.token.number,
-.token.boolean,
-.token.variable,
-.token.constant,
-.token.property,
-.token.regex,
-.token.inserted {
-	color: #36acaa;
-}
-.token.atrule,
-.token.keyword,
-.token.attr-name,
-.language-autohotkey .token.selector {
-	color: #00a4db;
-}
-.token.function,
-.token.deleted,
-.language-autohotkey .token.tag {
-	color: #9a050f;
-}
-.token.tag,
-.token.selector,
-.language-autohotkey .token.keyword {
-	color: #00009f;
-}
-.token.important,
-.token.function,
-.token.bold {
-	font-weight: bold;
-}
-.token.italic {
-	font-style: italic;
-}
-	
-	
-	body { 
-    margin: 0;   /* Remove body margins */
-}
-	.banner {
-  background-image: linear-gradient(rgba(39, 71, 118, 0.6), rgba(39, 71, 118, 0.6)), url(https://images.unsplash.com/photo-1509136561942-7d8663edaaa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80);
-  background-size: cover;
-  background-position: center;
-  color: white;
-  text-shadow: 0 0 10px rgba(0,0,0,0.2);
-  padding: 80px 0px;
-}
-.banner h1 {
-  font-size: 40px;
-  margin-top: 0;
-  opacity: 0.8;
-}
-.banner p {
-  font-size: 25px;
-  margin-bottom: 0;
-  opacity: 0.9;
-  font-weight: lighter;
-}
-.container {
-  width: 900px;
-  margin: 0px auto;
-}
-.blogpost-content h2 {
-  margin-top: 50px;
-  opacity: 0.4;
-  font-weight: bolder;
-}
-.blogpost-content p {
-  font-weigh: lighter;
+
+
+<link rel="stylesheet" href="./assets/style.css">
+     </head>""" + 
+     f"""<header>
+<nav>
   
-}
-@media(max-width: 992px) {
-  .container {
-    width: 700px;
-  }
-}
-@media(max-width: 768px) {
-  .container {
-    width: 500px;
-  }
-}
-@media(max-width: 480px) {
-  .container {
-    width: 350px;
-  }
-}
-</style>
-<!-- Image and text -->
-""" +
-     f"""<body>
-     {menu}
-<div class="banner">
-      <div class="container">
+ {menu}
+</nav>
+
 		    <h1>{BlogTitle} t</h1>
-		    <p>{BlogDate}</p>
-		    </div>
-    </div>
-    <div class="container blogpost-content">  
+		    <p>Published: {BlogDate} <br>by <a href="/Simply-Docs/pages/author">Author</a></p>
+		    </header>
+    <main>
+<article>
 		    {file_contents}
-		     </div>
-	</body>
+ </article>
+    </main>
+
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
-		 
+<footer>
+      <p> Hello</p>
+  <small>© 2014 Some company name</small>
+      <address>email@email.com</address>
+    </footer>		 
 	""")
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
+
+
+index_file_name = "pages/blog_posts.html"
+try:
+    with codecs.open(index_file_name, 'w', encoding='utf-8') as f:
+        f.write(f"""<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>News | Simply Docs</title>
+<meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
+
+ 
+<link rel="stylesheet" href="/Simply-Docs/assets/style.css">
+
+<link rel="icon" href="/Simply-Docs/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="/Simply-Docs/assets/images/favicon.png">
+
+ <!-- Facebook integration -->
+<meta property="og:title" content="Simply Docs Demo">
+<meta property="og:image" content="/Simply-Docs/assets/images/OG_image.png">
+<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Simple.css">
+<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">
+
+<!-- Twitter integration -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Simply Docs | Demo">
+<meta name="twitter:image" content="/Simply-Docs/assets/images/OG_image.png">
+<meta name="twitter:url" content="https://marketingpipeline.github.io/Simply-Docs/">
+<meta name="twitter:description" content="A Simply Docs / Blog Template built using Simple.css">
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"></script>
+  </head>
+<header>
+     <nav>
+  
+  <a href="/Simply-Docs/">Home</a>
+  
+  <a href="/Simply-Docs/pages/documentation">Docs</a>
+  
+  <a href="https://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip">Download</a>
+  
+  <a href="/Simply-Docs/pages/news">News</a>
+  
+  <a href="https://github.com/MarketingPipeline/Simply-Docs"><svg class="icon" viewBox="0 0 32 32"><path d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.347 1.094-0.77 0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993 0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74 1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234 0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070 4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743 7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925 1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"></path></svg>Github</a>
+  
+</nav>
+
+        <h1>News</h1>
+      <p>Newest updates about this project</p>
+    </header>
+
+
+<main>
+{blog_posts}
+
+
+
+</main>
+
+<footer>
+      <p>Simply Docs was created by <a href="https://github.com/MarketingPipeline/">Marketing Pipeline</a> and is licensed under the MIT license.</p>
+  <small>© 2014 Some company name</small>
+      <address>email@email.com</address>
+    </footer>
+
+   
+ <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
+""")
+except IOError:
+    sys.exit('Input file does not exist, or has no content.  Exiting')  
