@@ -24,7 +24,7 @@ with open(settings_file) as f:
   globals().update(var)
 	
 	
-
+print(var)
 # Blog Posts for Blog Page
 
 blog_posts = ""
