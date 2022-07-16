@@ -10,6 +10,8 @@ import json
 
 from pathlib import Path
 
+# Used to store key_values for later
+var = {}
 
 # Open main settings file
 settings_file = ".github/settings.md" 
@@ -89,7 +91,7 @@ def getListOfFiles(dirName):
     return allFiles
 
 
-var = {}
+
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
