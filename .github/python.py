@@ -27,7 +27,7 @@ with open(permalinks_file) as f:
   file_contents = f.read()
   for line in file_contents:
    for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
-    if window == "True"
+    if window == "True":
       Open_New_Window = "__target blank"
     else:
       Open_New_Window = "__target blank"
