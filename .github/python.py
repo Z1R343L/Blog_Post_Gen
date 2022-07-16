@@ -13,7 +13,7 @@ from pathlib import Path
 
 # Open main settings file
 settings_file = ".github/settings.md" 
-with open(permalinks_file) as f:
+with open(settings_file) as f:
   file_contents = f.read()
   for line in f:
     if ":" in line:
