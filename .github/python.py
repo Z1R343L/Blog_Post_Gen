@@ -33,6 +33,10 @@ else:
 
 blog_posts = ""
 
+footer_file = ".github/footer.md"
+with open(footer_file) as f:
+  footer_contents = f.read()
+
 # Permalinks for File Paths
 
 ## Permalink Settings
@@ -166,9 +170,7 @@ for file in getListOfFiles(dirName):
 
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
 <footer>
-      <p> Hello</p>
-  <small>© 2014 Some company name</small>
-      <address>email@email.com</address>
+     {footer_contents}
     </footer>		 
 	""")
     except IOError:
@@ -230,9 +232,7 @@ try:
 </main>
 
 <footer>
-      <p>Simply Docs was created by <a href="https://github.com/MarketingPipeline/">Marketing Pipeline</a> and is licensed under the MIT license.</p>
-  <small>© 2014 Some company name</small>
-      <address>email@email.com</address>
+     {footer_contents}
     </footer>
 
    
