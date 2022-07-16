@@ -22,8 +22,13 @@ with open(settings_file, 'r') as f:
     name, value = line.split('=================END OF SETTINGS============')[0].split(':')  # Needs replaced with regex match 
     var[name] = str(value).rstrip() # needs a value added    
   globals().update(var)
-  print(var)
-print(var)
+ # print(var)
+#print(var)
+
+if var['Asset_Path']:
+  AssetPath = var['Asset_Path']
+else:
+  AssetPath = ""
 # Blog Posts for Blog Page
 
 blog_posts = ""
@@ -107,14 +112,14 @@ for file in getListOfFiles(dirName):
     BlogDate = ""
     BlogDescription = ""
     SiteTitle = "Site Name"
-    AssetPath = ""
+   # AssetPath = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     try:
         data = var 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
         SiteTitle = data["BlogDate"]
-        AssetPath = data["Asset_Path"]
+    #    AssetPath = data["Asset_Path"]
 	
     except KeyError:
         pass
