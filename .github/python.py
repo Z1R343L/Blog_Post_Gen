@@ -23,7 +23,8 @@ permalinks_file_contents = None
 #PermaLinks = {}
 pattern = re.compile(r'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?) ')
 with open(permalinks_file) as f:
-        for line in f:
+	file_contents = f.read()       
+        for line in file_contents:
                 for (link, window, title, position) in re.findall(pattern, s):
                   print(link, window, title, position)		
 			
