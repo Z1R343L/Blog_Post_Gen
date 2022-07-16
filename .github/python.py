@@ -25,7 +25,8 @@ pattern = re.compile(r'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?) ')
 with open(permalinks_file) as f:
   file_contents = f.read()
   for (link, window, title, position) in re.findall(pattern, file_contents):
-    print(link, window, title, position)
+    for value in link:
+     print(link, window, title, position)
     #  print(link, window, title, position)	
 	#file_contents = f.read()       
         #for line in file_contents:
