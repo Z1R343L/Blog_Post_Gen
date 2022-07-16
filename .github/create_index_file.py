@@ -1,6 +1,6 @@
 import codecs
-with open(index_template_file) as f:
-  index_template = f.read() 
+#with open(index_template_file) as f:
+ # index_template = f.read() 
 
 
 # Open Index File
