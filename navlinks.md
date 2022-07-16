@@ -7,3 +7,8 @@ try_me:pleas2
 try_me:please
 
 =================END OF PERMALINK SETTINGS============
+
+
+Test
+
+{index_file_contents}
