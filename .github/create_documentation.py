@@ -23,7 +23,7 @@ with open(permalinks_file) as f:
     menu += f"""{position}<a href="{link}" {Open_New_Window}>{title}</a>"""  
 
 # Open Index File Content
-index_file_contents = ".github/cms/how_to_setup.md"
+index_file_contents = ".github/cms/docs/how_to_setup.md"
 try:
     with open(index_file_contents, 'r') as f:
         index_file_contents = f.read()
