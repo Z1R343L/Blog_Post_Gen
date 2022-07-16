@@ -21,12 +21,17 @@ permalinks_file_contents = None
 ## NEEDS IMPROVEMENT
 
 #PermaLinks = {}
+menu=""
 pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?)'
 with open(permalinks_file) as f:
   file_contents = f.read()
   for line in file_contents:
    for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
-    print(link)
+    if window == "True"
+      Open_New_Window = "__target blank"
+    else:
+      Open_New_Window = "__target blank"
+    menu += f"""{Posititon}<a href="{link}" {Open_New_Window}>{title}</a>"""
    #print(link, window, title, position)
  # for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
   #  for value in link:
@@ -261,18 +266,21 @@ pre[class*="language-"] {
 }
 </style>
 <!-- Image and text -->
-<body>
+""" +
+     f"""<body>
+     {menu}
 <div class="banner">
-      <div class="container">""" +
-     f"<h1>{BlogTitle} t</h1>" + 
-        f"<p>{BlogDate}</p>" + """
-      </div>
+      <div class="container">
+		    <h1>{BlogTitle} t</h1>
+		    <p>{BlogDate}</p>
+		    </div>
     </div>
-    <div class="container blogpost-content"> """ +
-   file_contents + """
-    </div>
+    <div class="container blogpost-content">  
+		    {file_contents}
+		     </div>
 	</body>
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
+		 
 	""")
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
