@@ -11,6 +11,18 @@ import json
 from pathlib import Path
 
 
+# Open main settings file
+settings_file = ".github/cms/blog_posts" 
+with open(permalinks_file) as f:
+  file_contents = f.read()
+  for line in f:
+    if ":" in line:
+     name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+     var[name] = str(value).rstrip() # needs a value added  
+  globals().update(var)
+	
+	
+
 # Blog Posts for Blog Page
 
 blog_posts = ""
@@ -52,7 +64,7 @@ with open(permalinks_file) as f:
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
 
 dirName = ".github/cms/blog_posts"
-outputFolder = "pages/blog_posts/"
+outputFolder = "pages/blog/"
 os.makedirs(outputFolder, exist_ok=True)
 
 outputFolder2 = "pages/"
@@ -92,11 +104,13 @@ for file in getListOfFiles(dirName):
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     BlogDate = ""
+    AssetPath = ""
     BlogDescription = ""
     SiteTitle = "Site Name"
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     try:
         data = var 
+	AssetPath = data["Asset_Path"] 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
         SiteTitle = data["BlogDate"]
@@ -104,7 +118,7 @@ for file in getListOfFiles(dirName):
         pass
     file_name = outputFolder + Path(file).stem + ".html"
     # For writing blog posts to other page
-    blog_posts += f"""  <p class="notice"><strong><a href=".{file_name}">{BlogTitle}</a></strong> <br><br>
+    blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
 	
@@ -122,7 +136,7 @@ for file in getListOfFiles(dirName):
 {Facebook_Meta}         
 
 
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="{AssetPath}assets/style.css">
      </head>""" + 
      f"""<header>
 <nav>
@@ -151,7 +165,7 @@ for file in getListOfFiles(dirName):
     var.clear()
 
 
-index_file_name = "pages/blog_posts.html"
+index_file_name = "pages/blog/index.html"
 try:
     with codecs.open(index_file_name, 'w', encoding='utf-8') as f:
         f.write(f"""<head>
@@ -163,7 +177,7 @@ try:
 <meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
 
  
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="{AssetPath}assets/style.css">
 
 <link rel="icon" href="/Simply-Docs/assets/images/favicon.png">
 <link rel="apple-touch-icon" href="/Simply-Docs/assets/images/favicon.png">
