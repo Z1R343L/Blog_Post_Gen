@@ -7,7 +7,7 @@ with open(index_template_file) as f:
 index_file_contents = ".github/index.md"
 try:
     with open(index_file_contents, 'r') as f:
-        index_file_contents = f.read()
+        index_template = f.read()
         
         
 except IOError:
