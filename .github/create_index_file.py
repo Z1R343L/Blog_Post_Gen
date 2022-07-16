@@ -16,6 +16,10 @@ with open(permalinks_file) as f:
       Open_New_Window = "__target blank"
     else:
       Open_New_Window = "__target blank"
+    if link == "null":
+      link = ""
+    else:
+      link = link
     menu += f"""{position}<a href="{link}" {Open_New_Window}>{title}</a>"""  
 
 # Open Index File Content
