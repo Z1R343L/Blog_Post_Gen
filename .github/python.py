@@ -15,20 +15,21 @@ from pathlib import Path
 
 ## Permalink Settings
 
-#permalinks_file= ".github/static-gen/settings/permalinks.md"
-#permalinks_file_contents = None
+permalinks_file= "navlinks.md"
+permalinks_file_contents = None
 
 ## NEEDS IMPROVEMENT
 
-#PermaLinks = {}
-#with open(permalinks_file) as f:
- #       for line in f:
-  #              if ":" in line:
-   #                     PermaLink, value = line.split('=================END OF PERMALINK SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-    #                    PermaLinks[PermaLink] = str(value).rstrip() # needs a value added					
+PermaLinks = {}
+with open(permalinks_file) as f:
+        for line in f:
+                if ":" in line:
+                        PermaLink, value = line.split('=================END OF PERMALINK SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+                        PermaLinks[PermaLink] = str(value).rstrip() # needs a value added					
 			
-#globals().update(PermaLinks)
-#output_file = PermaLinks['Blog_PermaLink']
+globals().update(PermaLinks)
+print(PermaLinks)
+#output_file = PermaLinks['Test']
 
 
 
