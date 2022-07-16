@@ -24,7 +24,7 @@ PermaLinks = {}
 with open(permalinks_file) as f:
         for line in f:
                 if ":" in line:
-                  for i in range(len(3)):
+                  for i in range(3):
                     PermaLink, value = line.split('=================END OF PERMALINK SETTINGS============')[0].split(':')  # Needs replaced with regex match 
                     PermaLinks[PermaLink] = str(value).rstrip() # needs a value added					
 			
