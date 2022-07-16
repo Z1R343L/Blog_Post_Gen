@@ -1,8 +1,8 @@
 Test: hello
 
-Link1: true:test:who
+Link1: true
 
 
-try me:please
+try_me:please
 
 =================END OF PERMALINK SETTINGS============
