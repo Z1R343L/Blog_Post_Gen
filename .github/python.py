@@ -52,7 +52,7 @@ with open(permalinks_file) as f:
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
 
 dirName = ".github/cms/blog_posts"
-outputFolder = "blog_posts/"
+outputFolder = "pages/blog_posts/"
 os.makedirs(outputFolder, exist_ok=True)
 
 outputFolder2 = "pages/"
@@ -122,7 +122,7 @@ for file in getListOfFiles(dirName):
 {Facebook_Meta}         
 
 
-<link rel="stylesheet" href="./assets/style.css">
+<link rel="stylesheet" href="assets/style.css">
      </head>""" + 
      f"""<header>
 <nav>
@@ -163,7 +163,7 @@ try:
 <meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
 
  
-<link rel="stylesheet" href="./assets/style.css">
+<link rel="stylesheet" href="assets/style.css">
 
 <link rel="icon" href="/Simply-Docs/assets/images/favicon.png">
 <link rel="apple-touch-icon" href="/Simply-Docs/assets/images/favicon.png">
