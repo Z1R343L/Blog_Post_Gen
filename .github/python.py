@@ -25,13 +25,12 @@ menu=""
 pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?)'
 with open(permalinks_file) as f:
   file_contents = f.read()
-  for line in file_contents:
-   for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
+  for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
     if window == "True":
       Open_New_Window = "__target blank"
     else:
       Open_New_Window = "__target blank"
-    menu += f"""{position}<a href="{link}" {Open_New_Window}>{title}</a>"""
+    menu += f"""{position}<a href="{link}" {Open_New_Window}>{title}</a>"""  
    #print(link, window, title, position)
  # for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
   #  for value in link:
