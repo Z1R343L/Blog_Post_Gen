@@ -110,7 +110,7 @@ for file in getListOfFiles(dirName):
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     try:
         data = var 
-	AssetPath = data["Asset_Path"] 
+	      AssetPath = data["Asset_Path"] 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
         SiteTitle = data["BlogDate"]
