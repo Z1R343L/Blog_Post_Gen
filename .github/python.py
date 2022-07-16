@@ -49,9 +49,9 @@ with open(permalinks_file) as f:
   file_contents = f.read()
   for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
     if window == "True":
-      Open_New_Window = "__target blank"
+      Open_New_Window = """target="_blank"""
     else:
-      Open_New_Window = "__target blank"
+      Open_New_Window = ""
     if link == "null":
       link = ""
     else:
