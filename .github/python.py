@@ -158,7 +158,7 @@ try:
 <meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
 
  
-<link rel="stylesheet" href="/Simply-Docs/assets/style.css">
+<link rel="stylesheet" href="./assets/style.css">
 
 <link rel="icon" href="/Simply-Docs/assets/images/favicon.png">
 <link rel="apple-touch-icon" href="/Simply-Docs/assets/images/favicon.png">
