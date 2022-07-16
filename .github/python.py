@@ -108,6 +108,7 @@ for file in getListOfFiles(dirName):
     BlogDescription = ""
     SiteTitle = "Site Name"
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
+    ## Another github error / ms code error
     try:
         data = var 
 	      AssetPath = data["Asset_Path"] 
