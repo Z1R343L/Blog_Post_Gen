@@ -52,10 +52,8 @@ with open(permalinks_file) as f:
       Open_New_Window = "__target blank"
     else:
       Open_New_Window = "__target blank"
-    if link == "null":
+    if link == null:
       link == ""
-    else:
-      link = link
     menu += f"""{position}<a href="{AssetPath}{link}" {Open_New_Window}>{title}</a>"""  
    #print(link, window, title, position)
  # for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
