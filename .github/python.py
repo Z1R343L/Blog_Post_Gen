@@ -20,20 +20,16 @@ permalinks_file_contents = None
 
 ## NEEDS IMPROVEMENT
 
-PermaLinks = {}
+#PermaLinks = {}
+pattern = re.compile(r'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?) ')
 with open(permalinks_file) as f:
         for line in f:
-                if ":" in line:
-                  for i in range(3):
-                    PermaLink, value = line.split('=================END OF PERMALINK SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-                    PermaLinks[PermaLink] = str(value).rstrip() # needs a value added					
+                for (link, window, title, position) in re.findall(pattern, s):
+                  print(link, window, title, position)		
 			
-globals().update(PermaLinks)
-print(PermaLinks)
+#globals().update(PermaLinks)
+#print(PermaLinks)
 #output_file = PermaLinks['Test']
-
-
-
 
 
 #PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
