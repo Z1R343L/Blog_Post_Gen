@@ -104,17 +104,17 @@ for file in getListOfFiles(dirName):
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     BlogDate = ""
-    AssetPath = ""
     BlogDescription = ""
     SiteTitle = "Site Name"
+    AssetPath = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
-    ## Another github error / ms code error
     try:
         data = var 
-	AssetPath = data["Asset_Path"] 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
         SiteTitle = data["BlogDate"]
+        AssetPath = data["Asset_Path"]
+	
     except KeyError:
         pass
     file_name = outputFolder + Path(file).stem + ".html"
