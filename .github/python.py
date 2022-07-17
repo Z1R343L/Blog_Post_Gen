@@ -131,7 +131,7 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-    file_contents = f.read()       
+    
 
 
     Facebook_Meta = ""
@@ -160,6 +160,7 @@ for file in getListOfFiles(dirName):
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
     except:
+        file_contents = f.read()       
         pass    
     try:
     #  if len(blog_posts) < 5:
