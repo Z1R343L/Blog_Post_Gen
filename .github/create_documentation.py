@@ -20,7 +20,7 @@ with open(permalinks_file) as f:
       link = ""
     else:
       link = link
-    menu += f"""{position}<a href="{link}" {Open_New_Window}>{title}</a>"""  
+    menu += f"""<a href="{link}" {Open_New_Window}>{title}</a>"""  
 
 # Open Index File Content
 index_file_contents = ".github/cms/docs/how_to_setup.md"
