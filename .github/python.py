@@ -128,6 +128,10 @@ for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     file_contents = f.read()
     file_contents = file_contents
+    try:
+      file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+    except:
+      pass
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
