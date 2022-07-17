@@ -95,7 +95,7 @@ try:
       
       
  {index_file_contents}
-<a href="https://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip"><button>Download This Template</button></a>
+</main>
 <footer>
       <p>Simply Docs was created by <a href="https://github.com/MarketingPipeline/">Marketing Pipeline</a> and is licensed under the MIT license.</p>
   <small>© 2014 Some company name</small>
