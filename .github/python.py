@@ -8,6 +8,7 @@ import re
 import os
 import json
 
+import platform
 from pathlib import Path
 
 # Used to store key_values for later
@@ -104,6 +105,24 @@ def getListOfFiles(dirName):
 
 
 
+## https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
+def creation_date(path_to_file):
+    """
+    Try to get the date that a file was created, falling back to when it was
+    last modified if that isn't possible.
+    See http://stackoverflow.com/a/39501288/1709587 for explanation.
+    """
+    if platform.system() == 'Windows':
+        return os.path.getctime(path_to_file)
+    else:
+        stat = os.stat(path_to_file)
+        try:
+            return stat.st_birthtime
+        except AttributeError:
+            # We're probably on Linux. No easy way to get creation dates here,
+            # so we'll settle for when its content was last modified.
+            return stat.st_mtime
+
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
@@ -117,7 +136,8 @@ for file in getListOfFiles(dirName):
 
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
-    BlogDate = ""
+    # Write create date for blog post as default	
+    BlogDate = creation_date(file)
     BlogDescription = ""
     SiteTitle = "Site Name"
    # AssetPath = ""
