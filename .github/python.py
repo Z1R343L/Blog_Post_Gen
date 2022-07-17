@@ -160,8 +160,7 @@ for file in getListOfFiles(dirName):
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
     except:
-        file_contents = f.read()       
-        pass    
+        file_contents = f.read()          
     try:
     #  if len(blog_posts) < 5:
      #   print(BlogDate.sort(key=sorting))
