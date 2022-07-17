@@ -126,6 +126,8 @@ def creation_date(path_to_file):
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
+    file_contents = f.read()
+    file_contents = file_contents
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
@@ -157,10 +159,11 @@ for file in getListOfFiles(dirName):
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
 
-    try:
-        file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
-    except:
-        file_contents = f.read()          
+    #try:
+     #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+    #except:
+     #   pass     
+           
     try:
     #  if len(blog_posts) < 5:
      #   print(BlogDate.sort(key=sorting))
