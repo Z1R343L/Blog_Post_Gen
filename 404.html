@@ -1,0 +1,74 @@
+<script type="text/javascript">
+// Redirect to routes to a page	
+
+// if correct route
+
+
+
+//var inputString = '22-34';
+  
+//var API_Route  = "/api/get_value="  
+//var pattern = "(?s).*";
+//API_Route = API_Route + pattern     
+  
+//if( pattern.test(window.location.host) ){
+  //document.body.innerHTML = "Works"
+//}  
+
+
+
+if (window.location.href.indexOf("/search?") != -1) {
+
+   window.onload=function(){
+    
+	   
+     
+	// else    
+	   
+	// Get the query from "/api/get_value?route=EXAMPLE"
+     var url_string = window.location.href
+      var url = new URL(url_string);
+var query = url.searchParams.get("route");
+     
+	   
+	   
+	   
+	   
+	   
+	   
+	//////////// Sample JSON DATA   
+	   
+	   var colors = {
+        "color": "red",
+        "color_2": "black",
+        "color_3": "green"
+    };
+	   
+	
+	  var Color_Json_To_String = JSON.stringify(colors);
+	  /////////////
+	   
+	   
+	
+     // Defining routes here	   
+	   
+      if (query == "posts") {
+	  document.body.innerHTML = Color_Json_To_String 
+	  } else {
+	document.body.innerHTML =  "Not a Valid API route, read documenation for proper usage."
+	  }
+	   
+    }
+} else {
+  window.onload=function(){
+	  
+          // if API route is not called properly / does not exist - display message AGAIN
+      document.body.innerHTML = "Error 404"
+    }
+}
+    
+  
+	
+
+  
+</script>
