@@ -163,8 +163,9 @@ for file in getListOfFiles(dirName):
         pass    
     try:
       if len(blog_posts) < 5:
-        print("More than 5 blog post creating another route")
+        print(BlogDate.sort(key=sorting))
       else:
+	print(BlogDate.sort(key=sorting))
         print("Less 5 blog posts")
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
