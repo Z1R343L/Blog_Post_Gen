@@ -53,8 +53,7 @@ var query = url.searchParams.get("route");
      // Defining routes here	   
 	   
       if (query == "posts") {
-	  document.body.innerHTML = Color_Json_To_String 
-	  var Terms = url.searchParams.get("terms");    
+	  document.body.innerHTML = Color_Json_To_String  
    
 	  
 		
@@ -62,16 +61,7 @@ var query = url.searchParams.get("route");
 	      
 	  } 
 	   
-	   
-	else if (query == "posts?terms") {
-	  var Terms = url.searchParams.get("terms");
-	 document.body.innerHTML = "Blog Posts For: " + Terms
-   
-	  
-		
-	      
-	      
-	  } else {
+	else {
 	document.body.innerHTML =  "Not a Valid API route, read documenation for proper usage."
 	  }
 	   
