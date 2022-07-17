@@ -1,13 +1,41 @@
+<article>
 <github-md>
-# Hello
-
-World
-
-## Test
-
-# Hello 2
-
-## Test 2
-
-# Hello
+# How To Install
+  
+  
 </github-md>
+</article>
+ 
+ 
+ 
+<article>
+<github-md>
+# Site Settings
+  
+  ## Site Name
+  
+  ## Footer
+  
+  
+  
+</github-md>
+</article>
+ 
+
+
+ 
+<article>
+<github-md>
+# Pages
+  
+## Documentation
+  
+## Blog
+  
+### How To Make A Blog Post
+  
+  
+  
+</github-md>
+</article>
+ 
