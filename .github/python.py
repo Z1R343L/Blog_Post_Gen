@@ -156,7 +156,10 @@ for file in getListOfFiles(dirName):
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
-	
+    if len(blog_posts) < 5:
+	print("More than 5 blog posts, creating another route!")
+    else:
+	print("Less than 5")
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
     except:
