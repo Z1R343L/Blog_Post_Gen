@@ -2,7 +2,7 @@ import codecs
 
 import re as regex
 
-
+var = {}
 
 # Open main settings file
 settings_file = ".github/settings.md" 
