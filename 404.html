@@ -54,10 +54,10 @@ var query = url.searchParams.get("route");
 	   
       if (query == "posts") {
 	  document.body.innerHTML = Color_Json_To_String 
-	  query = url.searchParams.get("terms");    
+	  var Terms = url.searchParams.get("terms");    
+      }  
 	      
-	      
-	  if (query) {   
+	  if (terms) {   
 	  document.body.innerHTML = "Blog Posts For: " + query	  
 	  }
 		  
