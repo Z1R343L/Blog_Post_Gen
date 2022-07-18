@@ -126,13 +126,12 @@ def creation_date(path_to_file):
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    contents = f.read()
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-    
+    file_contents = f.read()       
 
 
     Facebook_Meta = ""
@@ -158,13 +157,11 @@ for file in getListOfFiles(dirName):
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
 	
-        
     try:
-	## NEED HELP WITH THIS ISSUE
-       # try:
-        #  contents = contents.split("=================END OF SEO SETTINGS============",1)[1]
-        #except:
-         # pass
+        file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+    except:
+        pass    
+    try:
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
             <meta charset="utf-8">
@@ -187,7 +184,7 @@ for file in getListOfFiles(dirName):
 		    </header>
     <main>
 <article>
-		    {contents}
+		    {file_contents}
  </article>
     </main>
 
