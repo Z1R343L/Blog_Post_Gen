@@ -160,10 +160,7 @@ for file in getListOfFiles(dirName):
 	
         
     try:
-      try:
-        contents = contents.split("=================END OF SEO SETTINGS============",1)[1]
-      except:
-        contents = contents
+      contents.split("=================END OF SEO SETTINGS============",1)[1]
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
             <meta charset="utf-8">
