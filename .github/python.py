@@ -122,14 +122,15 @@ def creation_date(path_to_file):
     else:
         stat = os.stat(path_to_file)
         try:
-          Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
-          return Post_Time
+         # Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
+          return time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
         except AttributeError:
-          Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))
-          return Post_Time
+         # Post_Time = 
+          return time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))
 
 
 for file in getListOfFiles(dirName):
+  BlogDate = creation_date(file)
   with open(file, 'r') as f:
     file_contents = f.read()
     file_contents = file_contents
@@ -147,8 +148,7 @@ for file in getListOfFiles(dirName):
 
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
-    # Write create date for blog post as default	
-    BlogDate = creation_date(file)
+    # Write create date for blog post as default	 
     BlogDescription = ""
     SiteTitle = Site_Name
    # AssetPath = ""
