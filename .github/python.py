@@ -126,7 +126,7 @@ def creation_date(path_to_file):
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    file_contents = f.read()
+    
 
     for line in f:
         if ":" in line:
@@ -135,7 +135,7 @@ for file in getListOfFiles(dirName):
     globals().update(var)
          
 
-
+    file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     # Write create date for blog post as default	
