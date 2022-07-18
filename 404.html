@@ -55,7 +55,29 @@ var query = url.searchParams.get("route");
       if (query == "posts") {
 	  document.body.innerHTML = Color_Json_To_String  
    
-	  
+	  const input = [
+{
+url: "www.google.com",
+name: "name1"
+},
+{
+url: "www.google.com2",
+name: "name1"
+},
+{
+url: "www.google.com3",
+name: "name1"
+}
+]
+
+
+let url = "www.google.com"
+
+input.forEach(object => {
+  if(object.url.includes(url)) {
+  console.log(object)
+  }
+})
 		
 	      
 	      
