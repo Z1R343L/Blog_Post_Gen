@@ -130,7 +130,7 @@ def creation_date(path_to_file):
 
 
 for file in getListOfFiles(dirName):
-  BlogDate = creation_date(file)
+  BlogDate = ""
   with open(file, 'r') as f:
     file_contents = f.read()
     file_contents = file_contents
