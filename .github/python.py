@@ -26,11 +26,6 @@ with open(settings_file, 'r') as f:
  # print(var)
 #print(var)
 
-if var['Site_Name']:
-  Site_Name = var['Site_Name']
-else:
-  Site_Name = ""
-
 if var['Asset_Path']:
   AssetPath = var['Asset_Path']
 else:
@@ -122,42 +117,38 @@ def creation_date(path_to_file):
     else:
         stat = os.stat(path_to_file)
         try:
-         # Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
-          return time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
+	  Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
+            return Post_Time
         except AttributeError:
-         # Post_Time = 
-          return time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))
+            # We're probably on Linux. No easy way to get creation dates here,
+            # so we'll settle for when its content was last modified.
+	  Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))	
+            return Post_Time
 
 
 for file in getListOfFiles(dirName):
-  BlogDate = ""
   with open(file, 'r') as f:
-    file_contents = f.read()
-    file_contents = file_contents
-    try:
-      file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
-    except:
-      pass
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-    
+    file_contents = f.read()       
 
 
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
-    # Write create date for blog post as default	 
+    # Write create date for blog post as default	
+    BlogDate = creation_date(file)
     BlogDescription = ""
-    SiteTitle = Site_Name
+    SiteTitle = "Site Name"
    # AssetPath = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     try:
         data = var 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
-        SiteTitle = data["BlogDate"] + f"| {Site_Name}"
+        SiteTitle = data["BlogDate"]
     #    AssetPath = data["Asset_Path"]
 	
     except KeyError:
@@ -167,18 +158,12 @@ for file in getListOfFiles(dirName):
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
-
-    #try:
-     #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
-    #except:
-     #   pass     
-           
+	
     try:
-    #  if len(blog_posts) < 5:
-     #   print(BlogDate.sort(key=sorting))
-      #else:
-       # print(BlogDate.sort(key=sorting))
-        #print("Less 5 blog posts")
+        file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+    except:
+        pass    
+    try:
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
             <meta charset="utf-8">
@@ -223,7 +208,7 @@ try:
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Blog | {Site_Name}</title>
+<title>News | Simply Docs</title>
 <meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
 
  
