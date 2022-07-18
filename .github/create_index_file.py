@@ -82,7 +82,7 @@ try:
 
 </nav>
 
-      <h1>{SiteName}</h1>
+      <h1>{Site_Name}</h1>
  
     </header>
 <main>
