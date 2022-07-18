@@ -2,9 +2,6 @@
 
 Asset_Path:/Blog_Post_Gen/
 
-Test: hello
-
-weird: hello
-
+Site_Name:Simply Static
 
 =================END OF SETTINGS============
