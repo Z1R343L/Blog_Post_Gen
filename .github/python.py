@@ -117,13 +117,11 @@ def creation_date(path_to_file):
     else:
         stat = os.stat(path_to_file)
         try:
-	  Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
-            return Post_Time
+          Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_birthtime))
+          return Post_Time
         except AttributeError:
-            # We're probably on Linux. No easy way to get creation dates here,
-            # so we'll settle for when its content was last modified.
-	  Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))	
-            return Post_Time
+          Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))
+          return Post_Time
 
 
 for file in getListOfFiles(dirName):
