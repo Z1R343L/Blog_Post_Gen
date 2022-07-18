@@ -2,6 +2,9 @@ import codecs
 
 import re as regex
 
+
+var = {}
+
 # Open main settings file
 settings_file = ".github/settings.md" 
 with open(settings_file, 'r') as f:
