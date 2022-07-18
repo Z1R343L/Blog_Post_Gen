@@ -126,8 +126,9 @@ def creation_date(path_to_file):
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    file_contents = f.read()   
-    BlogDate = creation_date(file)
+    # Error when reading file contents + creating date	
+    #file_contents = f.read()   
+    #BlogDate = creation_date(file)
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
@@ -137,7 +138,7 @@ for file in getListOfFiles(dirName):
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     # Write create date for blog post as default	
-   # BlogDate = creation_date(file)
+    BlogDate = creation_date(file)
     BlogDescription = ""
     SiteTitle = "Site Name"
    # AssetPath = ""
