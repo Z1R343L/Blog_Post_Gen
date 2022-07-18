@@ -1,6 +1,29 @@
 import codecs
 
 import re as regex
+
+# Open main settings file
+settings_file = ".github/settings.md" 
+with open(settings_file, 'r') as f:
+  for line in f:
+   print(line)
+   if ":" in line:
+    name, value = line.split('=================END OF SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+    var[name] = str(value).rstrip() # needs a value added    
+  globals().update(var)
+ # print(var)
+#print(var)
+
+if var['Site_Name']:
+  Site_Name = var['Site_Name']
+else:
+  Site_Name = ""
+
+if var['Asset_Path']:
+  AssetPath = var['Asset_Path']
+else:
+  AssetPath = ""
+
 ## Menu Settings File
 
 permalinks_file= "navlinks.md"
@@ -43,7 +66,7 @@ try:
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Simply Docs Demo | Home</title>
+<title>Home | {SiteName}</title>
   
 <meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
 
@@ -56,7 +79,7 @@ try:
 
 </nav>
 
-      <h1>Simply Docs</h1>
+      <h1>{SiteName}</h1>
  
     </header>
 <main>
