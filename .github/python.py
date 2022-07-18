@@ -26,6 +26,11 @@ with open(settings_file, 'r') as f:
  # print(var)
 #print(var)
 
+if var['Site_Name']:
+  Site_Name = var['Site_Name']
+else:
+  Site_Name = ""
+
 if var['Asset_Path']:
   AssetPath = var['Asset_Path']
 else:
@@ -145,14 +150,14 @@ for file in getListOfFiles(dirName):
     # Write create date for blog post as default	
     BlogDate = creation_date(file)
     BlogDescription = ""
-    SiteTitle = "Site Name"
+    SiteTitle = Site_Name
    # AssetPath = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     try:
         data = var 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
-        SiteTitle = data["BlogDate"]
+        SiteTitle = data["BlogDate"] + f"| {Site_Name}"
     #    AssetPath = data["Asset_Path"]
 	
     except KeyError:
@@ -218,7 +223,7 @@ try:
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>News | Simply Docs</title>
+<title>Blog | {Site_Name}</title>
 <meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
 
  
