@@ -158,12 +158,13 @@ for file in getListOfFiles(dirName):
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
-    json_data += f"""
+    json_data += """
     {
-url: "{AssetPath}{file_name}",
-name: "{BlogTitle}",
-contents: "{BlogDescription}"
-},"""
+url: """+ f""AssetPath + file_name","+
+"name: " + BlogTitle ,"+
+"contents: " + BlogDescription + 
+"
+}," """
 	
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
