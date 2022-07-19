@@ -123,7 +123,7 @@ def creation_date(path_to_file):
           Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))
           return Post_Time
 
-
+json_data = ""
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     
@@ -158,6 +158,12 @@ for file in getListOfFiles(dirName):
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
+    json_data += f"""
+    {
+url: "{AssetPath}{file_name}",
+name: "{BlogTitle}",
+contents: "{BlogDescription}"
+},"""
 	
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
@@ -259,6 +265,107 @@ try:
 
    
  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
+""")
+except IOError:
+    sys.exit('Input file does not exist, or has no content.  Exiting')  
+
+
+
+
+
+
+
+
+## Create search file
+
+
+search_file_name = "pages/blog/search.html"
+try:
+    with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
+        f.write(f"""
+
+
+if (window.location.href.indexOf("/api/test?") != -1) {
+
+   window.onload=function(){
+     var url_string = window.location.href
+      var url = new URL(url_string);
+var c = url.searchParams.get("posts");
+console.log(c);
+     
+      
+     
+     if (c === null){
+document.body.innerHTML = "No search route provided"
+       
+     } else {
+       
+         const input = [
+{
+url: "www.google.com",
+name: "name1"
+},
+{
+url: "www.google.com2",
+name: "name1"
+},
+{
+url: "www.google.com3",
+name: "name1"
+}
+]
+
+
+let url = c
+
+var blogPosts = ""
+
+var SearchResults = false
+input.forEach(object => {
+  if(object.url.includes(url)) {
+  blogPosts += object.url
+  SearchResults = true  
+  } 
+})
+       
+       if (url == ""){
+        SearchResults = false 
+         var Message = "No search query was provided"
+       } else {
+         var Message = "No blog posts found for " + c
+       }
+       
+       
+          
+     if (url === null){
+ SearchResults = false 
+ var Message = "No search route provided"
+       
+     } 
+       if (SearchResults === true) {
+         
+         document.body.innerHTML = ` Blog posts found containing:  ${c}  
+         <br>
+  
+         ${blogPosts} `
+         
+       } else {
+          document.body.innerHTML = Message
+       }
+         
+       
+       
+     }
+     
+    }
+} else {
+  window.onload=function(){
+      document.body.innerHTML = "Not a Valid API access route"
+    }
+}
+    
+
+        
 """)
 except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')  
