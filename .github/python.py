@@ -301,14 +301,7 @@ document.body.innerHTML = "No search route provided"
      } else {
        
          const input = [
-{
-url: "www.google.com",
-name: "name1"
-},
-{
-url: "www.google.com2",
-name: "name1"
-},
+{json_data}
 {
 url: "www.google.com3",
 name: "name1"
