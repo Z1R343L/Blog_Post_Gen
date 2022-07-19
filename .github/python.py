@@ -282,12 +282,12 @@ except IOError:
 search_file_name = "pages/blog/search.html"
 try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
-        f.write(f"""
+         f.write("""
 
 
 if (window.location.href.indexOf("/api/test?") != -1) {
 
-   window.onload=function(){
+window.onload=function(){
      var url_string = window.location.href
       var url = new URL(url_string);
 var c = url.searchParams.get("posts");
@@ -299,9 +299,9 @@ console.log(c);
 document.body.innerHTML = "No search route provided"
        
      } else {
-       
+       """ + f"""
          const input = [
-{json_data}
+{json_data}""" + """
 {
 url: "www.google.com3",
 name: "name1"
