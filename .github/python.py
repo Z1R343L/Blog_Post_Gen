@@ -163,7 +163,7 @@ for file in getListOfFiles(dirName):
 
     json_data += """
     {
-url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{AssetPath}{file_name}",\n' + "contents: " + f'"{AssetPath}{file_name}"\n' + "},"
+url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription}"\n' + "},"
 	
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
