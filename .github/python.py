@@ -158,13 +158,12 @@ for file in getListOfFiles(dirName):
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
+    ##
+
+
     json_data += """
     {
-url: """+ AssetPath + file_name+",\n"+
-"name: " + BlogTitle + ",\n"+
-"contents: " + BlogDescription + 
-"""
-},"""
+url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{AssetPath}{file_name}",\n' + "contents: " + f'"{AssetPath}{file_name}"\n' + "},"
 	
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
@@ -283,7 +282,7 @@ except IOError:
 search_file_name = "pages/blog/search.html"
 try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
-         f.write("""
+        f.write(""" 
 
 
 if (window.location.href.indexOf("/api/test?") != -1) {
