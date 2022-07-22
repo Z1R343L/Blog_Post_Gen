@@ -172,7 +172,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
     except:
-        pass    
+        file_contents = file_contents    
     try:
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
