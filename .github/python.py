@@ -126,10 +126,6 @@ def creation_date(path_to_file):
 json_data = ""
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    file_contents = f.read()
-
-for file in getListOfFiles(dirName):
-  with open(file, 'r') as f:
     
 
     for line in f:
@@ -138,6 +134,8 @@ for file in getListOfFiles(dirName):
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
          
+
+    file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     # Write create date for blog post as default	
@@ -170,7 +168,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     try:
         file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
     except:
-        file_contents = file_contents    
+        pass    
     try:
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
