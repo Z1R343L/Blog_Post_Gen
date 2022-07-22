@@ -1,7 +1,7 @@
  
 
 
-if (window.location.href.indexOf("/pages/blog/search?") != -1) {
+if (window.location.href.indexOf("/api/test?") != -1) {
 
 window.onload=function(){
      var url_string = window.location.href
@@ -88,7 +88,9 @@ input.forEach(object => {
      
     }
 } else {
-  // Do nothing show the search page
+  window.onload=function(){
+      document.body.innerHTML = "Not a Valid API access route"
+    }
 }
     
 
