@@ -138,8 +138,6 @@ for file in getListOfFiles(dirName):
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
          
-
-    file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     # Write create date for blog post as default	
