@@ -126,6 +126,10 @@ def creation_date(path_to_file):
 json_data = ""
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
+    file_contents = f.read()
+
+for file in getListOfFiles(dirName):
+  with open(file, 'r') as f:
     
 
     for line in f:
