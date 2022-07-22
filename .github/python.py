@@ -267,7 +267,7 @@ try:
  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
 """)
 except IOError:
-    sys.exit('Input file does not exist, or has no content.  Exiting')  
+    sys.exit('Index file does not exist, or has no content.  Exiting')  
 
 
 
@@ -284,8 +284,8 @@ try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
         f.write(""" 
 
-
-if (window.location.href.indexOf("/api/test?") != -1) {
+<script>
+if (window.location.href.indexOf("/pages/blog/search?") != -1) {
 
 window.onload=function(){
      var url_string = window.location.href
@@ -352,13 +352,11 @@ input.forEach(object => {
      
     }
 } else {
-  window.onload=function(){
-      document.body.innerHTML = "Not a Valid API access route"
-    }
+  // Do nothing
 }
     
-
+</script>
         
 """)
 except IOError:
-    sys.exit('Input file does not exist, or has no content.  Exiting')  
+    sys.exit('Blog posts do not exist, or has no content.  Exiting')  
