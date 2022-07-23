@@ -139,7 +139,7 @@ for file in getListOfFiles(dirName):
       blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
       blog_content = f.read()
-    content[Blog_Content_Key] = str(blog_content)
+    content['Blog_Content_Key'] = str(blog_content)
     globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
