@@ -124,6 +124,8 @@ def creation_date(path_to_file):
           return Post_Time
 
 json_data = ""
+
+content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     
@@ -133,18 +135,21 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-         
-
-    file_contents = f.read()
+    blog_content = f.split("=================END OF SEO SETTINGS============",1)[1]     
+    content[Blog_Content_Key] = str(blog_content).rstrip()
+    globals().update(content)
+   # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
     # Write create date for blog post as default	
     BlogDate = ""
     BlogDescription = ""
     SiteTitle = "Site Name"
+    Blog_Contents = ""
    # AssetPath = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     try:
+        Blog_Contents = content["Blog_Content_Key"]
         data = var 
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
@@ -165,10 +170,10 @@ for file in getListOfFiles(dirName):
     {
 url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription}"\n' + "},"
 	
-    try:
-        file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
-    except:
-        pass    
+    #try:
+     #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+   # except:
+    #    pass    
     try:
         with codecs.open(file_name, 'w', encoding='utf-8') as f:
             f.write(f"""<head><title>{SiteTitle}</title>
@@ -192,7 +197,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
 		    </header>
     <main>
 <article>
-		    {file_contents}
+		    {Blog_Contents}
  </article>
     </main>
 
@@ -204,6 +209,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
+    content.clear()
 
 
 index_file_name = "pages/blog/index.html"
