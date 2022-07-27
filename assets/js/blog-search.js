@@ -30,6 +30,12 @@ contents: ","
 published: "2022-07-27,"
 },
     {
+url: "/Blog_Post_Gen/pages/blog/blog_template.html",
+name: "Hello World",
+contents: ","
+published: "Test 0, 2020,"
+},
+    {
 url: "/Blog_Post_Gen/pages/blog/blog_post_1.html",
 name: "Hello World",
 contents: ","
