@@ -18,30 +18,6 @@ document.body.innerHTML = "No search route provided"
          const input = [
 
     {
-url: "/Blog_Post_Gen/pages/blog/c_test_blog_post.html",
-name: "Hello World 2",
-contents: ","
-published: "Test 0, 2020,"
-},
-    {
-url: "/Blog_Post_Gen/pages/blog/blog_post_3.html",
-name: "",
-contents: ","
-published: "2022-07-27,"
-},
-    {
-url: "/Blog_Post_Gen/pages/blog/blog_post_1.html",
-name: "Hello World",
-contents: ","
-published: "Test 1, 2020,"
-},
-    {
-url: "/Blog_Post_Gen/pages/blog/test.html",
-name: "",
-contents: ","
-published: "2022-07-27,"
-},
-    {
 url: "/Blog_Post_Gen/pages/blog/jared.html",
 name: "",
 contents: ","
@@ -52,12 +28,6 @@ url: "/Blog_Post_Gen/pages/blog/octocat.html",
 name: "",
 contents: ","
 published: "2022-07-27,"
-},
-    {
-url: "/Blog_Post_Gen/pages/blog/blog_post_2.html",
-name: "Coool",
-contents: ","
-published: "Test 2, 2020,"
 },
 {
 url: "www.google.com3",
