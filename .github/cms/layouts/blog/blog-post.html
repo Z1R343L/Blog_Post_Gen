@@ -15,7 +15,7 @@
 
 		    <h1>{{BlogTitle}} t</h1>
 	     {% if BlogAuthor is defined %}
-     <p>Published: {{BlogDate}} <br>by <a href="/Simply-Docs/pages/blog/author/{{BlogAuthor}}">{{BlogAuthor}}</a></p>
+     <p>Published: {{BlogDate}} <br>by <a href="{{AssetPath}}pages/blog/author/{{BlogAuthor}}">{{BlogAuthor}}</a></p>
 {% else %}
     <p>Published: {{BlogDate}}</p>
 {% endif %}
