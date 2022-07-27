@@ -275,9 +275,9 @@ for file in getListOfFiles(dirName):
 
 
     try:
-      BlogAuthor = data["BlogAuthor"]
+      PageTitle = data["PageTitle"]
     except:
-      BlogAuthor = ""
+      PageTitle = "Author"
 
     file_name = outputFolder + Path(file).stem + ".html"
     # For writing blog posts to other page
