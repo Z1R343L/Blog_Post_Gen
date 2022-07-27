@@ -308,7 +308,7 @@ for file in getListOfFiles(dirName):
 
 # Create search route page
 search_page_template = env.get_template('search-route.html')
-search_file_name = "search.html"
+search_file_name = "pages/blog/search.html"
 output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
 try:
     with open(search_file_name, 'w') as fh:
