@@ -4,7 +4,7 @@ import re as regex
 import os
 import subprocess
 from jinja2 import Environment, FileSystemLoader
-env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
+env = Environment(loader=FileSystemLoader('/.github/cms/layouts/'))
 template = env.get_template('index.html')
 
 var = {}
