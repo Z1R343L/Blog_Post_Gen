@@ -155,27 +155,22 @@ for file in getListOfFiles(dirName):
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     data = var 
 
-    if content["Blog_Content_Key"]:
+    if ["Blog_Content_Key"] in data:
       Blog_Contents = content["Blog_Content_Key"]
     else:
       Blog_Contents = ""
 
-    if data["BlogDate"]:
+    if ["BlogDate"] in data:
       SiteTitle = data["BlogDate"]
     else:
       SiteTitle = ""
 
-    if data["BlogDate"]:
-      BlogDate = data["BlogDate"]
-    else:
-      BlogDate = ""
-
-    if data["Title"]:
+    if ["Title"] in data:
       BlogTitle = data["Title"]
     else:
       BlogTitle = ""
 
-    if data["BlogAuthor"]:
+    if ["BlogAuthor"] in data:
       BlogAuthor = data["BlogAuthor"]
     else:
       BlogAuthor = ""
