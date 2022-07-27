@@ -1,57 +1,76 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 import codecs
 import sys
 import re
-#import requests
 import os
 import json
 import time
 import platform
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
-env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
-blog_post_template = env.get_template('blog-post.html')
 
-# Used to store key_values for later
+
+
+
+
+
+
+# Variables to append / add for usage later in this script
+
+## Used to store key_values for later
 var = {}
+
+## Blog Posts for Blog Page
+blog_posts = ""
+
+## JSON data
+json_data = ""
+
+
+
+
 
 # Open main settings file
 settings_file = ".github/settings.md" 
 with open(settings_file, 'r') as f:
   for line in f:
-   print(line)
+   # Make JSON Key Values
    if ":" in line:
-    name, value = line.split('=================END OF SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-    var[name] = str(value).rstrip() # needs a value added    
+    name, value = line.split('=================END OF SETTINGS============')[0].split(':')  
+    var[name] = str(value).rstrip()   
   globals().update(var)
- # print(var)
-#print(var)
+
 
 if var['Asset_Path']:
   AssetPath = var['Asset_Path']
 else:
   AssetPath = ""
-# Blog Posts for Blog Page
 
-blog_posts = ""
 
+
+
+
+# Get the footer contents
 footer_file = ".github/footer.md"
 with open(footer_file) as f:
   footer_contents = f.read()
 
-# Permalinks for File Paths
 
-## Permalink Settings
+
+
+
+
+
+# Create menu links
+
 
 permalinks_file= "navlinks.md"
 permalinks_file_contents = None
-
-## NEEDS IMPROVEMENT
-
-#PermaLinks = {}
 menu=""
+# Regex match for menu links
 pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?)'
 with open(permalinks_file) as f:
   file_contents = f.read()
@@ -65,32 +84,18 @@ with open(permalinks_file) as f:
     else:
       link = link
     menu += f"""{position}<a href="{AssetPath}{link}" {Open_New_Window}>{title}</a>"""  
-   #print(link, window, title, position)
- # for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
-  #  for value in link:
-   #  print(link, window, title, position)
-    #  print(link, window, title, position)	
-	#file_contents = f.read()       
-        #for line in file_contents:
-                #for (link, window, title, position) in re.findall(pattern, s):
-                 # print(link, window, title, position)		
-#globals().update(PermaLinks)
-#print(PermaLinks)
-#output_file = PermaLinks['Test']
+  
 
 
-#PUBLIC_GITHUB_MARKDOWN_URL = 'https://api.github.com/markdown'
 
-dirName = ".github/cms/blog_posts"
+# Make folder for blog posts
 outputFolder = "pages/blog/"
+
+## succeeds even if directory does not exist.
 os.makedirs(outputFolder, exist_ok=True)
 
-outputFolder2 = "pages/"
-os.makedirs(outputFolder2, exist_ok=True)
 
-# succeeds even if directory exists.
-## To do - get all files and contents and convert correctly (Need if statements added for paths like index etc)
-## Need to remove paths that were changed for perma links automacially?
+## function to get all files in directory
 def getListOfFiles(dirName):
     listOfFile = os.listdir(dirName)
     allFiles = list()
@@ -126,10 +131,15 @@ def creation_date(path_to_file):
           Post_Time = time.strftime('%Y-%m-%d', time.localtime(stat.st_mtime))
           return Post_Time
 
-json_data = ""
 
 
-## Create Blog Posts
+
+
+## Create Blog Posts With All Files Returned
+
+
+env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
+blog_post_template = env.get_template('blog-post.html')
 content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
@@ -196,13 +206,13 @@ for file in getListOfFiles(dirName):
       BlogDescription = ""
 
     file_name = outputFolder + Path(file).stem + ".html"
-    # For writing blog posts to other page
+    # For writing blog posts to other page > (pages/blog/index.html)
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
 {BlogDescription} <p><b>Posted on:</b>{BlogDate}</p></p>
 """	
-    ##
+    
 
-
+    # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
     json_data += """
     {
 url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription},"\n' + "published: " + f'"{BlogDate},"\n' + "},"
@@ -217,9 +227,12 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
           fh.write(output_from_parsed_template)
 	    
     except IOError:
-        sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
+        sys.exit(u'Unable to write to files: {0}'.format(file_contents))
+    # Delete the JSON keys made for the file & start loop again till done	
     var.clear()
     content.clear()
+
+
 
 	
 # Create page showing all blog posts (blog index file)	
@@ -230,7 +243,7 @@ try:
     with open(index_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
 except IOError:
-    sys.exit('Index file does not exist, or has no content.  Exiting')  
+    sys.exit('Blog index file does not exist, or has no content.  Exiting')  
 
 
 
@@ -259,12 +272,7 @@ for file in getListOfFiles(dirName):
     globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
-    BlogTitle = "Blog Post"
-    # Write create date for blog post as default	
-    BlogDate = ""
-    BlogDescription = ""
     SiteTitle = "Site Name"
-   # AssetPath = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     data = var 
 
@@ -279,12 +287,7 @@ for file in getListOfFiles(dirName):
     except:
       PageTitle = "Author"
 
-    file_name = outputFolder + Path(file).stem + ".html"
-    # For writing blog posts to other page
-    #try:
-     #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
-   # except:
-    #    pass    
+    file_name = outputFolder + Path(file).stem + ".html"   
     try:
         with open(file_name, 'w') as fh:
           output_from_parsed_template = blog_author_template.render(menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
@@ -302,7 +305,7 @@ for file in getListOfFiles(dirName):
 	
 	
 
-# SWtiching template path
+# Switching template path
 env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
 
 # Create search page
