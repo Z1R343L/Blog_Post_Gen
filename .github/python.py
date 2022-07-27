@@ -287,7 +287,7 @@ for file in getListOfFiles(dirName):
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_author_template.render(menu=menu,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_author_template.render(menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
