@@ -144,6 +144,8 @@ content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     
+    if file.find("/author/") != -1:
+    pass
 
     for line in f:
         if ":" in line:
