@@ -1,6 +1,5 @@
  
 
-<script>
 if (window.location.href.indexOf("/pages/blog/search?") != -1) {
 
 window.onload=function(){
@@ -101,5 +100,5 @@ input.forEach(object => {
   // Do nothing
 }
     
-</script>
+
         
