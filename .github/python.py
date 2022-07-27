@@ -161,7 +161,7 @@ for file in getListOfFiles(dirName):
       Blog_Contents = ""
 
     try:
-      SiteTitle = data["BlogDate"]
+      SiteTitle = data["SEO_Title"]
     except:
       SiteTitle = ""
 
