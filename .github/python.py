@@ -220,7 +220,7 @@ for file in getListOfFiles(dirName):
     # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
     json_data += """
     {
-url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription},"\n' + "published: " + f'"{BlogDate},"\n' + "},"
+url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription}",\n' + "published: " + f'"{BlogDate}",\n' + "},"
 	
     #try:
      #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
