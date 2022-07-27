@@ -155,31 +155,31 @@ for file in getListOfFiles(dirName):
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     data = var 
 
-    if Blog_Contents = content["Blog_Content_Key"]:
+    if content["Blog_Content_Key"]:
       Blog_Contents = content["Blog_Content_Key"]
     else:
       Blog_Contents = ""
 
-    if SiteTitle = data["BlogDate"]:
+    if data["BlogDate"]:
       SiteTitle = data["BlogDate"]
     else:
       SiteTitle = ""
 
-    if BlogDate = data["BlogDate"]:
+    if data["BlogDate"]:
       BlogDate = data["BlogDate"]
     else:
       BlogDate = ""
 
-    if BlogTitle = data["Title"]:
+    if data["Title"]:
       BlogTitle = data["Title"]
     else:
       BlogTitle = ""
 
-    if BlogAuthor = data["BlogAuthor"]:
+    if data["BlogAuthor"]:
       BlogAuthor = data["BlogAuthor"]
     else:
       BlogAuthor = ""
-      
+
     file_name = outputFolder + Path(file).stem + ".html"
     # For writing blog posts to other page
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
