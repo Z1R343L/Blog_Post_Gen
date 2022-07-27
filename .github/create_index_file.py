@@ -4,7 +4,7 @@ import re as regex
 import os
 import subprocess
 from jinja2 import Environment, FileSystemLoader
-env = Environment(loader=FileSystemLoader('/.github/cms/layouts/'))
+env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
 template = env.get_template('index.html')
 
 var = {}
@@ -63,7 +63,7 @@ except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')
 
 index_file_name = "index.html"
-output_from_parsed_template = template.render(menu, Site_Name,index_file_contents)
+output_from_parsed_template = template.render(menu=menu, Site_Name=Site_Name,index_file_contents=index_file_contents)
 
 
 # to save the results
