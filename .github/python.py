@@ -239,7 +239,7 @@ except IOError:
 blog_author_template = env.get_template('blog-author.html')
 content = {}
 dirName = ".github/cms/blog_posts/author"
-outputFolder = "pages/blog/author"
+outputFolder = "pages/blog/author/"
 os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
