@@ -8,6 +8,8 @@ BlogTitle:Hello World
 
 BlogDate:Test 0, 2020
 
+BlogAuthor: Hello
+
 <code>Site Title</code>
 
 SEO_Title:Helloo
