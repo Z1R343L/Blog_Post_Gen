@@ -14,7 +14,13 @@
 </nav>
 
 		    <h1>{{BlogTitle}} t</h1>
-		    <p>Published: {{BlogDate}} <br>by <a href="/Simply-Docs/pages/author">Author</a></p>
+	     {% if BlogAuthor is defined %}
+     <p>Published: {{BlogDate}} <br>by <a href="/Simply-Docs/pages/author">{{BlogAuthor}}</a></p>
+{% else %}
+    <p>Published: {{BlogDate}}</p>
+{% endif %}
+	     
+		   
 		    </header>
     <main>
 <article>
