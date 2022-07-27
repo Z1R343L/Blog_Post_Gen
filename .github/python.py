@@ -10,6 +10,10 @@ import json
 import time
 import platform
 from pathlib import Path
+import subprocess
+from jinja2 import Environment, FileSystemLoader
+env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
+blog_post_template = env.get_template('index.html')
 
 # Used to store key_values for later
 var = {}
@@ -178,103 +182,9 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
    # except:
     #    pass    
     try:
-        with codecs.open(file_name, 'w', encoding='utf-8') as f:
-            f.write(f"""<head><title>{SiteTitle}</title>
-            <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"></script>
-{Facebook_Meta}         
-
-
-<link rel="stylesheet" href="{AssetPath}assets/style.css">
-     </head>""" + 
-     f"""<header>
-<nav>
-  
- {menu}
-</nav>
-
-		    <h1>{BlogTitle} t</h1>
-		    <p>Published: {BlogDate} <br>by <a href="/Simply-Docs/pages/author">Author</a></p>
-		    </header>
-    <main>
-<article>
-		    {Blog_Contents}
- </article>
-    </main>
-
-	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
-<footer>
-     {footer_contents}
-    </footer>		 
-	""")
-    except IOError:
-        sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
-    var.clear()
-    content.clear()
-
-
-index_file_name = "pages/blog/index.html"
-try:
-    with codecs.open(index_file_name, 'w', encoding='utf-8') as f:
-        f.write(f"""<head>
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>News | Simply Docs</title>
-<meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
-
- 
-<link rel="stylesheet" href="{AssetPath}assets/style.css">
-
-<link rel="icon" href="/Simply-Docs/assets/images/favicon.png">
-<link rel="apple-touch-icon" href="/Simply-Docs/assets/images/favicon.png">
-
- <!-- Facebook integration -->
-<meta property="og:title" content="Simply Docs Demo">
-<meta property="og:image" content="/Simply-Docs/assets/images/OG_image.png">
-<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Simple.css">
-<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">
-
-<!-- Twitter integration -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Simply Docs | Demo">
-<meta name="twitter:image" content="/Simply-Docs/assets/images/OG_image.png">
-<meta name="twitter:url" content="https://marketingpipeline.github.io/Simply-Docs/">
-<meta name="twitter:description" content="A Simply Docs / Blog Template built using Simple.css">
-
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"></script>
-  </head>
-<header>
-     <nav>
-  
- 
-{menu}
-</nav>
-
-        <h1>Blog</h1>
-      <p>Latest Blog Posts</p>
-    </header>
-
-
-<main>
-{blog_posts}
-
-
-
-</main>
-
-<footer>
-     {footer_contents}
-    </footer>
-
-   
- <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
-""")
+        with open(index_file_name, 'w') as fh:
+	    output_from_parsed_template = blog_post_template.render(SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,menu=menu,BlogTitle=BlogTitle,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
+            fh.write(output_from_parsed_template)
 except IOError:
     sys.exit('Index file does not exist, or has no content.  Exiting')  
 
