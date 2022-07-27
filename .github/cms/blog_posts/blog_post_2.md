@@ -8,6 +8,8 @@ BlogTitle:Coool
 
 BlogDate:Test 2, 2020
 
+BlogAuthor: Hello
+
 <code>Site Title</code>
 
 SEO_Title:Hellodo
