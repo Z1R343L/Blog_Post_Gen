@@ -146,8 +146,8 @@ content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     print(file)
-    if "/author/" in file:
-      pass
+    if "/author/" not in file:
+      continue
 
     for line in f:
         if ":" in line:
