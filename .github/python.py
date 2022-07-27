@@ -146,7 +146,7 @@ content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     print(file)
-    if file.find("author") != -1:
+    if "/author/" in file:
       pass
 
     for line in f:
