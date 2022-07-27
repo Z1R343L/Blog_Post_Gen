@@ -91,6 +91,8 @@ with open(permalinks_file) as f:
 # Make folder for blog posts
 outputFolder = "pages/blog/"
 
+dirName = ".github/cms/blog_posts"
+
 ## succeeds even if directory does not exist.
 os.makedirs(outputFolder, exist_ok=True)
 
