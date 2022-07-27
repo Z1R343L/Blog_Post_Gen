@@ -145,8 +145,8 @@ blog_post_template = env.get_template('blog-post.html')
 content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    
-    if file.find("/author/") != -1:
+    print(file)
+    if file.find("author") != -1:
       pass
 
     for line in f:
