@@ -165,6 +165,13 @@ for file in getListOfFiles(dirName):
     except:
       SiteTitle = ""
 
+
+    try:
+      BlogDate = data["BlogDate"]
+    except:
+      BlogDate= creation_date(file)
+
+
     try:
       BlogTitle = data["BlogTitle"]
     except:
@@ -190,7 +197,7 @@ for file in getListOfFiles(dirName):
 
     json_data += """
     {
-url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription}"\n' + "},"
+url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription},"\n' + "published: " + f'"{BlogDate},"\n' + "},"
 	
     #try:
      #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
@@ -198,7 +205,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,menu=menu,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(menu=menu,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,menu=menu,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
@@ -206,67 +213,12 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     var.clear()
     content.clear()
 
-
+blog_index_template = env.get_template('blog-index.html')
 index_file_name = "pages/blog/index.html"
+output_from_parsed_template = blog_index_template.render(AssetPath=AssetPath,menu=menu,blog_posts=blog_posts,footer_contents=footer_contents)	
 try:
-    with codecs.open(index_file_name, 'w', encoding='utf-8') as f:
-        f.write(f"""<head>
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>News | Simply Docs</title>
-<meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
-
- 
-<link rel="stylesheet" href="{AssetPath}assets/style.css">
-
-<link rel="icon" href="/Simply-Docs/assets/images/favicon.png">
-<link rel="apple-touch-icon" href="/Simply-Docs/assets/images/favicon.png">
-
- <!-- Facebook integration -->
-<meta property="og:title" content="Simply Docs Demo">
-<meta property="og:image" content="/Simply-Docs/assets/images/OG_image.png">
-<meta property="og:url" content="https://marketingpipeline.github.io/Simply-Docs/">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Simple.css">
-<meta property="og:description" content="A Simply Docs / Blog Template built using Simple.css.">
-
-<!-- Twitter integration -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Simply Docs | Demo">
-<meta name="twitter:image" content="/Simply-Docs/assets/images/OG_image.png">
-<meta name="twitter:url" content="https://marketingpipeline.github.io/Simply-Docs/">
-<meta name="twitter:description" content="A Simply Docs / Blog Template built using Simple.css">
-
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"></script>
-  </head>
-<header>
-     <nav>
-  
- 
-{menu}
-</nav>
-
-        <h1>Blog</h1>
-      <p>Latest Blog Posts</p>
-    </header>
-
-
-<main>
-{blog_posts}
-
-
-
-</main>
-
-<footer>
-     {footer_contents}
-    </footer>
-
-   
- <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
-""")
+    with open(index_file_name, 'w') as fh:
+        fh.write(index_file_name)
 except IOError:
     sys.exit('Index file does not exist, or has no content.  Exiting')  
 
@@ -277,10 +229,8 @@ except IOError:
 
 
 
-## Create search file
-
-
-search_file_name = "pages/blog/search.html"
+## Create search JS file
+search_file_name = "assets/blog-search.js"
 try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
         f.write(""" 
