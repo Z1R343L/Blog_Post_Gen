@@ -3,7 +3,37 @@
   
 # How To Install
   
+  Download options:
+  Make a template from this repo
+  Download as a ZIP
+  Clone this repo to your own!
+
+Choose a download option  
+
+GitHub Pages Install: 
   
+1. Enable GitHub Pages in the repo you downloaded / cloned / made a template - to. 
+  
+2. Change the asset path. Refer to [Site Settings: Asset Path](#asset-path) 
+  
+3. Change the site name. [Site Settings: Site Name](#site-name)    
+  
+4. Enable GitHub workflows in the repo
+  
+5. Make another change (or add your own blog post) & your done!
+  
+  
+Install on own provider:
+  
+You will require python for this project & some sort of package / script to monitor changes on the directory you set the static generator up in. 
+  
+ 
+1. Upload the files from the ZIP folder to your provider 
+  
+2. Change the site name. Refer to [Site Settings: Site Name](#site-name)   
+  
+3. Run the script everytime a change is made in the <code>cms</code> folder
+   
 </github-md>
 </article>
  
@@ -13,11 +43,21 @@
 <github-md>
 # Site Settings
   
+## Asset Path
+ 
+   Change the "Asset_Path" to your repo name example:
+  
+  <code>Asset_Path:/Your_Repo_Name_Here/</code>
+  
+  If using this on GitHub Pages you will <b>NEED</b> to change this for assets like (JS, CSS) to load properly 
+  
 ## Site Name
+
+   Change the "Site_Name" to your website name example
   
-## Footer
+  <code>Site_Name:My awesome static generated python website</code>
   
-  
+
   
 </github-md>
 </article>
@@ -51,6 +91,30 @@
   To change the content in the index file  go to <code>.github/cms/index.md</code>
   
   and edit the index.md (markdown) file with your changes!
+ 
+  
+</github-md>
+</article>
+  
+
+
+
+
+
+
+
+
+<article>
+<github-md>
+# Footer
+   
+## How to edit the content in the bottom footer
+  
+   To change the bottom footer go to <code>.github/cms/layout/footer.md</code>
+  
+  
+  
+  and edit the footer.md (markdown) file with your changes!
  
   
 </github-md>
