@@ -8,7 +8,7 @@ BlogTitle:Coool
 
 BlogDate:Test 2, 2020
 
-BlogAuthor: Hello
+BlogAuthor:OctoCat
 
 <code>Site Title</code>
 
