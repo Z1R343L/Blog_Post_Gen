@@ -150,22 +150,37 @@ for file in getListOfFiles(dirName):
     # Write create date for blog post as default	
     BlogDate = ""
     BlogDescription = ""
-    BlogAuthor = None
     SiteTitle = "Site Name"
-    Blog_Contents = ""
    # AssetPath = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
-    try:
-        Blog_Contents = content["Blog_Content_Key"]
-        data = var 
-        BlogAuthor = data["BlogAuthor"]
-        BlogTitle = data["SEO_Title"]
-        BlogDate =  data["BlogDate"]
-        SiteTitle = data["BlogDate"]
-    #    AssetPath = data["Asset_Path"]
-	
-    except KeyError:
-        pass
+    data = var 
+
+    if Blog_Contents = content["Blog_Content_Key"]:
+      Blog_Contents = content["Blog_Content_Key"]
+    else:
+      Blog_Contents = ""
+
+    if SiteTitle = data["BlogDate"]:
+      SiteTitle = data["BlogDate"]
+    else:
+      SiteTitle = ""
+
+    if BlogDate = data["BlogDate"]:
+      BlogDate = data["BlogDate"]
+    else:
+      BlogDate = ""
+
+    if BlogTitle = data["Title"]:
+      BlogTitle = data["Title"]
+    else:
+      BlogTitle = ""
+
+    if BlogAuthor = data["BlogAuthor"]:
+      BlogAuthor = data["BlogAuthor"]
+    else:
+      BlogAuthor = ""
+
+
     file_name = outputFolder + Path(file).stem + ".html"
     # For writing blog posts to other page
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
@@ -184,7 +199,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,menu=menu,BlogTitle=BlogTitle,BlogDate=BlogDate, BlogAuthor=BlogAuthor, Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,menu=menu,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
