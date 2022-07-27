@@ -226,11 +226,22 @@ except IOError:
 
 
 
+# SWtiching template path
+env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
+blog_index_template = env.get_template('search.html')
+search_file_name = "pages/seach.html"
+output_from_parsed_template = blog_index_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
+try:
+    with open(search_file_name, 'w') as fh:
+        fh.write(output_from_parsed_template)
+except IOError:
+    sys.exit('Seach page file does not exist, or has no content.  Exiting')  
+
 
 
 
 ## Create search JS file
-search_file_name = "assets/blog-search.js"
+search_file_name = "assets/js/blog-search.js"
 try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
         f.write(""" 
