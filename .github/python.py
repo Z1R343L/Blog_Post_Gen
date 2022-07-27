@@ -150,6 +150,7 @@ for file in getListOfFiles(dirName):
     # Write create date for blog post as default	
     BlogDate = ""
     BlogDescription = ""
+    BlogAuthor = None
     SiteTitle = "Site Name"
     Blog_Contents = ""
    # AssetPath = ""
@@ -157,6 +158,7 @@ for file in getListOfFiles(dirName):
     try:
         Blog_Contents = content["Blog_Content_Key"]
         data = var 
+        BlogAuthor = data["BlogAuthor"]
         BlogTitle = data["SEO_Title"]
         BlogDate =  data["BlogDate"]
         SiteTitle = data["BlogDate"]
@@ -182,7 +184,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,menu=menu,BlogTitle=BlogTitle,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,menu=menu,BlogTitle=BlogTitle,BlogDate=BlogDate, BlogAuthor=BlogAuthor, Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
