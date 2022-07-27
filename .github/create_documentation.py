@@ -1,7 +1,9 @@
 import codecs
 
 import re as regex
-
+from jinja2 import Environment, FileSystemLoader
+env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
+template = env.get_template('documentation.html')
 var = {}
 
 # Open main settings file
@@ -53,56 +55,13 @@ except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')
 
 index_file_name = "pages/documentation.html"
-    
+
+
+output_from_parsed_template = template.render(menu=menu, Asset_Path=Asset_Path,index_file_contents=index_file_contents)
+
 # Write out index.html file    
 try:
-    with codecs.open(index_file_name, 'w', encoding='utf-8') as f:
-        f.write(f"""
-        <head>
-         <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simply Docs Demo | Home</title>
-<script src="{Asset_Path}assets/js/toc_generator.js"></script>   
-<meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
-<link rel="stylesheet" href="{Asset_Path}assets/style.css">
-</head>
-        
-        <header>
-   <nav>
-  {menu}
-</nav>
-      <h1>Simply Docs</h1>
- 
-    </header>
-<main>
-      <fieldset>
-        <!--
-        Every fieldset must contain a legend. IE barfs if it's not there.
-        It's no fun.
-        -->
-        <legend>Table Of Contents</legend>
-        
-      
-<ul id="toc">
-
-</ul>
-
-
-        
-        
-      </fieldset>
-      
-      
- {index_file_contents}
-</main>
-<footer>
-      <p>Simply Docs was created by <a href="https://github.com/MarketingPipeline/">Marketing Pipeline</a> and is licensed under the MIT license.</p>
-  <small>© 2014 Some company name</small>
-      <address>email@email.com</address>
-    </footer>
-   
- <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
-        """)
+    with open(index_file_name, 'w', encoding='utf-8') as fh:
+        fh.write(output_from_parse_template)
 except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')  
