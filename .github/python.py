@@ -179,8 +179,7 @@ for file in getListOfFiles(dirName):
       BlogAuthor = data["BlogAuthor"]
     else:
       BlogAuthor = ""
-
-
+      
     file_name = outputFolder + Path(file).stem + ".html"
     # For writing blog posts to other page
     blog_posts += f"""  <p class="notice"><strong><a href="{AssetPath}{file_name}">{BlogTitle}</a></strong> <br><br>
