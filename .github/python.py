@@ -155,24 +155,24 @@ for file in getListOfFiles(dirName):
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     data = var 
 
-    if ["Blog_Content_Key"] in data:
+    try:
       Blog_Contents = content["Blog_Content_Key"]
-    else:
+    except:
       Blog_Contents = ""
 
-    if ["BlogDate"] in data:
+    try:
       SiteTitle = data["BlogDate"]
-    else:
+    except:
       SiteTitle = ""
 
-    if ["Title"] in data:
+    try:
       BlogTitle = data["Title"]
-    else:
+    except:
       BlogTitle = ""
 
-    if ["BlogAuthor"] in data:
+    try:
       BlogAuthor = data["BlogAuthor"]
-    else:
+    except:
       BlogAuthor = ""
 
     file_name = outputFolder + Path(file).stem + ".html"
