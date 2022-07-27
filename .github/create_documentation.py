@@ -62,6 +62,6 @@ output_from_parsed_template = template.render(menu=menu, Asset_Path=Asset_Path,i
 # Write out index.html file    
 try:
     with open(index_file_name, 'w', encoding='utf-8') as fh:
-        fh.write(output_from_parse_template)
+        fh.write(output_from_parsed_template)
 except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')  
