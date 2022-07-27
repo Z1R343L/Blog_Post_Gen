@@ -12,7 +12,7 @@ import platform
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
-blog_post_template = env.get_template('index.html')
+blog_post_template = env.get_template('blog-post.html')
 
 # Used to store key_values for later
 var = {}
