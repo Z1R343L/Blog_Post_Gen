@@ -181,12 +181,12 @@ for file in getListOfFiles(dirName):
 
     try:
       BlogTitle = data["BlogTitle"]
-      BlogAuthor_LowerCase = BlogAuthor.lower
     except:
       BlogTitle = ""
 
     try:
       BlogAuthor = data["BlogAuthor"]
+      BlogAuthor_LowerCase = BlogAuthor.lower
     except:
       BlogAuthor = ""
 
