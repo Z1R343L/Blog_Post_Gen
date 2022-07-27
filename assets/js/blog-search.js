@@ -42,6 +42,12 @@ contents: ","
 published: "2022-07-27,"
 },
     {
+url: "/Blog_Post_Gen/pages/blog/jared.html",
+name: "",
+contents: ","
+published: "2022-07-27,"
+},
+    {
 url: "/Blog_Post_Gen/pages/blog/blog_post_2.html",
 name: "Coool",
 contents: ","
