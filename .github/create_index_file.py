@@ -1,7 +1,11 @@
 import codecs
 
 import re as regex
-
+import os
+import subprocess
+from jinja2 import Environment, FileSystemLoader
+env = Environment(loader=FileSystemLoader('/.github/cms/layouts'))
+template = env.get_template('index.html')
 
 var = {}
 
@@ -59,48 +63,16 @@ except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')
 
 index_file_name = "index.html"
-    
+output_from_parsed_template = template.render(menu, Site_Name,index_file_contents)
+
+
+# to save the results
+with open("my_new_file.html", "w") as fh:
+    fh.write(output_from_parsed_template)    
 # Write out index.html file    
 try:
-    with codecs.open(index_file_name, 'w', encoding='utf-8') as f:
-        f.write(f"""
-        <head>
-         <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Home</title>
-  
-<meta name="description" content="A showcase of Simply Docs by MarketingPipeline built using Simple.CSS">
-
-<link rel="stylesheet" href="./assets/style.css">
-</head>
-        
-        <header>
-   <nav>
-  {menu}
-
-</nav>
-
-      <h1>{Site_Name}</h1>
- 
-    </header>
-<main>
-
-{index_file_contents}
-</main>
-<a href="https://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip"><button>Download This Template</button></a>
-
-
-
-<footer>
-      <p>Simply Docs was created by <a href="https://github.com/MarketingPipeline/">Marketing Pipeline</a> and is licensed under the MIT license.</p>
-  <small>© 2014 Some company name</small>
-      <address>email@email.com</address>
-    </footer>
-   
- <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
-        """)
+    with open(index_file_name, 'w') as fh:
+        fh.write(output_from_parsed_template)
 except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')  
 
