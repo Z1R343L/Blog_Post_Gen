@@ -203,6 +203,7 @@ for file in getListOfFiles(dirName):
       BlogAuthor_LowerCase = BlogAuthor.lower()
     except:
       BlogAuthor = ""
+      BlogAuthor_LowerCase = ""
 
     try:
       BlogDescription = data["BlogDescription"]
