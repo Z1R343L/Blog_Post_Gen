@@ -128,6 +128,8 @@ def creation_date(path_to_file):
 
 json_data = ""
 
+
+## Create Blog Posts
 content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
@@ -135,12 +137,17 @@ for file in getListOfFiles(dirName):
 
     for line in f:
         if ":" in line:
+	  # Create JSON Data	
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
+    
+	
+    ## Get input after 	(ERROR HERE)
     try:
       blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
+    # If no settings - get the whole file contents		
       blog_content = f.read()
     content['Blog_Content_Key'] = str(blog_content)
     globals().update(content)
@@ -213,6 +220,8 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     var.clear()
     content.clear()
 
+	
+# Create page showing all blog posts (blog index file)	
 blog_index_template = env.get_template('blog-index.html')
 index_file_name = "pages/blog/index.html"
 output_from_parsed_template = blog_index_template.render(AssetPath=AssetPath,menu=menu,blog_posts=blog_posts,footer_contents=footer_contents)	
@@ -226,11 +235,79 @@ except IOError:
 
 
 
+# Create Blog Author Pages
+blog_author_template = env.get_template('blog-author.html')
+content = {}
+dirName = ".github/cms/blog_posts/author"
+outputFolder = "pages/blog/author"
+os.makedirs(outputFolder, exist_ok=True)
+for file in getListOfFiles(dirName):
+  with open(file, 'r') as f:
+    
+
+    for line in f:
+        if ":" in line:
+          name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+          var[name] = str(value).rstrip() # needs a value added    
+    globals().update(var)
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
+   # file_contents = f.read()
+    Facebook_Meta = ""
+    BlogTitle = "Blog Post"
+    # Write create date for blog post as default	
+    BlogDate = ""
+    BlogDescription = ""
+    SiteTitle = "Site Name"
+   # AssetPath = ""
+    Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
+    data = var 
+
+    try:
+      SiteTitle = data["SEO_Title"]
+    except:
+      SiteTitle = ""
+
+
+    try:
+      BlogAuthor = data["BlogAuthor"]
+    except:
+      BlogAuthor = ""
+
+    file_name = outputFolder + Path(file).stem + ".html"
+    # For writing blog posts to other page
+    #try:
+     #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
+   # except:
+    #    pass    
+    try:
+        with open(file_name, 'w') as fh:
+          output_from_parsed_template = blog_author_template.render(menu=menu,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
+          fh.write(output_from_parsed_template)
+	    
+    except IOError:
+        sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
+    var.clear()
+    content.clear()
+
+
+
+	
+	
+	
+	
+
 # SWtiching template path
 env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
-blog_index_template = env.get_template('search.html')
+
+# Create search page
+search_page_template = env.get_template('search.html')
 search_file_name = "pages/seach.html"
-output_from_parsed_template = blog_index_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
+output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
 try:
     with open(search_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
