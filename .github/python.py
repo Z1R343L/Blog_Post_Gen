@@ -305,6 +305,16 @@ for file in getListOfFiles(dirName):
 
 
 
+
+# Create search route page
+search_page_template = env.get_template('search-route.html')
+search_file_name = "search.html"
+output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
+try:
+    with open(search_file_name, 'w') as fh:
+        fh.write(output_from_parsed_template)
+except IOError:
+    sys.exit('Seach route page file does not exist, or has no content.  Exiting')  
 	
 	
 	
@@ -315,13 +325,15 @@ env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
 
 # Create search page
 search_page_template = env.get_template('search.html')
-search_file_name = "pages/seach.html"
+search_file_name = "pages/search.html"
 output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
 try:
     with open(search_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
 except IOError:
     sys.exit('Seach page file does not exist, or has no content.  Exiting')  
+
+
 
 
 
