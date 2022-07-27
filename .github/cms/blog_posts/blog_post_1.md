@@ -8,6 +8,11 @@ BlogTitle:Hello World
 
 BlogDate:Test 1, 2020
 
+
+<code>Blog Author</code>
+
+BlogAuthor:Jared
+
 <code>Site Title</code>
 
 SEO_Title:Helloo
