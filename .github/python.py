@@ -135,6 +135,11 @@ else:
 
 
 
+if var['Site_Name']:
+  Site_Name = var['Site_Name']
+else:
+  Site_Name = ""
+
 
 
 ## Get the footer contents
@@ -212,7 +217,7 @@ except IOError:
     sys.exit('Input file does not exist, or has no content.  Exiting')
 
 index_file_name = "index.html"
-output_from_parsed_template = template.render(menu=menu, Site_Name=Site_Name,index_file_contents=index_file_contents)
+output_from_parsed_template = template.render(menu=menu, Site_Name=Site_Name,index_file_contents=index_file_contents,footer_contents=footer_contents)
 
 try:
     with open(index_file_name, 'w') as fh:
@@ -289,7 +294,7 @@ for file in getListOfFiles(dirName):
     try:
       SiteTitle = data["SEO_Title"]
     except:
-      SiteTitle = ""
+      SiteTitle = "Blog Post"
 
 
     try:
@@ -301,7 +306,7 @@ for file in getListOfFiles(dirName):
     try:
       BlogTitle = data["BlogTitle"]
     except:
-      BlogTitle = ""
+      BlogTitle = "Blog Post"
 
     try:
       BlogAuthor = data["BlogAuthor"]
@@ -378,14 +383,13 @@ for file in getListOfFiles(dirName):
     globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
-    SiteTitle = "Site Name"
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     data = var 
 
     try:
       SiteTitle = data["SEO_Title"]
     except:
-      SiteTitle = ""
+      SiteTitle = "Author Page"
 
 
     try:
@@ -396,7 +400,7 @@ for file in getListOfFiles(dirName):
     file_name = outputFolder + Path(file).stem + ".html"   
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_author_template.render(menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
@@ -422,7 +426,7 @@ for file in getListOfFiles(dirName):
 ## Create search route page
 search_page_template = env.get_template('search-route.html')
 search_file_name = "pages/blog/search.html"
-output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
+output_from_parsed_template = search_page_template.render(Site_Name=Site_Name, AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
 try:
     with open(search_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
@@ -439,7 +443,7 @@ env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
 ## Create search page
 search_page_template = env.get_template('search.html')
 search_file_name = "pages/search.html"
-output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
+output_from_parsed_template = search_page_template.render(Site_Name=Site_Name, AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
 try:
     with open(search_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
@@ -561,7 +565,7 @@ except IOError:
 documentation_file_name = "pages/documentation.html"
 
 
-output_from_parsed_template = documentation_template.render(menu=menu, Asset_Path=Asset_Path,documenation_file_contents=documenation_file_contents,footer_contents=footer_contents)
+output_from_parsed_template = documentation_template.render(menu=menu,Site_Name=Site_Name, Asset_Path=Asset_Path,documenation_file_contents=documenation_file_contents,footer_contents=footer_contents)
 
 ## Write out documenation.html file    
 try:
