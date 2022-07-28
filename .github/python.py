@@ -168,7 +168,7 @@ with open(permalinks_file) as f:
       link = ""
     else:
       link = link
-    if external_link == "False"
+    if external_link == "False":
 	external_link = ""
     else:
 	external_link = AssetPath
