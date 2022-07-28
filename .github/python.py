@@ -145,16 +145,18 @@ blog_post_template = env.get_template('blog-post.html')
 #content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    if "=================END OF SEO SETTINGS============" in f.read():
-      Blog_Contents = f.readlines().split("=================END OF SEO SETTINGS============",1)[1] 
-    else:
-      Blog_Contents = f.read()
+   
 
     print(file)
     if "/author/" in file:
       break
 
     for line in f:
+        if "=================END OF SEO SETTINGS============" in line:
+          Blog_Contents = f.readlines().split("=================END OF SEO SETTINGS============",1)[1] 
+        else:
+          Blog_Contents = f
+          
         if ":" in line:
 	  # Create JSON Data	
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
