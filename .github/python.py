@@ -338,7 +338,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(menu=menu,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
@@ -352,7 +352,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
 ## Create page showing all blog posts (blog index file)	
 blog_index_template = env.get_template('blog-index.html')
 index_file_name = "pages/blog/index.html"
-output_from_parsed_template = blog_index_template.render(AssetPath=AssetPath,menu=menu,blog_posts=blog_posts,footer_contents=footer_contents)	
+output_from_parsed_template = blog_index_template.render(Site_Name=Site_Name, AssetPath=AssetPath,menu=menu,blog_posts=blog_posts,footer_contents=footer_contents)	
 try:
     with open(index_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
