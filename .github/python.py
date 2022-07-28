@@ -565,7 +565,7 @@ except IOError:
 documentation_file_name = "pages/documentation.html"
 
 
-output_from_parsed_template = documentation_template.render(menu=menu,Site_Name=Site_Name, Asset_Path=Asset_Path,documenation_file_contents=documenation_file_contents,footer_contents=footer_contents)
+output_from_parsed_template = documentation_template.render(menu=menu,Site_Name=Site_Name, AssetPath=AssetPath,documenation_file_contents=documenation_file_contents,footer_contents=footer_contents)
 
 ## Write out documenation.html file    
 try:
