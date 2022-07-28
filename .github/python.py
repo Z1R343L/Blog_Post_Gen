@@ -139,7 +139,7 @@ def creation_date(path_to_file):
 
 ## Create Blog Posts With All Files Returned
 
-
+Blog_Contents = "test"
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
 #content = {}
@@ -151,13 +151,10 @@ for file in getListOfFiles(dirName):
     if "/author/" in file:
       break
     for line in f:
-        if "=================END OF SEO SETTINGS============" in line:	
-          Blog_Contents = "Found"	
+        if "=================END OF SEO SETTINGS============" in line:
           print("Found")
-	      else:
-	        Blog_Contents = "Not found"	
-	        print("Not Found")
-          
+        else:
+          print("Not Found")  
         if ":" in line:
 	  # Create JSON Data	
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
