@@ -169,11 +169,11 @@ with open(permalinks_file) as f:
     else:
       link = link
     if external_link == "False":
-	    external_link = ""
+	    path = AssetPath
     else:
-	    external_link = AssetPath
+	    path = ""
    ## For links like github.com/MarketingPipeline (does not add asset path infront) if not False
-    menu += f"""<a href="{external_link}{link}" {Open_New_Window}>{title}</a>"""  
+    menu += f"""<a href="{path}{link}" {Open_New_Window}>{title}</a>"""  
 
 
 ########################################
