@@ -150,7 +150,7 @@ for file in getListOfFiles(dirName):
     print(file)
     if "/author/" in file:
       break
-    if "=================END OF SEO SETTINGS============" in f:
+    if "=================END OF SEO SETTINGS============" in f.readlines():
       print("Found")		
       Blog_Contents = f.read().partition("=================END OF SEO SETTINGS============")[2]
     else:
