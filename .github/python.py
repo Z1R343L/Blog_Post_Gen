@@ -242,7 +242,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
     var.clear()
-    content.clear()
+   # content.clear()
 
 
 
