@@ -10,7 +10,7 @@
         
         <header>
    <nav>
-  <a href="/Blog_Post_Gen/" __target blank>Home</a><a href="/Blog_Post_Gen/pages/blog/index" __target blank>Blog</a><a href="/Blog_Post_Gen/pages/documentation" __target blank>Blog</a><a href="/Blog_Post_Gen/http://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip" __target blank>Download</a><a href="/Blog_Post_Gen/ google.com" __target blank>Open new window</a>
+  <a href="/Blog_Post_Gen/" >Home</a><a href="/Blog_Post_Gen/pages/blog/index" >Blog</a><a href="/Blog_Post_Gen/pages/documentation" >Blog</a><a href="/Blog_Post_Gen/http://github.com/MarketingPipeline/Simply-Docs/archive/refs/heads/main.zip" >Download</a><a href="/Blog_Post_Gen/ google.com" target="_blank">Open new window</a>
 </nav>
       <h1>Simply Docs</h1>
  
@@ -34,251 +34,33 @@
       </fieldset>
       
       
- <article>
-<github-md>
-  
-# How To Install
-  
-  Download options:
-  Make a template from this repo
-  Download as a ZIP
-  Clone this repo to your own!
+ <github-md>
+# Test yall
 
-
-
-Choose a download option  
-
-
-GitHub Pages Install: 
+Features:
   
-1. Enable GitHub Pages in the repo you downloaded / cloned / made a template - to. 
+  - Lightweight
+  - Search Page (Search real results!) 
+  - Write GitHub Flavored Markdown & HTML in the same document!
+  - Blog
+    - Multiple Blog Author Support
+  - Add your own links to menu!
+  - Create your own custom pages!
+  - Easy to customize layouts
+  - Theme support (download or create theme with EASE!)
+  - Easy to read code (built with Python)
+  - Ready to host on GitHub Pages
+    - Can deploy on your OWN provider (optional) 
+  - Setup in literally less than 5 minutes.
+  - Plugins
+    - Theme Downloader
   
-2. Change the asset path. Refer to [Site Settings: Asset Path](#asset-path) 
+ Markdown support made possible with: Markdown-Tag
   
-3. Change the site name. [Site Settings: Site Name](#site-name)    
+ Static search route support made possible with: Static-Search.js
   
-4. Enable GitHub workflows in the repo
+</github-md>  
   
-5. Make another change (or add your own blog post) & your done!
-  
-  
-Install on own provider:
-  
-You will require python for this project & some sort of package / script to monitor changes on the directory you set the static generator up in. 
-  
- 
-1. Upload the files from the ZIP folder to your provider 
-  
-2. Change the site name. Refer to [Site Settings: Site Name](#site-name)   
-  
-3. Run the script everytime a change is made in the <code>cms</code> folder
-   
-</github-md>
-</article>
- 
- 
- 
-<article>
-<github-md>
-# Site Settings
-  
-## Asset Path
- 
-   Change the "Asset_Path" to your repo name example:
-  
-  <code>Asset_Path:/Your_Repo_Name_Here/</code>
-  
-  If using this on GitHub Pages you will <b>NEED</b> to change this for assets like (JS, CSS) to load properly 
-  
-## Site Name
-
-   Change the "Site_Name" to your website name example
-  
-  <code>Site_Name:My awesome static generated python website</code>
-  
-
-  
-</github-md>
-</article>
-
-
-
-
-
-
-<article>
-<github-md>
-# Layouts
-
-## How to change rendered template / layout
-  
-  To change the default templates rendered  go to <code>.github/cms/layouts/</code>
- 
-  and you can edit the layout / templates to your liking. To render the values be sure to not remove anything that looks like {{this}}
-  
-</github-md>
-</article>
-  
-
-
-<article>
-<github-md>
-# Index File
-
-## How to edit the content in the index page
-  
-  To change the content in the index file  go to <code>.github/cms/index.md</code>
-  
-  and edit the index.md (markdown) file with your changes!
- 
-  
-</github-md>
-</article>
-  
-
-
-
-
-
-
-
-
-<article>
-<github-md>
-# Footer
-   
-## How to edit the content in the bottom footer
-  
-   To change the bottom footer go to <code>.github/cms/layout/footer.md</code>
-  
-  
-  
-  and edit the footer.md (markdown) file with your changes!
- 
-  
-</github-md>
-</article>
-  
-
-
-
-<article>
-<github-md>
-# Documentation
-
-## How to edit the content in the documenation page
-  
-  To change the content in the documentation page  go to <code>.github/cms/documentation.md</code>
-  
-  and edit the documentation.md (markdown) file with your changes!
- 
-  
-</github-md>
-</article>
-  
-
-
-
-
-
-
-
-
-
-<article>
-<github-md>
-# Blog
-
-## How to add a blog post
-  
-  To add a blog post go to <code>.github/cms/blog-posts/</code>
-  
-  create a new Markdown File (.md) and write your content. The blog post will be automatically created (if your workflow is setup using a push action)
-  
-  <b>Note</b>: Author in your Blog Post should have a author blog page (read further).
-  
-## How to add a blog author page
-  
-  To add a blog author page go to <code>.github/cms/blog-posts/authors</code>
-  
-  Create a file using the author name (in lowercase) & write the content describing the author
-  
-  Multiple authors can be added! 
-  
-  
-</github-md>
-</article>
-  
- 
-
-
-<article>
-<github-md>
-# Plugin
-
-## Theme Downloader
-  
-  <b>Note</b>: This plugin is only for GitHub hosted site created with Simply Static
-  
-  To download a theme go to Workflows in your GitHub repo and click <code>Theme Downloader</code>
-  
-  Set the <code>Theme Path</code> to the layout path of the theme you are downloading 
-  
-  Set the <code>Asset Path</code> to the asset path of the theme you are downloading. 
-  
-  
-### Themes
-
-There are currently no themes provided. If you would like to learn how to create one read below
-
-
-
-### How to create a theme for Simply Static
-
-To create a theme go to <code>.github/cms/layouts</code> download these files to wherever you are making your changes.
-
-
-Once done making changes, create a repo with a folder named "layouts" with your HTML templates used & "assets" containing any CSS / images needed.
-
-Feel free to provide a pull request on the main repo with your theme to have it added here!
-  
-## How to add a blog author page
-  
-  To add a blog author page go to <code>.github/cms/blog-posts/authors</code>
-  
-  Create a file using the author name (in lowercase) & write the content describing the author
-  
-  Multiple authors can be added! 
-  
-  
-</github-md>
-</article>
-  
- 
- 
-
-
-
- 
-<article>
-<github-md>
-# Pages
-
-### Index  
-  
-### Documentation
-  
-### Blog
-  
-### Blog Author  
-
-  
-  
-</github-md>
-</article>
- 
-
-
 
 
 </main>
