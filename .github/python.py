@@ -150,14 +150,13 @@ for file in getListOfFiles(dirName):
     print(file)
     if "/author/" in file:
       break
-    if "=================END OF SEO SETTINGS============" in f.readlines():
-      print("Found")		
-      Blog_Contents = f.read().partition("=================END OF SEO SETTINGS============")[2]
-    else:
-      print("Not found")
-      Blog_Contents = f.read() 
     for line in f:
-       
+        if "=================END OF SEO SETTINGS============" in line:	
+	   Blog_Contents = "Found"	
+           print("Found")
+	else:
+	   Blog_Contents = "Not found"	
+	   print("Not Found")
           
         if ":" in line:
 	  # Create JSON Data	
