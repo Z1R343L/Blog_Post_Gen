@@ -542,7 +542,7 @@ except IOError:
 #            Documentation             #
 ########################################      
 
-documenation_template = env.get_template('documentation.html')
+documentation_template = env.get_template('documentation.html')
 
 ## Open Input Documenation Content
 
