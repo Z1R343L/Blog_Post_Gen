@@ -153,7 +153,7 @@ for file in getListOfFiles(dirName):
 
     for line in f:
         if "=================END OF SEO SETTINGS============" in line:
-          Blog_Contents = line.partition("=================END OF SEO SETTINGS============")[2]
+          Blog_Contents = f.read().partition("=================END OF SEO SETTINGS============")[2]
         else:
           Blog_Contents = f.read()
           
