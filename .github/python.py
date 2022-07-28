@@ -151,19 +151,25 @@ permalinks_file= "navlinks.md"
 permalinks_file_contents = None
 menu=""
 ## Regex match for menu links
-pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?)'
+pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?) External_URL:(.*?)'
 with open(permalinks_file) as f:
   file_contents = f.read()
-  for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
+  for (link, window, title, position, external_link) in re.findall(pattern, file_contents, re.DOTALL):
+    ## For opening link in a new window		
     if window == "True":
       Open_New_Window = 'target="_blank"'
     else:
       Open_New_Window = ""
+    ## For home pages (example : "/")
     if link == "null":
       link = ""
     else:
       link = link
-    menu += f"""{position}<a href="{AssetPath}{link}" {Open_New_Window}>{title}</a>"""  
+   ## For links like github.com/MarketingPipeline (does not add asset path infront) if not False
+   if external_link == "False":
+      menu += f"""{position}<a href="{AssetPath}{link}" {Open_New_Window}>{title}</a>"""  
+    else:
+      menu += f"""{position}<a href="{link}" {Open_New_Window}>{title}</a>"""  
   
 
 
