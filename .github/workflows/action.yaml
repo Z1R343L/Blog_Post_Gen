@@ -19,9 +19,6 @@ jobs:
     # Run the Python Script
       run: |
          python3 .github/python.py 
-         python3 .github/create_index_file.py
-         python3 .github/create_documentation.py 
-
 
 
     - name: Commit and Push Updated Content 
