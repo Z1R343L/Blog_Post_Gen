@@ -146,8 +146,8 @@ blog_post_template = env.get_template('blog-post.html')
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     if "=================END OF SEO SETTINGS============" in f.read():
-      print("Found")
-      Blog_Contents = f.read().split("=================END OF SEO SETTINGS============",1)[1] 
+      Blog_Contents = f.read().split("=================END OF SEO SETTINGS============", 1)
+        #Blog_Contents = f.split("=================END OF SEO SETTINGS============",1)[1] 
     else:
       Blog_Contents= f.read()
       print("Not Found")
