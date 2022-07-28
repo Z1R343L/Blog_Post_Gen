@@ -1,6 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+########################################
+#              Import(s)               #
+########################################    
 
 import codecs
 import sys
@@ -13,14 +16,25 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 
+########################################
+#          End of Import(s)            #
+########################################    
 
 
 
+
+
+
+
+
+########################################
+#              List(s)                 #
+########################################    
 
 
 # Variables to append / add for usage later in this script
 
-## Used to store key_values for later
+## Used to store JSON key_values for later
 var = {}
 
 ## Blog Posts for Blog Page
@@ -31,32 +45,9 @@ json_data = ""
 
 
 
-
-
-# Open main settings file
-settings_file = ".github/settings.md" 
-with open(settings_file, 'r') as f:
-  for line in f:
-   # Make JSON Key Values
-   if ":" in line:
-    name, value = line.split('=================END OF SETTINGS============')[0].split(':')  
-    var[name] = str(value).rstrip()   
-  globals().update(var)
-
-
-if var['Asset_Path']:
-  AssetPath = var['Asset_Path']
-else:
-  AssetPath = ""
-
-
-
-
-
-# Get the footer contents
-footer_file = ".github/footer.md"
-with open(footer_file) as f:
-  footer_contents = f.read()
+########################################
+#          End of Lists(s)             #
+########################################    
 
 
 
@@ -64,38 +55,11 @@ with open(footer_file) as f:
 
 
 
-# Create menu links
 
 
-permalinks_file= "navlinks.md"
-permalinks_file_contents = None
-menu=""
-# Regex match for menu links
-pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?)'
-with open(permalinks_file) as f:
-  file_contents = f.read()
-  for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
-    if window == "True":
-      Open_New_Window = 'target="_blank"'
-    else:
-      Open_New_Window = ""
-    if link == "null":
-      link = ""
-    else:
-      link = link
-    menu += f"""{position}<a href="{AssetPath}{link}" {Open_New_Window}>{title}</a>"""  
-  
-
-
-
-# Make folder for blog posts
-outputFolder = "pages/blog/"
-
-dirName = ".github/cms/blog_posts"
-
-## succeeds even if directory does not exist.
-os.makedirs(outputFolder, exist_ok=True)
-
+########################################
+#            Function(s)               #
+########################################    
 
 ## function to get all files in directory
 def getListOfFiles(dirName):
@@ -115,7 +79,8 @@ def getListOfFiles(dirName):
 
 
 
-## https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
+## Function to get File Creation Dates
+# https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
 def creation_date(path_to_file):
     """
     Try to get the date that a file was created, falling back to when it was
@@ -135,7 +100,132 @@ def creation_date(path_to_file):
 
 
 
+########################################
+#          End of Function(s)          #
+########################################    
 
+
+
+
+
+
+
+
+
+
+########################################
+#           SITE SETTINGS              #
+########################################    
+
+## Open main settings file
+settings_file = ".github/settings.md" 
+with open(settings_file, 'r') as f:
+  for line in f:
+   ## Make JSON Key Values
+   if ":" in line:
+    name, value = line.split('=================END OF SETTINGS============')[0].split(':')  
+    var[name] = str(value).rstrip()   
+  globals().update(var)
+
+
+if var['Asset_Path']:
+  AssetPath = var['Asset_Path']
+else:
+  AssetPath = ""
+
+
+
+
+
+## Get the footer contents
+footer_file = ".github/footer.md"
+with open(footer_file) as f:
+  footer_contents = f.read()
+
+
+
+## Create menu links
+
+
+permalinks_file= "navlinks.md"
+permalinks_file_contents = None
+menu=""
+## Regex match for menu links
+pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?)'
+with open(permalinks_file) as f:
+  file_contents = f.read()
+  for (link, window, title, position) in re.findall(pattern, file_contents, re.DOTALL):
+    if window == "True":
+      Open_New_Window = 'target="_blank"'
+    else:
+      Open_New_Window = ""
+    if link == "null":
+      link = ""
+    else:
+      link = link
+    menu += f"""{position}<a href="{AssetPath}{link}" {Open_New_Window}>{title}</a>"""  
+  
+
+
+########################################
+#      END OF SITE SETTINGS            #
+########################################    
+
+
+
+
+
+
+########################################
+#           SITE SETTINGS              #
+########################################    
+
+
+
+
+########################################
+#             Index File               #
+########################################    
+
+# Open Index File Content
+index_file_contents = ".github/index.md"
+try:
+    with open(index_file_contents, 'r') as f:
+        index_file_contents = f.read()
+        
+        
+except IOError:
+    sys.exit('Input file does not exist, or has no content.  Exiting')
+
+index_file_name = "index.html"
+output_from_parsed_template = template.render(menu=menu, Site_Name=Site_Name,index_file_contents=index_file_contents)
+
+try:
+    with open(index_file_name, 'w') as fh:
+        fh.write(output_from_parsed_template)
+except IOError:
+    sys.exit('Input file does not exist, or has no content.  Exiting')  
+
+########################################
+#          End Of Index File           #
+########################################    
+
+
+
+
+
+
+########################################
+#               BLOG                   #
+########################################      
+
+## Make folder for blog posts
+outputFolder = "pages/blog/"
+
+dirName = ".github/cms/blog_posts"
+
+## succeeds even if directory does not exist.
+os.makedirs(outputFolder, exist_ok=True)
 
 ## Create Blog Posts With All Files Returned
 
@@ -248,9 +338,8 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
    # content.clear()
 
 
-
 	
-# Create page showing all blog posts (blog index file)	
+## Create page showing all blog posts (blog index file)	
 blog_index_template = env.get_template('blog-index.html')
 index_file_name = "pages/blog/index.html"
 output_from_parsed_template = blog_index_template.render(AssetPath=AssetPath,menu=menu,blog_posts=blog_posts,footer_contents=footer_contents)	
@@ -258,13 +347,10 @@ try:
     with open(index_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
 except IOError:
-    sys.exit('Blog index file does not exist, or has no content.  Exiting')  
+    sys.exit('Blog index file template does not exist, or has no content.  Exiting')  
 
 
-
-
-
-# Create Blog Author Pages
+## Create Blog Author Pages
 blog_author_template = env.get_template('blog-author.html')
 content = {}
 dirName = ".github/cms/blog_posts/author"
@@ -313,10 +399,22 @@ for file in getListOfFiles(dirName):
     var.clear()
     content.clear()
 
+########################################
+#            End of Blog               #
+########################################      
 
 
 
-# Create search route page
+
+
+
+
+
+########################################
+#            Search Route              #
+########################################      
+
+## Create search route page
 search_page_template = env.get_template('search-route.html')
 search_file_name = "pages/blog/search.html"
 output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
@@ -330,10 +428,10 @@ except IOError:
 	
 	
 
-# Switching template path
+## Switching template path
 env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
 
-# Create search page
+## Create search page
 search_page_template = env.get_template('search.html')
 search_file_name = "pages/search.html"
 output_from_parsed_template = search_page_template.render(AssetPath=AssetPath,menu=menu,footer_contents=footer_contents)	
@@ -341,7 +439,7 @@ try:
     with open(search_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
 except IOError:
-    sys.exit('Seach page file does not exist, or has no content.  Exiting')  
+    sys.exit('Seach page template file does not exist, or has no content.  Exiting')  
 
 
 
@@ -429,3 +527,46 @@ input.forEach(object => {
 """)
 except IOError:
     sys.exit('Blog posts do not exist, or has no content.  Exiting')  
+
+########################################
+#         End of Search Route          #
+########################################      
+
+
+
+
+########################################
+#            Documentation             #
+########################################      
+
+documenation_template = env.get_template('documentation.html')
+
+## Open Input Documenation Content
+
+# Need to create a better documenation function than just one page! 
+documenation_file_contents = ".github/cms/docs/how_to_setup.md"
+try:
+    with open(index_file_contents, 'r') as f:
+        index_file_contents = f.read()
+        
+        
+except IOError:
+    sys.exit('Documentation file does not exist, or has no content.  Exiting')
+
+documentation_file_name = "pages/documentation.html"
+
+
+output_from_parsed_template = documentation_template.render(menu=menu, Asset_Path=Asset_Path,index_file_contents=index_file_contents)
+
+## Write out documenation.html file    
+try:
+    with open(documentation_file_name, 'w', encoding='utf-8') as fh:
+        fh.write(output_from_parsed_template)
+except IOError:
+    sys.exit('Documentation template file does not exist, or has no content.  Exiting')  
+
+
+
+########################################
+#         End of  Documentation        #
+########################################      
