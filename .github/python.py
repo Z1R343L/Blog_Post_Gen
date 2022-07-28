@@ -232,20 +232,11 @@ os.makedirs(outputFolder, exist_ok=True)
 
 ## Create Blog Posts With All Files Returned
 
-Blog_Contents = "test"
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
-#content = {}
+content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    if "=================END OF SEO SETTINGS============" in f.read():
-      print("Found")
-        #Blog_Contents = f.split("=================END OF SEO SETTINGS============",1)[1] 
-    else:
-      print("Not Found")
-   
-
-    print(file)
     if "/author/" in file:
       break
     for line in f:
@@ -261,13 +252,13 @@ for file in getListOfFiles(dirName):
     
 	
     ## Get input after 	(ERROR HERE)
-   # try:
-    #  blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    #except:
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
     # If no settings - get the whole file contents		
-     # blog_content = f.read()
-   # content['Blog_Content_Key'] = str(blog_content)
-   # globals().update(content)
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
@@ -279,10 +270,10 @@ for file in getListOfFiles(dirName):
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     data = var 
 
-  #  try:
-   #   Blog_Contents = content["Blog_Content_Key"]
-    #except:
-     # Blog_Contents = ""
+    try:
+      Blog_Contents = content["Blog_Content_Key"]
+    except:
+      Blog_Contents = ""
 
     try:
       SiteTitle = data["SEO_Title"]
@@ -338,7 +329,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
     var.clear()
-   # content.clear()
+    content.clear()
 
 
 	
