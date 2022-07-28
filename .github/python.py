@@ -152,11 +152,11 @@ for file in getListOfFiles(dirName):
       break
     for line in f:
         if "=================END OF SEO SETTINGS============" in line:	
-	   Blog_Contents = "Found"	
-           print("Found")
-	else:
-	   Blog_Contents = "Not found"	
-	   print("Not Found")
+          Blog_Contents = "Found"	
+          print("Found")
+	      else:
+	        Blog_Contents = "Not found"	
+	        print("Not Found")
           
         if ":" in line:
 	  # Create JSON Data	
