@@ -151,10 +151,10 @@ for file in getListOfFiles(dirName):
     if "/author/" in file:
       break
     for line in f:
-        if "=================END OF SEO SETTINGS============" in line:	
+       if "=================END OF SEO SETTINGS============" in line:	
           Blog_Contents = "Found"	
           print("Found")
-	      else:
+	     else:
 	        Blog_Contents = "Not found"	
 	        print("Not Found")
           
