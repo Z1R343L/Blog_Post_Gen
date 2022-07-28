@@ -187,6 +187,9 @@ with open(permalinks_file) as f:
 #             Index File               #
 ########################################    
 
+env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
+template = env.get_template('index.html')
+
 # Open Index File Content
 index_file_contents = ".github/index.md"
 try:
