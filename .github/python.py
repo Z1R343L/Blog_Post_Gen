@@ -169,6 +169,7 @@ with open(permalinks_file) as f:
     else:
       link = link
     if external_link == "True":
+	    print("true")
 	    path = ""
     else:
 	    path = AssetPath 
