@@ -546,8 +546,8 @@ documenation_template = env.get_template('documentation.html')
 # Need to create a better documenation function than just one page! 
 documenation_file_contents = ".github/cms/docs/how_to_setup.md"
 try:
-    with open(index_file_contents, 'r') as f:
-        index_file_contents = f.read()
+    with open(documenation_file_contents, 'r') as f:
+        documenation_file_contents = f.read()
         
         
 except IOError:
