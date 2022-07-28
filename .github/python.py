@@ -155,8 +155,8 @@ for file in getListOfFiles(dirName):
           Blog_Contents = "Found"	
           print("Found")
 	     else:
-	        Blog_Contents = "Not found"	
-	        print("Not Found")
+	         Blog_Contents = "Not found"	
+	         print("Not Found")
           
         if ":" in line:
 	  # Create JSON Data	
