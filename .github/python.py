@@ -153,9 +153,9 @@ for file in getListOfFiles(dirName):
 
     for line in f:
         if "=================END OF SEO SETTINGS============" in line:
-          Blog_Contents = line.split("=================END OF SEO SETTINGS============",1)[1] 
+          Blog_Contents = f.read().split("=================END OF SEO SETTINGS============",1)[1] 
         else:
-          Blog_Contents = f
+          Blog_Contents = f.read()
           
         if ":" in line:
 	  # Create JSON Data	
