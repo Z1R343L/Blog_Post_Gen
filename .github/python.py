@@ -142,9 +142,14 @@ def creation_date(path_to_file):
 
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
-content = {}
+#content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
+    if "=================END OF SEO SETTINGS============" in f.read():
+      Blog_Contents = f.read().split("=================END OF SEO SETTINGS============",1)[1] 
+    else:
+      Blog_Contents = f.read()
+
     print(file)
     if "/author/" in file:
       break
@@ -158,13 +163,13 @@ for file in getListOfFiles(dirName):
     
 	
     ## Get input after 	(ERROR HERE)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
+   # try:
+    #  blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    #except:
     # If no settings - get the whole file contents		
-      blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
+     # blog_content = f.read()
+   # content['Blog_Content_Key'] = str(blog_content)
+   # globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
@@ -176,10 +181,10 @@ for file in getListOfFiles(dirName):
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
     data = var 
 
-    try:
-      Blog_Contents = content["Blog_Content_Key"]
-    except:
-      Blog_Contents = ""
+  #  try:
+   #   Blog_Contents = content["Blog_Content_Key"]
+    #except:
+     # Blog_Contents = ""
 
     try:
       SiteTitle = data["SEO_Title"]
