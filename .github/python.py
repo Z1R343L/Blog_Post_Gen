@@ -157,7 +157,7 @@ permalinks_file_contents = None
 menu=""
 ## Regex match for menu links
 
-pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) External_URL:(.*?)'
+pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) External_URL:(.*?),'
 # old match
 #pattern = 'Link:(.*?) New_Window:(.*?) Title:(.*?) Position:(.*?) External_URL:(.*?)'
 with open(permalinks_file) as f:
