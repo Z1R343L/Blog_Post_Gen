@@ -2,7 +2,11 @@
             <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Syntax Highlighting -->
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"></script>
+	
+	<!-- Social-Share.js -->
+ <script src="{{Asset_Path}}assets/js/social-share.js"></script>   	
 {{Facebook_Meta}}         
 
 
@@ -25,9 +29,31 @@
     <main>
 <article>
 		    {{Blog_Contents}}
+	
+	 <!-- Social-Share.js Widget Starts Here -->
+  <div class="ssbats-social-share">
+    <span class="ssbats-social-share-label">Share on:</span>
+    <div class="ssbats-social-share-buttons">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=URL_HERE" class="ssbats-share-facebook ssbats-share-popup"><span>facebook</span></a>
+      <a href="https://www.twitter.com/intent/tweet?url=URL_HERE&via=i_Genius" class="ssbats-share-twitter ssbats-share-popup"><span>twitter</span></a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=URL_HERE" class="ssbats-share-linkedin ssbats-share-popup"><span>linkedin</span></a>
+      <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom="true" class="ssbats-share-pinterest"><span>pinterest</span></a>
+       <a href="https://tumblr.com/widgets/share/tool?canonicalUrl=URL_HERE" class="ssbats-share-tumblr ssbats-share-popup"><span>tumblr</span></a>
+      <a href="https://www.reddit.com/submit?url=URL_HERE" class="ssbats-share-reddit ssbats-share-popup"><span>reddit</span></a>
+      <a href="https://api.whatsapp.com/send?text=URL_HERE" class="ssbats-share-whatsapp"><span>whatsapp</span></a>
+      <a href="https://telegram.me/share/url?url=URL_HERE" class="ssbats-share-telegram ssbats-share-popup"><span>telegram</span></a>
+      <a href="https://getpocket.com/save?url=URL_HERE" class="ssbats-share-pocket ssbats-share-popup"><span>pocket</span></a>
+    </div>
+  </div>
+  <!-- Share Widget Ends Here -->
+</div>
+<!-- Pinterest share button script -->
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
  </article>
     </main>
+                                        
 
+                               	<!-- Markdown Tag by github.com/MarketingPipeline -->
 	 <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag-GitHub.js"></script> 
 <footer>
      {{footer_contents}}
