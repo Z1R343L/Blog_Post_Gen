@@ -283,7 +283,7 @@ for file in getListOfFiles(dirName):
     BlogDescription = ""
     SiteTitle = "Site Name"
    # AssetPath = ""
-    Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
+   
     data = var 
 
     try:
@@ -319,6 +319,12 @@ for file in getListOfFiles(dirName):
       BlogDescription = data["BlogDescription"]
     except:
       BlogDescription = ""
+
+    # Create SEO / Meta Tags
+    try:
+      Facebook_Meta += f"""<meta property="og:title" content="{data["OG_Title"]}">""" 
+    except:
+      pass
 
     file_name = outputFolder + Path(file).stem + ".html"
     # For writing blog posts to other page > (pages/blog/index.html)
