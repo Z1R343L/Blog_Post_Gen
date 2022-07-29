@@ -693,6 +693,9 @@ input[type="color" i] {
 
 
 
+/* Syntax Highlighting */
+
+
 code[class*="language-"],
 pre[class*="language-"] {
 	color: #393A34;
@@ -810,3 +813,6 @@ pre[class*="language-"] {
 .token.italic {
 	font-style: italic;
 }
+
+
+/* Syntax Highlighting */
