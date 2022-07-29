@@ -173,6 +173,7 @@ with open(permalinks_file) as f:
       link = ""
     else:
       link = link
+    print(external_link)
     if external_link == "True":
 	    print("true")
 	    path = ""
