@@ -901,7 +901,7 @@ pre[class*="language-"] {
   background-image: url('https://unpkg.com/simple-icons@latest/icons/pocket.svg');
 }
 
-/* Social share widget hover state */
+/* Social share widget */
 
 .ssbats-social-share-buttons a:hover {
   background-color: #333333;
@@ -956,4 +956,11 @@ pre[class*="language-"] {
 .ssbats-social-share-buttons a.ssbats-share-pocket:hover {
   background-color: #ef3f56;
   border-color: #ef3f56;
+}
+
+
+/* Blog Post Reading Time Widget */
+
+.reading-time__label {
+font-weight: 700;
 }
