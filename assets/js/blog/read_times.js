@@ -32,7 +32,7 @@
 
         const wordsPerMinute = numberWordsPerMinute;
         // Select all the paragraphs in element with ID readText.
-        const paragraphs = document.querySelectorAll('p');
+        const paragraphs = document.querySelectorAll('article > p');
 
         // The counter.
         var count = 0;
