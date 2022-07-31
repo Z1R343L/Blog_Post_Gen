@@ -50,7 +50,6 @@ def gatherfiles(extensionsToInclude) :
 	        print(root)
 	        print(f)	
             if ".github" in f:
-		        print(f)
                 break  
             if "assets" in f:
                 break  		
