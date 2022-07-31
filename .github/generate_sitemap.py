@@ -46,7 +46,7 @@ def gatherfiles(extensionsToInclude) :
     allfiles = []
     for root, dirs, files in os.walk(".") :
         for f in files :
-	    print(f)	
+	        print(f)	
             if ".github" in f:
                 break
             if getFileExtension(f) in extensionsToInclude :
