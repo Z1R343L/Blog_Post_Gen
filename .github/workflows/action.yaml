@@ -19,6 +19,7 @@ jobs:
     # Run the Python Script
       run: |
          python3 .github/python.py 
+         python3 .github/generate_sitemap.py
 
 
     - name: Commit and Push Updated Content 
