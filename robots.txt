@@ -2,3 +2,6 @@ User-agent: *
 Disallow: /.github/*
 Disallow: ./.github/*
 Disallow: .github/*
+Disallow: .github*
+Disallow: /.github/*
+Disallow: ./.github/*
