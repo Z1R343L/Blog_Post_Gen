@@ -274,13 +274,13 @@ def writeXmlSitemap(files, baseUrl, dropExtension=False) :
 
 
 if __name__ == "__main__" :
-    websiteRoot = "./"
+    websiteRoot = "."
     baseUrl = "test.com"
-    includeHTML = sys.argv[3]=="true"
-    includePDF = sys.argv[4]=="true"
-    sitemapFormat = sys.argv[5]
-    additionalExt = set(sys.argv[6].lower().replace(",", " ").replace(".", " ").split())
-    dropExtension = sys.argv[7]=="true"
+    includeHTML = "true"
+    includePDF =  "true"
+    sitemapFormat = "xml"
+    additionalExt = set("".lower().replace(",", " ").replace(".", " ").split())
+    dropExtension = "true"
 
     os.chdir(websiteRoot)
     blockedPaths = parseRobotsTxt()
