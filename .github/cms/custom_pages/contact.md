@@ -9,7 +9,7 @@ Site Title
 SEO_Title:Octocat
 
 
-PagePath:
+PagePath:./
 
 OG Data (Optional)
 
