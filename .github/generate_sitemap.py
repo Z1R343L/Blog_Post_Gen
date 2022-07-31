@@ -274,7 +274,7 @@ def writeXmlSitemap(files, baseUrl, dropExtension=False) :
 
 
 if __name__ == "__main__" :
-    websiteRoot = sys.argv[1]
+    websiteRoot = "./"
     baseUrl = "test.com"
     includeHTML = sys.argv[3]=="true"
     includePDF = sys.argv[4]=="true"
