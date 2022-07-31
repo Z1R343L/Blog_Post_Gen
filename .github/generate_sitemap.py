@@ -40,12 +40,15 @@ def gatherfiles(extensionsToInclude) :
     Keyword arguments:
     extensionsToInclude - a set of the file extensions to include in sitemap
     """
+    
     if len(extensionsToInclude) == 0 :
         return []
     allfiles = []
     for root, dirs, files in os.walk(".") :
         for f in files :
             if getFileExtension(f) in extensionsToInclude :
+		if ".github" in f:
+			break
                 allfiles.append(os.path.join(root, f))
     return allfiles
 
