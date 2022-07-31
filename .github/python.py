@@ -592,6 +592,7 @@ except IOError:
 
 ## Make Custom Pages 
 content = {}
+var = {}
 dirName = ".github/cms/custom_pages"
 
 for file in getListOfFiles(dirName):
