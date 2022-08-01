@@ -251,18 +251,9 @@ os.makedirs(outputFolder, exist_ok=True)
 
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
-#content = {}
+content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    # Get file contents after fline 
-    try:
-      file_contents = f.read()		
-      blog_content = f.read()
-    except:
-      blog_content = f.read()
-
-   
-   
     if "/author/" in file:
       break
     for line in f:
@@ -277,9 +268,14 @@ for file in getListOfFiles(dirName):
     globals().update(var)
     
 	
-
-  #  content['Blog_Content_Key'] = str(blog_content)
-   # globals().update(content)
+    ## Get input after 	(ERROR HERE)
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
+    # If no settings - get the whole file contents		
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
@@ -292,9 +288,9 @@ for file in getListOfFiles(dirName):
     data = var 
 
     try:
-      Blog_Contents = blog_content
+      Blog_Contents = content["Blog_Content_Key"]
     except:
-      Blog_Contents = blog_content
+      Blog_Contents = ""
 
     try:
       SiteTitle = data["SEO_Title"]
@@ -356,7 +352,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
     var.clear()
-    #content.clear()
+    content.clear()
 
 
 	
@@ -373,28 +369,25 @@ except IOError:
 
 ## Create Blog Author Pages
 blog_author_template = env.get_template('blog-author.html')
-#content = {}
+content = {}
 dirName = ".github/cms/blog_posts/author"
 outputFolder = "pages/blog/author/"
 os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    # Get file contents after fline 
-    try:
-      blog_content = f
-    except:
-      blog_content = f
-
-       
+    
 
     for line in f:
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-  
-   # content['Blog_Content_Key'] = str(blog_content)
-    #globals().update(content)
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -414,14 +407,13 @@ for file in getListOfFiles(dirName):
     file_name = outputFolder + Path(file).stem + ".html"   
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle, Blog_Contents=blog_content, Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
-    blog_content = ""
-   # content.clear()
+    content.clear()
 
 ########################################
 #            End of Blog               #
@@ -599,7 +591,7 @@ except IOError:
 
 
 ## Make Custom Pages 
-#content = {}
+content = {}
 var = {}
 dirName = ".github/cms/custom_pages"
 
@@ -608,18 +600,16 @@ for file in getListOfFiles(dirName):
     
 
     for line in f:
-      #  if "" in line:
-       #   blog_content = f.read(split(':')[1])
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
     try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",[1])    
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
       blog_content = f.read()
-    #content['Blog_Content_Key'] = str(blog_content)
-  #  globals().update(content)
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -656,4 +646,4 @@ for file in getListOfFiles(dirName):
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
-    #content.clear()
+    content.clear()
