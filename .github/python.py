@@ -257,9 +257,9 @@ for file in getListOfFiles(dirName):
     # Get file contents after fline 
     try:
       file_contents = f.read()		
-      blog_content = file_contents.split("=================END OF SEO SETTINGS============",[1]) 
+      blog_content = file.read()
     except:
-      blog_content = f.read()
+      blog_content = file.read()
 
    
    
