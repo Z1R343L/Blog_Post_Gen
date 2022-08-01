@@ -374,6 +374,11 @@ dirName = ".github/cms/blog_posts/author"
 outputFolder = "pages/blog/author/"
 os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
+  try:
+    blog_content = f.read().split("=================END OF SEO SETTINGS============",[1]) 
+  except:
+    blog_content = f.read()
+
   with open(file, 'r') as f:
     
 
@@ -382,10 +387,7 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",[1])    
-    except:
-      blog_content = f.read()
+  
    # content['Blog_Content_Key'] = str(blog_content)
     #globals().update(content)
    # file_contents = f.read()
