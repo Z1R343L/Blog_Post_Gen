@@ -263,7 +263,7 @@ for file in getListOfFiles(dirName):
         #else:
          # print("Not Found") 
 # Check line for <meta name="robots" content="noindex">, etc
-        if regex.search("<meta\s+name.+robots.+content.+noindex") in line:
+        if re.search("<meta\s+name.+robots.+content.+noindex") in line:
 	        robots_txt_disallow += Path(file).stem 
 	
         if ":" in line:
@@ -384,7 +384,7 @@ for file in getListOfFiles(dirName):
 
     for line in f:
 # Check line for <meta name="robots" content="noindex">, etc
-        if regex.search("<meta\s+name.+robots.+content.+noindex") in line:
+        if re.search("<meta\s+name.+robots.+content.+noindex") in line:
 	        robots_txt_disallow += Path(file).stem 
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
