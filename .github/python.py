@@ -147,9 +147,9 @@ else:
 
 
 if var['Blog_Post_Date_Format']:
-  Blog_Post_Date_Format = var['Blog_Post_Date_Format']
+  blog_date_format = var['Blog_Post_Date_Format']
 else:
-  Blog_Post_Date_Format = '%d, %b %Y'
+  blog_date_format= '%d, %b %Y'
 
 
 
