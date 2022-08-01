@@ -298,10 +298,10 @@ for file in getListOfFiles(dirName):
 
     try:
       Robots_Index = data["Robots_Index"]
-      if Robots_Index == "True":
-	robots_txt_disallow += Path(file).stem 
-    except:
-      pass
+      if Robots_Index == "False":
+        robots_txt_disallow += Path(file).stem 
+      except:
+        pass
 
 
 
