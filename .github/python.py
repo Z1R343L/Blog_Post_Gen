@@ -43,7 +43,8 @@ blog_posts = ""
 ## JSON data
 json_data = ""
 
-
+# Robots.Txt Disallow Links
+robots_txt_disallow = "" 
 
 ########################################
 #          End of Lists(s)             #
@@ -260,7 +261,11 @@ for file in getListOfFiles(dirName):
         #if "=================END OF SEO SETTINGS============" in line:
          # print("Found")
         #else:
-         # print("Not Found")  
+         # print("Not Found") 
+# Check line for <meta name="robots" content="noindex">, etc
+        if re.search("<meta\s+name.+robots.+content.+noindex") in line:
+	  robots_txt_disallow += Path(file).stem 
+	
         if ":" in line:
 	  # Create JSON Data	
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
@@ -378,6 +383,9 @@ for file in getListOfFiles(dirName):
     
 
     for line in f:
+# Check line for <meta name="robots" content="noindex">, etc
+        if re.search("<meta\s+name.+robots.+content.+noindex") in line:
+	  robots_txt_disallow += Path(file).stem 
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
@@ -647,3 +655,6 @@ for file in getListOfFiles(dirName):
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
     content.clear()
+
+	
+print(robots_txt_disallow)	
