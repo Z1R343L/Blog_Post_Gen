@@ -251,7 +251,7 @@ os.makedirs(outputFolder, exist_ok=True)
 
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
-content = {}
+#content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     if "/author/" in file:
@@ -270,12 +270,12 @@ for file in getListOfFiles(dirName):
 	
     ## Get input after 	(ERROR HERE)
     try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",[1])    
     except:
-    # If no settings - get the whole file contents		
       blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
+
+  #  content['Blog_Content_Key'] = str(blog_content)
+   # globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
@@ -288,9 +288,9 @@ for file in getListOfFiles(dirName):
     data = var 
 
     try:
-      Blog_Contents = content["Blog_Content_Key"]
+      Blog_Contents = blog_content
     except:
-      Blog_Contents = ""
+      Blog_Contents = blog_content
 
     try:
       SiteTitle = data["SEO_Title"]
