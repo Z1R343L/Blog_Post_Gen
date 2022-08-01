@@ -254,6 +254,14 @@ blog_post_template = env.get_template('blog-post.html')
 #content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
+    # Get file contents after fline 
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",[1]) 
+    except:
+      blog_content = f.read()
+
+   
+   
     if "/author/" in file:
       break
     for line in f:
@@ -268,11 +276,6 @@ for file in getListOfFiles(dirName):
     globals().update(var)
     
 	
-    ## Get input after 	(ERROR HERE)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",[1])    
-    except:
-      blog_content = f.read()
 
   #  content['Blog_Content_Key'] = str(blog_content)
    # globals().update(content)
@@ -374,13 +377,14 @@ dirName = ".github/cms/blog_posts/author"
 outputFolder = "pages/blog/author/"
 os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
-  try:
-    blog_content = f.read().split("=================END OF SEO SETTINGS============",[1]) 
-  except:
-    blog_content = f.read()
-
   with open(file, 'r') as f:
-    
+    # Get file contents after fline 
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",[1]) 
+    except:
+      blog_content = f.read()
+
+       
 
     for line in f:
         if ":" in line:
