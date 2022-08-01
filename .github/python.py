@@ -380,7 +380,7 @@ for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     # Get file contents after fline 
     try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",[1]) 
+      blog_content = f.read()
     except:
       blog_content = f.read()
 
@@ -419,6 +419,7 @@ for file in getListOfFiles(dirName):
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
+    blog_content = ""
    # content.clear()
 
 ########################################
