@@ -94,11 +94,11 @@ def creation_date(path_to_file):
         stat = os.stat(path_to_file)
         try:
           Date = stat.st_birthtime	
-          Post_Time = datetime.datetime.fromtimestamp(Date).strftime('%d %m %Y')
+          Post_Time = datetime.datetime.fromtimestamp(Date).strftime('%d, %b %Y')
           return Post_Time
         except AttributeError:
           Date = stat.st_mtime	
-          Post_Time = datetime.datetime.fromtimestamp(Date).strftime('%d %m %Y')
+          Post_Time = datetime.datetime.fromtimestamp(Date).strftime(':%d, %b %Y')
           return Post_Time
 
 ########################################
