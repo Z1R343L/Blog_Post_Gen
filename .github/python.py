@@ -611,7 +611,7 @@ for file in getListOfFiles(dirName):
     except:
       blog_content = f.read()
     #content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
+  #  globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
