@@ -19,9 +19,9 @@ document.body.innerHTML = "No search route provided"
 
     {
 url: "/Blog_Post_Gen/pages/blog/c_test_blog_post.html",
-name: "Hello World 2",
+name: "Blog Post",
 contents: "",
-published: "Test 0, 2020",
+published: "2022-08-01",
 },
     {
 url: "/Blog_Post_Gen/pages/blog/blog_post_3.html",
@@ -31,15 +31,15 @@ published: "2022-08-01",
 },
     {
 url: "/Blog_Post_Gen/pages/blog/blog_template.html",
-name: "Hello World",
+name: "Blog Post",
 contents: "",
-published: "Test 0, 2020",
+published: "2022-08-01",
 },
     {
 url: "/Blog_Post_Gen/pages/blog/blog_post_1.html",
-name: "Hello World",
+name: "Blog Post",
 contents: "",
-published: "Test 1, 2020",
+published: "2022-08-01",
 },
     {
 url: "/Blog_Post_Gen/pages/blog/test.html",
