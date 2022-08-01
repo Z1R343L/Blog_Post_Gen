@@ -16,10 +16,10 @@
 </nav>
 
 		    <h1>{{BlogTitle}} t</h1>
-	     {% if BlogAuthor is defined %}
-     <p>Published: {{BlogDate}} <br>by <a href="{{AssetPath}}pages/blog/author/{{BlogAuthor_LowerCase}}">{{BlogAuthor}}</a></p>
+	     {% if BlogAuthor is == ""  %}
+     <p>Published: {{BlogDate}}</p>
 {% else %}
-    <p>Published: {{BlogDate}}</p>
+	     <p>Published: {{BlogDate}} <br>by <a href="{{AssetPath}}pages/blog/author/{{BlogAuthor_LowerCase}}">{{BlogAuthor}}</a></p>
 {% endif %}
 	     
 		   
