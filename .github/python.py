@@ -380,9 +380,9 @@ for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     # Get file contents after fline 
     try:
-      blog_content = f.read()
+      blog_content = f
     except:
-      blog_content = f.read()
+      blog_content = f
 
        
 
