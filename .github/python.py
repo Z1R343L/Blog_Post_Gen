@@ -14,7 +14,7 @@ import time
 import platform
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
-
+import datetime
 
 ########################################
 #          End of Import(s)            #
@@ -93,12 +93,12 @@ def creation_date(path_to_file):
     else:
         stat = os.stat(path_to_file)
         try:
-          Date = time(stat.st_birthtime)	
-          Post_Time = Date.strftime('%d %m %Y')
+          Date = stat.st_birthtime	
+          Post_Time = datetime.datetime.fromtimestamp(Date).strftime('%d %m %Y')
           return Post_Time
         except AttributeError:
-          Date = time(stat.st_mtime)	
-          Post_Time = Date.strftime('%d %m %Y')
+          Date = stat.st_mtime	
+          Post_Time = datetime.datetime.fromtimestamp(Date).strftime('%d %m %Y')
           return Post_Time
 
 ########################################
