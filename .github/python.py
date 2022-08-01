@@ -82,11 +82,14 @@ def getListOfFiles(dirName):
 
 ## Function to get File Creation Dates
 # https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
-def creation_date(path_to_file):
+def creation_date(path_to_file, blog_date_format):
     """
     Try to get the date that a file was created, falling back to when it was
     last modified if that isn't possible.
     See http://stackoverflow.com/a/39501288/1709587 for explanation.
+    
+    Default blog date format is  -- '%d, %b %Y'
+    
     """
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
@@ -94,11 +97,11 @@ def creation_date(path_to_file):
         stat = os.stat(path_to_file)
         try:
           Date = stat.st_birthtime	
-          Post_Time = datetime.datetime.fromtimestamp(Date).strftime('%d, %b %Y')
+          Post_Time = datetime.datetime.fromtimestamp(Date).strftime(blog_date_format)
           return Post_Time
         except AttributeError:
           Date = stat.st_mtime	
-          Post_Time = datetime.datetime.fromtimestamp(Date).strftime('%d, %b %Y')
+          Post_Time = datetime.datetime.fromtimestamp(Date).strftime(blog_date_format)
           return Post_Time
 
 ########################################
@@ -140,6 +143,13 @@ if var['Site_Name']:
   Site_Name = var['Site_Name']
 else:
   Site_Name = ""
+
+
+
+if var['Blog_Post_Date_Format']:
+  Blog_Post_Date_Format = var['Blog_Post_Date_Format']
+else:
+  Blog_Post_Date_Format = '%d, %b %Y'
 
 
 
@@ -314,7 +324,7 @@ for file in getListOfFiles(dirName):
     try:
       BlogDate = data["BlogDate"]
     except:
-      BlogDate= creation_date(file)
+      BlogDate= creation_date(file, blog_date_format)
 
 
     try:
