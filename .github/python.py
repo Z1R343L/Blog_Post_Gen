@@ -300,8 +300,8 @@ for file in getListOfFiles(dirName):
       Robots_Index = data["Robots_Index"]
       if Robots_Index == "False":
         robots_txt_disallow += Path(file).stem 
-      except:
-        pass
+    except:
+      pass
 
 
 
