@@ -262,10 +262,8 @@ for file in getListOfFiles(dirName):
          # print("Found")
         #else:
          # print("Not Found") 
-# Check line for <meta name="robots" content="noindex">, etc
-        if re.search("<meta\s+name.+robots.+content.+noindex", line) == True:
-	        robots_txt_disallow += Path(file).stem 
-	
+
+       
         if ":" in line:
 	  # Create JSON Data	
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
@@ -296,6 +294,16 @@ for file in getListOfFiles(dirName):
       Blog_Contents = content["Blog_Content_Key"]
     except:
       Blog_Contents = ""
+
+
+    try:
+      Robots_Index = data["Robots_Index"]
+      if Robots_Index == "True":
+	robots_txt_disallow += Path(file).stem 
+    except:
+      pass
+
+
 
     try:
       SiteTitle = data["SEO_Title"]
