@@ -1,5 +1,8 @@
 =================START OF SEO SETTINGS============
 
+
+Robots_Index:True
+
 <code>Blog Title</code>
 
 BlogTitle:Hello World
