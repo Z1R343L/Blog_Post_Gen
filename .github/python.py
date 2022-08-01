@@ -263,7 +263,7 @@ for file in getListOfFiles(dirName):
         #else:
          # print("Not Found") 
 # Check line for <meta name="robots" content="noindex">, etc
-        if re.search("<meta\s+name.+robots.+content.+noindex", line):
+        if re.search("<meta\s+name.+robots.+content.+noindex", line) == True:
 	        robots_txt_disallow += Path(file).stem 
 	
         if ":" in line:
