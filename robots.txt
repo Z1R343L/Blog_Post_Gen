@@ -1,2 +1,2 @@
-User-agent: * 
- Disallow:pages/blog/blog_post_1
+User-agent: *
+Disallow:pages/blog/blog_post_1
