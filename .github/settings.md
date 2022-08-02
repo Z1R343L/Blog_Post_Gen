@@ -9,4 +9,8 @@ Site_Name:Simply Static
 
 Blog_Post_Date_Format:
 
+<code>GitHub Pages Hosted</code>
+
+GitHub_Hosted:True
+
 =================END OF SETTINGS============
