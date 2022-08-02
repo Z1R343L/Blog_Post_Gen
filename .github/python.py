@@ -674,5 +674,28 @@ for file in getListOfFiles(dirName):
     var.clear()
     content.clear()
 
+
+
+
 	
-print(robots_txt_disallow)	
+
+
+########################################
+#           Robots.txt File            #
+########################################    
+
+template = env.get_template('robots.txt')
+
+robots_file_name = "robots.txt"
+output_from_parsed_template = template.render(robots_txt_disallow)
+
+try:
+    with open(robots_file_name, 'w') as fh:
+        fh.write(output_from_parsed_template)
+except IOError:
+    sys.exit('Robots.txt layout does not exist, or has no content.  Exiting')  
+
+########################################
+#        End Of Robots.txt File        #
+########################################    	
+print()	
