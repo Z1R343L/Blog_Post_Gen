@@ -11,6 +11,7 @@ import re
 import os
 import json
 import time
+import subprocess
 import platform
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
@@ -713,10 +714,10 @@ except IOError:
 
 
 
+
 ########################################
 #            Commit Changes            #
 ########################################   
-
 
 if GitHub_Hosted == "True":
     # Commit changes to CMS content	
@@ -724,8 +725,6 @@ if GitHub_Hosted == "True":
     ret = subprocess.run(command, capture_output=True, shell=True)
 else:
     print("No changes found to create for CMS")
-
-
 
 
 ########################################
