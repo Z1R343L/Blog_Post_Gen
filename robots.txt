@@ -1,7 +1,1 @@
-user-agent: *
-Disallow: /.github/*
-Disallow: ./.github/*
-Disallow: .github/*
-Disallow: .github*
-Disallow: /.github/*
-Disallow: ./.github/*
+blog_post_1
