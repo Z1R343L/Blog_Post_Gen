@@ -309,7 +309,7 @@ for file in getListOfFiles(dirName):
     try:
       Robots_Index = data["Robots_Index"]
       if Robots_Index == "False":
-        robots_txt_disallow += "User-agent: * \n Disallow:" + outputFolder + Path(file).stem 
+        robots_txt_disallow += "User-agent: *\nDisallow:" + outputFolder + Path(file).stem 
     except:
       pass
 
