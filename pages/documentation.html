@@ -79,23 +79,217 @@ You will require python for this project & some sort of package / script to moni
  
 <article>
 <github-md>
-# Site Settings
+## Site Settings
   
-## Asset Path
+### Asset Path
  
-   Change the "Asset_Path" to your repo name example:
+   Change the "Asset_Path" to your repo name, example:
   
   <code>Asset_Path:/Your_Repo_Name_Here/</code>
   
   If using this on GitHub Pages you will <b>NEED</b> to change this for assets like (JS, CSS) to load properly 
   
-## Site Name
+### Site Name
 
-   Change the "Site_Name" to your website name example
+   Change the "Site_Name" to your website name, example:
   
   <code>Site_Name:My awesome static generated python website</code>
   
-
+### Change Blog Post Format
+  
+  
+    Change the "Blog_Post_Date_Format" to your prefered date format, example:
+  
+  
+  **Warning:* Do NOT use : in date formats. 
+  
+  <code>Blog_Post_Date_Format: %d, %Y</code>
+  
+  By default the format date will be <code> %d, %b %Y </code> which represents (day, short-version of month & full year), you can find more about the format guides accepted below
+  
+  <details>
+  
+    <summary>Click to view date format guide</summary>
+    
+    
+    <table cellpadding="0" cellspacing="0" border="0">
+      <colgroup>
+        <col id="directive">
+        <col id="example">
+        <col id="description">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Example</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>%a</code></td>
+          <td><code>Sun</code></td>
+          <td>Weekday as locale’s abbreviated name.</td>
+        </tr>
+        <tr>
+          <td><code>%A</code></td>
+          <td><code>Sunday</code></td>
+          <td>Weekday as locale’s full name.</td>
+        </tr>
+        <tr>
+          <td><code>%w</code></td>
+          <td><code>0</code></td>
+          <td>Weekday as a decimal number, where 0 is Sunday and 6 is Saturday.</td>
+        </tr>
+        <tr>
+          <td><code>%d</code></td>
+          <td><code>08</code></td>
+          <td>Day of the month as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%-d</code></td>
+          <td><code>8</code></td>
+          <td>Day of the month as a  decimal number. (Platform specific)</td>
+        </tr>
+        <tr>
+          <td><code>%b</code></td>
+          <td><code>Sep</code></td>
+          <td>Month as locale’s abbreviated name.</td>
+        </tr>
+        <tr>
+          <td><code>%B</code></td>
+          <td><code>September</code></td>
+          <td>Month as locale’s full name.</td>
+        </tr>
+        <tr>
+          <td><code>%m</code></td>
+          <td><code>09</code></td>
+          <td>Month as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%-m</code></td>
+          <td><code>9</code></td>
+          <td>Month as a  decimal number. (Platform specific)</td>
+        </tr>
+        <tr>
+          <td><code>%y</code></td>
+          <td><code>13</code></td>
+          <td>Year without century as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%Y</code></td>
+          <td><code>2013</code></td>
+          <td>Year with century as a decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%H</code></td>
+          <td><code>07</code></td>
+          <td>Hour (24-hour clock) as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%-H</code></td>
+          <td><code>7</code></td>
+          <td>Hour (24-hour clock) as a  decimal number. (Platform specific)</td>
+        </tr>
+        <tr>
+          <td><code>%I</code></td>
+          <td><code>07</code></td>
+          <td>Hour (12-hour clock) as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%-I</code></td>
+          <td><code>7</code></td>
+          <td>Hour (12-hour clock) as a  decimal number. (Platform specific)</td>
+        </tr>
+        <tr>
+          <td><code>%p</code></td>
+          <td><code>AM</code></td>
+          <td>Locale’s equivalent of either AM or PM.</td>
+        </tr>
+        <tr>
+          <td><code>%M</code></td>
+          <td><code>06</code></td>
+          <td>Minute as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%-M</code></td>
+          <td><code>6</code></td>
+          <td>Minute as a  decimal number. (Platform specific)</td>
+        </tr>
+        <tr>
+          <td><code>%S</code></td>
+          <td><code>05</code></td>
+          <td>Second as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%-S</code></td>
+          <td><code>5</code></td>
+          <td>Second as a  decimal number. (Platform specific)</td>
+        </tr>
+        <tr>
+          <td><code>%f</code></td>
+          <td><code>000000</code></td>
+          <td>Microsecond as a decimal number, zero-padded on the left.</td>
+        </tr>
+        <tr>
+          <td><code>%z</code></td>
+          <td><code>+0000</code></td>
+          <td>UTC offset in the form ±HHMM[SS[.ffffff]] (empty string if the object is naive).</td>
+        </tr>
+        <tr>
+          <td><code>%Z</code></td>
+          <td><code>UTC</code></td>
+          <td>Time zone name (empty string if the object is naive).</td>
+        </tr>
+        <tr>
+          <td><code>%j</code></td>
+          <td><code>251</code></td>
+          <td>Day of the year as a zero-padded decimal number.</td>
+        </tr>
+        <tr>
+          <td><code>%-j</code></td>
+          <td><code>251</code></td>
+          <td>Day of the year as a  decimal number. (Platform specific)</td>
+        </tr>
+        <tr>
+          <td><code>%U</code></td>
+          <td><code>36</code></td>
+          <td>Week number of the year (Sunday as the first day of the week) as a zero padded decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.</td>
+        </tr>
+        <tr>
+          <td><code>%W</code></td>
+          <td><code>35</code></td>
+          <td>Week number of the year (Monday as the first day of the week) as a decimal number. All days in a new year preceding the first Monday are considered to be in week 0.</td>
+        </tr>
+        <tr>
+          <td><code>%c</code></td>
+          <td><code>Sun Sep  8 07:06:05 2013</code></td>
+          <td>Locale’s appropriate date and time representation.</td>
+        </tr>
+        <tr>
+          <td><code>%x</code></td>
+          <td><code>09/08/13</code></td>
+          <td>Locale’s appropriate date representation.</td>
+        </tr>
+        <tr>
+          <td><code>%X</code></td>
+          <td><code>07:06:05</code></td>
+          <td>Locale’s appropriate time representation.</td>
+        </tr>
+        <tr>
+          <td><code>%%</code></td>
+          <td><code>%</code></td>
+          <td>A literal '%' character.</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    
+  </details>
+    
+    
+  
+  
   
 </github-md>
 </article>
