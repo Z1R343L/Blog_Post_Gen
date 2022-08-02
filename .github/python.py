@@ -153,6 +153,15 @@ else:
 
 
 
+
+## Check if hosted on GitHub
+  ### To Run Git Commands If True (For pushing commits etc)
+if var['GitHub_Hosted']:
+  GitHub_Hosted = var['GitHub_Hosted']
+else:
+  GitHub_Hosted = "False"
+
+
 ## Get the footer contents
 footer_file = ".github/footer.md"
 with open(footer_file) as f:
@@ -698,3 +707,27 @@ except IOError:
 ########################################
 #        End Of Robots.txt File        #
 ########################################    	
+
+
+
+
+
+
+########################################
+#            Commit Changes            #
+########################################   
+
+
+if GitHub_Hosted == "True":
+    # Commit changes to CMS content	
+    command = """git config --global user.name "github-actions[bot]"; git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"; git add -A; git commit -m "Updated CMS Content" ; git push"""
+    ret = subprocess.run(command, capture_output=True, shell=True)
+else:
+    print("No changes found to create for CMS")
+
+
+
+
+########################################
+#          End of Commit Changes       #
+########################################   
