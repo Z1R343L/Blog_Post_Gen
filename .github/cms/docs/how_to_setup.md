@@ -70,7 +70,7 @@ You will require python for this project & some sort of package / script to moni
   
   <code>Blog_Post_Date_Format: %d, %Y</code>
   
-  By **default** the format date will be <code> %d, %b %Y </code> which represents (day, short-version of month & full year), you can find more about the format guides accepted below
+  By **default** the format date will be <code> %d, %b %Y </code> which represents (day, short-version of month & full year), you can find more about the accepted date format options in the guide below.
   
 <details>
   
@@ -368,11 +368,40 @@ You will require python for this project & some sort of package / script to moni
 </article>
   
  
-
+ 
+ 
+ <artice>
+ <github-md>
+ # Custom Pages
+   
+ ## How to add a custom page
+   
+   To add a custom page go to <code>.github/cms/custom_pages</code>
+   
+   Create a new .md file with your custom page contents. **Note:** make sure your custom page has the custom page settings section inside. (Read further)
+   
+   View the the [example.md](https://github.com/MarketingPipeline/.github/) to an example of a custom page with the custom page settings include. 
+   
+   Page will be created with file name. To change the page output path - set <code>PagePath</code> to your prefered path. Example:
+   
+   
+   <code>PagePath:/cool-route</code>
+   
+   
+   which will result in your-website.com/cool-route/your-page-name.html
+   
+   
+   **Note:** to set your page in the main directory use <code>./</code>
+   
+  
+  
+</github-md>
+</article>
+  
 
 <article>
 <github-md>
-# Plugin
+# Themes
 
 ## Theme Downloader
   
@@ -385,13 +414,13 @@ You will require python for this project & some sort of package / script to moni
   Set the <code>Asset Path</code> to the asset path of the theme you are downloading. 
   
   
-### Themes
+## Current Theme Option(s)
 
-There are currently no themes provided. If you would like to learn how to create one read below
+There are currently no themes provided. If you would like to learn how to create one continue reading.
 
 
 
-### How to create a theme for Simply Static
+## How to create a theme for Simply Static
 
 To create a theme go to <code>.github/cms/layouts</code> download these files to wherever you are making your changes.
 
@@ -399,14 +428,6 @@ To create a theme go to <code>.github/cms/layouts</code> download these files to
 Once done making changes, create a repo with a folder named "layouts" with your HTML templates used & "assets" containing any CSS / images needed.
 
 Feel free to provide a pull request on the main repo with your theme to have it added here!
-  
-## How to add a blog author page
-  
-  To add a blog author page go to <code>.github/cms/blog-posts/authors</code>
-  
-  Create a file using the author name (in lowercase) & write the content describing the author
-  
-  Multiple authors can be added! 
   
   
 </github-md>
