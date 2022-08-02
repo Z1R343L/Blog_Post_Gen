@@ -27,5 +27,5 @@ document.querySelectorAll('.ssbats-share-popup').forEach( item =>
 }));
 
 document.querySelectorAll('.ssbats-social-share a').forEach( item => {
-    item.href = item.href.replace( "URL_HERE", window.location.href);
+    item.href = item.href.replace( "{{{REPLACE_SOCIAL_URL}}}", window.location.href);
 });
