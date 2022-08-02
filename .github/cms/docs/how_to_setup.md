@@ -35,7 +35,11 @@ You will require python for this project & some sort of package / script to moni
   
 2. Change the site name. Refer to [Site Settings: Site Name](#site-name)   
   
-3. Run the script everytime a change is made in the <code>cms</code> folder
+3. Remove the asset path. Refer to [Site Settings: Site Name](#site-name)   
+  
+4. Change the GitHub hosted to <code>False</code>. Refer to [Site Settings: Site Name](#site-name)     
+  
+5. Run the script everytime a change is made in the <code>cms</code> folder
    
 </github-md>
 </article>
