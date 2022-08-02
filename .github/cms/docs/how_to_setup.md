@@ -66,11 +66,11 @@ You will require python for this project & some sort of package / script to moni
     Change the "Blog_Post_Date_Format" to your prefered date format, example:
   
   
-  **Warning:* Do NOT use : in date formats. 
+  **Warning:** Do NOT use : in date formats. 
   
   <code>Blog_Post_Date_Format: %d, %Y</code>
   
-  By default the format date will be <code> %d, %b %Y </code> which represents (day, short-version of month & full year), you can find more about the format guides accepted below
+  By **default** the format date will be <code> %d, %b %Y </code> which represents (day, short-version of month & full year), you can find more about the format guides accepted below
   
 <details>
   
