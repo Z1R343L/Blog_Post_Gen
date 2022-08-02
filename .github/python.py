@@ -687,7 +687,7 @@ for file in getListOfFiles(dirName):
 template = env.get_template('robots.txt')
 
 robots_file_name = "robots.txt"
-output_from_parsed_template = template.render(robots_txt_disallow)
+output_from_parsed_template = template.render(robots_txt_disallow=robots_txt_disallow)
 
 try:
     with open(robots_file_name, 'w') as fh:
@@ -698,4 +698,3 @@ except IOError:
 ########################################
 #        End Of Robots.txt File        #
 ########################################    	
-print()	
