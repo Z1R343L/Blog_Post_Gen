@@ -718,7 +718,7 @@ from webassets import Bundle
 
 my_env = Environment(
     directory='./assets/',
-    url='./assets')
+    url='assets/')
 
 dirName = "./assets/"
 
