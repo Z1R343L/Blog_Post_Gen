@@ -727,9 +727,10 @@ for file in getListOfFiles(dirName):
       ## TODO - if file path contains anything after /assets/ + add path. 	
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
+      ## path.split("/assets/")[1]        
       if file_path != "css":
-        Output_Folder = "assets/"
-	print(path) #path.split("/assets/")[1]              
+        Output_Folder = "assets/"  
+        print(path)
       else:
         Output_Folder = "assets/"
         # Split everything after "assets" in "path"
