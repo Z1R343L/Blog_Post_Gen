@@ -730,7 +730,7 @@ for file in getListOfFiles(dirName):
       if file_path != "css":
         Output_Folder = path.split("assets/")[1]
       else:
-	      Output_Folder = "assets/"
+	      Output_Folder = "/assets/"
         #print(test)
         # Split everything after "assets" in "path"
         # else nothing
