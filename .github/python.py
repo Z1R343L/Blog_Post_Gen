@@ -755,6 +755,13 @@ for file in getListOfFiles(dirName):
       f2.write(css_minified)
       f2.close()
 
+	
+	
+# Optimize images in assets path
+command = """optimize-images ./assets/"""
+ret = subprocess.run(command, capture_output=True, shell=True)
+    
+	
     
 
 ########################################
