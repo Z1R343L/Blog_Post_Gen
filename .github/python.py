@@ -717,15 +717,15 @@ from webassets import Environment
 from webassets import Bundle
 
 my_env = Environment(
-    directory='/assets/',
-    url='/assets')
+    directory='./assets/',
+    url='./assets')
 
-dirName = "/assets/"
+dirName = "./assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     js = Bundle(f,
-    filters='jsmin', output='gen/packed.js')
+    filters='jsmin', output='assets/')
     my_env.register('js_all', js)
     my_env['js_all'].urls()
 
