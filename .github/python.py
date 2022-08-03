@@ -728,11 +728,13 @@ for file in getListOfFiles(dirName):
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
       if file_path != "css":
-        print("Added output folder to me" + file)
-        print(file_path)
+        Output_Folder = path.split("assets/")[1]
+      else:
+	Output_Folder = "assets/"
+        #print(test)
         # Split everything after "assets" in "path"
         # else nothing
-      file_name = Path(file).stem + ".min.css"
+      file_name = Output_Folder + Path(file).stem + ".min.css"
       f2 = open(file_name, "w")
       f2.write(css_minified)
       f2.close()
