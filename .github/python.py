@@ -732,7 +732,6 @@ for file in getListOfFiles(dirName):
         print(file_path)
         # Split everything after "assets" in "path"
         # else nothing
-      print(fname)
       file_name = Path(file).stem + ".min.css"
       f2 = open(file_name, "w")
       f2.write(css_minified)
