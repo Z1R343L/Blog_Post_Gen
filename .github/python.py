@@ -9,6 +9,7 @@ import codecs
 import sys
 import re
 import os
+import requests
 import json
 import time
 import subprocess
@@ -714,7 +715,7 @@ except IOError:
 
 
 
-dirName = "/assets/"
+dirName = "assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
