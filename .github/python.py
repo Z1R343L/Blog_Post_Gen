@@ -725,10 +725,13 @@ for file in getListOfFiles(dirName):
       r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
       css_minified = r.text
       ## TODO - if file path contains anything after /assets/ + add path. 	
-      fname=os.path.splitext(file)[0]
-      if fname != "assets/css/":
-        print("Added output folder to me")
-        print(file)
+      path=os.path.dirname(file)
+      file_path = os.path.basename(path)
+      if file_path != "css":
+        print("Added output folder to me" + file)
+        print(file_path)
+        # Split everything after "assets" in "path"
+        # else nothing
       print(fname)
       file_name = Path(file).stem + ".min.css"
       f2 = open(file_name, "w")
