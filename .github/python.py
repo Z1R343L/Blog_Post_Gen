@@ -17,6 +17,7 @@ import platform
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 import datetime
+from jsmin import jsmin
 
 ########################################
 #          End of Import(s)            #
@@ -500,10 +501,10 @@ except IOError:
 
 
 ## Create search JS file
-search_file_name = "assets/js/blog-search.js"
+search_file_name = "assets/js/blog-search.min.js"
 try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
-        f.write(""" 
+	minified = jsmin(""" 
 
 if (window.location.href.indexOf("/pages/blog/search?") != -1) {
 
@@ -578,6 +579,7 @@ input.forEach(object => {
 
         
 """)
+        f.write(minified)
 except IOError:
     sys.exit('Blog posts do not exist, or has no content.  Exiting')  
 
