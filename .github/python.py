@@ -713,21 +713,20 @@ except IOError:
 
 
 
-from webassets import Environment
-from webassets import Bundle
 
-my_env = Environment(
-    directory='./assets/',
-    url='assets/')
-
-dirName = "./assets/"
+dirName = "/assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    js = Bundle(file,
-    filters='jsmin', output='assets/')
-    my_env.register('js_all', js)
-    my_env['js_all'].urls()
+    if ".css" in file:
+      css_text = f.read()
+      f.close()
+      r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
+      css_minified = r.text
+      file_name = Path(file).stem + ".min.css"
+      f2 = open(file_name, "w")
+      f2.write(css_minified)
+      f2.close()
 
     
 
