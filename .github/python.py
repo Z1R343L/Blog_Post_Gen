@@ -504,7 +504,7 @@ except IOError:
 search_file_name = "assets/js/blog-search.min.js"
 try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
-	minified = jsmin(""" 
+        minified = jsmin(""" 
 
 if (window.location.href.indexOf("/pages/blog/search?") != -1) {
 
