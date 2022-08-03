@@ -733,6 +733,7 @@ for file in getListOfFiles(dirName):
       else:   
 	    #   print("outpath: " + path)
 	      Output_Folder = "assets/" + path.split("assets/")[1] 
+	      print(path)
 	      print(Path(file).stem + "hello") 
 	      # path.split("/assets/")[1] 
 	
