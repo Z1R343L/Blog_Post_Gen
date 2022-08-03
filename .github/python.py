@@ -726,9 +726,10 @@ for file in getListOfFiles(dirName):
       css_minified = r.text
       ## TODO - if file path contains anything after /assets/ + add path. 	
       fname=os.path.splitext(file)[0]
-      if not fname == "./assets/":
-	print("Added output folder to me")
-	print(file)
+      
+      if fname != "./assets/":
+        print("Added output folder to me")
+	      print(file)
       print(fname)
       file_name = Path(file).stem + ".min.css"
       f2 = open(file_name, "w")
