@@ -715,26 +715,30 @@ except IOError:
 
 
 
-dirName = "assets/"
+dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
+    # Ignore already minifed CSS files	
+    if ".min.css" in file:
+      break
     if ".css" in file:
+      # Open file		
       css_text = f.read()
       f.close()
+      ## Send API request for minified CSS	
       r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
       css_minified = r.text
-      ## TODO - if file path contains anything after /assets/ + add path. 	
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
-      ## path.split("/assets/")[1]        
+       ## Check if file path contains anything after /assets/  	   
       if file_path == "assets":
 	      Output_Folder = "assets/" 
       else:   
-	    #   print("outpath: " + path)
+	      ## File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
-	      print(path)
-	      print(Path(file).stem + "hello") 
+	     # print(path)
+	     # print(Path(file).stem + "hello") 
 	      # path.split("/assets/")[1] 
 	
 	
