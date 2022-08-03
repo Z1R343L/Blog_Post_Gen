@@ -730,8 +730,10 @@ for file in getListOfFiles(dirName):
       ## path.split("/assets/")[1]        
       if file_path == "assets":
 	      Output_Folder = "assets/"
-      else:
-	      Output_Folder = path.split("/assets/")[1] 
+      else:   
+	      print("outpath: " + path)
+	      Output_Folder = "assets" 
+	      # path.split("/assets/")[1] 
 	
 	
 	
