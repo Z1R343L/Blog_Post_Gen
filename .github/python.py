@@ -728,11 +728,18 @@ for file in getListOfFiles(dirName):
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
       ## path.split("/assets/")[1]        
-      if file_path != "css":
-        Output_Folder = "assets/"  
-        print(path)
+      if file_path = "assets":
+	Output_Folder = "assets/"
       else:
-        Output_Folder = "assets/"
+	Output_Folder = path.split("/assets/")[1] 
+	
+	
+	
+      #  Output_Folder = "assets/"  
+       # if file_path = "assets":
+	#  Output_Folder = "assets/"
+	#else:
+	#  Output_Folder = path.split("/assets/")[1] 
         # Split everything after "assets" in "path"
         # else nothing
       file_name = Output_Folder + Path(file).stem + ".min.css"
