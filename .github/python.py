@@ -728,7 +728,7 @@ for file in getListOfFiles(dirName):
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
       ## path.split("/assets/")[1]        
-      if file_path = "assets":
+      if file_path == "assets":
 	Output_Folder = "assets/"
       else:
 	Output_Folder = path.split("/assets/")[1] 
