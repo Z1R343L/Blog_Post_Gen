@@ -728,7 +728,8 @@ for file in getListOfFiles(dirName):
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
       if file_path != "css":
-        Output_Folder = print(path) 
+        Output_Folder = "assets/"
+	print(path) 
 	#path.split("/assets/")[1]
       else:
 	      Output_Folder = "assets/"
