@@ -14,6 +14,7 @@ import json
 import time
 import subprocess
 import platform
+import shutil
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 import datetime
@@ -504,6 +505,7 @@ except IOError:
 search_file_name = "assets/js/blog-search.min.js"
 try:
     with codecs.open(search_file_name, 'w', encoding='utf-8') as f:
+       # minify the JS file
         minified = jsmin(""" 
 
 if (window.location.href.indexOf("/pages/blog/search?") != -1) {
@@ -721,8 +723,17 @@ dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    # Ignore already minifed CSS files	
+    # Copy & move already minifed CSS files	
     if ".min.css" in file:
+      path=os.path.dirname(file)
+      file_path = os.path.basename(path)
+      ## Check if file path contains anything after /assets/  	   
+      if file_path == "assets":
+	      Output_Folder = "assets/" 
+      else:   
+	      ## File path contains something after /assets/ + adding path. 
+	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+      shutil.copyfile(file, Output_Folder)
       break
     if ".css" in file:
       # Open file		
