@@ -732,8 +732,7 @@ for file in getListOfFiles(dirName):
 	      print(path) 
 	#path.split("/assets/")[1]
       else:
-	      Output_Folder = "assets/"
-        #print(test)
+        Output_Folder = "assets/"
         # Split everything after "assets" in "path"
         # else nothing
       file_name = Output_Folder + Path(file).stem + ".min.css"
