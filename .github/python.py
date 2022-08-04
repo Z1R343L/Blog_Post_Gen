@@ -47,8 +47,12 @@ blog_posts = ""
 ## JSON data
 json_data = ""
 
-# Robots.Txt Disallow Links
+## Robots.Txt Disallow Links
 robots_txt_disallow = "" 
+
+## Page Slugs
+page_slugs = ""
+
 
 ########################################
 #          End of Lists(s)             #
@@ -671,6 +675,18 @@ for file in getListOfFiles(dirName):
     except:
       PagePath = "pages/"   
 
+
+    # Create page slug 
+    try:
+      PageSlug = data["PageSlug"]
+      page_slugs += f""" if (window.location.href = "{Site_URL}{PageSlug}";) """ + "{" +
+          
+          f"""window.location.href = "{Site_URL}/{PageSlug}/{Path(file).stem}";"""
+    # pass if no page slug found to make  
+    except:
+      pass  
+
+
     try:
       PageLayout = data["PageLayout"]
     except:
@@ -713,6 +729,31 @@ except IOError:
 ########################################
 #        End Of Robots.txt File        #
 ########################################    	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Create Page Slugs JS file
+page_slugs_file_name = "assets/js/page-slugs.min.js"
+try:
+    with codecs.open(page_slugs_file_name, 'w', encoding='utf-8') as f:
+       # minify the JS file
+        minified = jsmin(page_slugs}
+        f.write(minified)
+except as e:
+    print(e)  
+
+
 
 
 
