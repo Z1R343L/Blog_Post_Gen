@@ -329,7 +329,7 @@ for file in getListOfFiles(dirName):
 
 
     # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
-    json_data += """{url: """ + f'"{AssetPath}{PagePath}{file_name}",\n' + "name: " +f'"{PageTitle}",\n' + "contents: " + '"ADD PAGE CONTENTS", \n ' + "published: " + '"ADD PUBLISHED DATE",\n' +  "type: " + '"page",\n' + "}"
+    json_data += """{url: """ + f'"{AssetPath}{PagePath}{file_name}",\n' + "name: " +f'"{PageTitle}",\n' + "contents: " + '"ADD PAGE CONTENTS", \n ' + "published: " + '"ADD PUBLISHED DATE",\n' +  "type: " + '"page",\n' + "},"
 	
 
     # Create page slug 
