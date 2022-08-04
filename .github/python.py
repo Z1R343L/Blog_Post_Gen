@@ -740,15 +740,18 @@ for file in getListOfFiles(dirName):
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
 
     else:
+      # Don't copy un-minified CSS files	
+      if Path(file).suffix == "css":
+	break
       # Copy & move all the other files to /assets/ folder. 
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
       ## Check if file path contains anything after /assets/  	   
       if file_path == "assets":
-	      Output_Folder = "assets/" 
+	      Output_Folder = "assets/" + os.path.basename(file)
       else:   
 	      ## File path contains something after /assets/ + adding path. 
-	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
       shutil.copyfile(file, Output_Folder)
 
 	     # print(path)
