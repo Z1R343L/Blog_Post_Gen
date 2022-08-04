@@ -153,6 +153,15 @@ else:
   Site_Name = ""
 
 
+try:
+  Site_URL = var['Site_URL']
+else:
+  print("You need to have a site URL defined in your settings.md file, exiting...")
+  sys.exit()
+
+
+
+
 
 if var['Blog_Post_Date_Format']:
   blog_date_format = var['Blog_Post_Date_Format']
@@ -679,9 +688,8 @@ for file in getListOfFiles(dirName):
     # Create page slug 
     try:
       PageSlug = data["PageSlug"]
-      page_slugs += f""" if (window.location.href = "{Site_URL}{PageSlug}";) """ + "{" +
-          
-          f"""window.location.href = "{Site_URL}/{PageSlug}/{Path(file).stem}";"""
+      page_slugs += f'if (window.location.href = "{Site_URL}{PageSlug}";)' + "{" +
+          f'window.location.href = "{Site_URL}/{PageSlug}/{Path(file).stem}";' + "}"
     # pass if no page slug found to make  
     except:
       pass  
