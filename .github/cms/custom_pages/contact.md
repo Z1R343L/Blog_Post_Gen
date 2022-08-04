@@ -11,6 +11,8 @@ SEO_Title:Octocat
 
 PagePath:./
 
+PageSlug:test
+
 OG Data (Optional)
 
 OG_Title: Contact
