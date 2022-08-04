@@ -724,8 +724,9 @@ dirName = ".github/cms/layouts/assets/"
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
      ## These are used for below	
-     path=os.path.dirname(file)
-     file_path = os.path.basename(path)	
+    path=os.path.dirname(file)
+    file_path = os.path.basename(path)	
+    print("File Suf" + Path(file).suffix)
     if Path(file).suffix == "js":
       minified_js = f.read()
       if file_path == "assets":
