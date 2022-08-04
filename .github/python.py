@@ -738,7 +738,11 @@ for file in getListOfFiles(dirName):
       else:   
 	      ## File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
-
+      
+      file_name = Output_Folder + Path(file).stem + ".min.css"
+      f2 = open(file_name, "w")
+      f2.write(css_minified)
+      f2.close()
     else:
       # Don't copy un-minified CSS files	
       if Path(file).suffix == "css":
@@ -767,11 +771,6 @@ for file in getListOfFiles(dirName):
 	#  Output_Folder = path.split("/assets/")[1] 
         # Split everything after "assets" in "path"
         # else nothing
-      file_name = Output_Folder + Path(file).stem + ".min.css"
-      f2 = open(file_name, "w")
-      f2.write(css_minified)
-      f2.close()
-
 	
 	
 # Optimize images in assets path
