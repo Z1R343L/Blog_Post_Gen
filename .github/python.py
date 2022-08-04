@@ -155,7 +155,7 @@ else:
 
 try:
   Site_URL = var['Site_URL']
-else:
+except:
   print("You need to have a site URL defined in your settings.md file, exiting...")
   sys.exit()
 
