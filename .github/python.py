@@ -344,11 +344,11 @@ for file in getListOfFiles(dirName):
       PageLayout = data["PageLayout"]
     except:
       PageLayout = "custom_page_default.html"      
-    search_page_template = env.get_template(PageLayout)
+    page_template = env.get_template(PageLayout)
     try:
         with open(file_name, 'w') as fh:
-          search_page_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
-          fh.write(search_page_template)
+          page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
+          fh.write(page_template)
 	    
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
