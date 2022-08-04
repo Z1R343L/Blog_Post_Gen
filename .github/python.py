@@ -757,7 +757,7 @@ try:
        # minify the JS file
         minified = jsmin(page_slugs)
         f.write(minified)
-except as e:
+except Exceptation as e:
     print(e)  
 
 
