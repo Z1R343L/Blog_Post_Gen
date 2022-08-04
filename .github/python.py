@@ -897,12 +897,14 @@ ret = subprocess.run(command, capture_output=True, shell=True)
 
 # To do - add another try statement here and except error that python command is not found
 
+## Run the sitemap generator
 try:
-    ## Commit changes to CMS content (pages / posts / minifed CSS & JS)	
-    command = """python .github/sitemap_generator.py"""
+    ## Try to see if Python is avaliable on system
+    command = """python .github/generate_sitemap.py"""
     ret = subprocess.run(command, capture_output=True, shell=True)
 except:
-    command = """python3 .github/sitemap_generator.py"""
+    # If not try Python 3 (I am sure there is a better method of detection for this) 	
+    command = """python3 .github/generate_sitemap.py"""
     ret = subprocess.run(command, capture_output=True, shell=True)
 
 
