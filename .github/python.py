@@ -744,6 +744,9 @@ for file in getListOfFiles(dirName):
       f2.write(css_minified)
       f2.close()
     else:
+      # Don't copy un-minified JS files
+      if Path(file).suffix == ".js":
+	      break
       # Don't copy un-minified CSS files
       if Path(file).suffix == ".css":
 	      break
@@ -773,7 +776,7 @@ for file in getListOfFiles(dirName):
         # else nothing
 	
 	
-# Optimize images in assets path
+# Optimize all images in assets path
 command = """optimize-images ./assets/"""
 ret = subprocess.run(command, capture_output=True, shell=True)
     
