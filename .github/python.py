@@ -12,6 +12,7 @@ import os
 import requests
 import json
 import time
+import html
 import subprocess
 import platform
 import shutil
@@ -328,7 +329,7 @@ for file in getListOfFiles(dirName):
 
 
     # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
-    json_data += """{url: """ + f'"{AssetPath}{PagePath}{file_name}",\n' + "name: " +f'"{PageTitle}",\n' + "contents: " + "ADD PAGE CONTENTS, \n " + "published: " + " ADD PUBLISHED DATE,\n" +  "type: " + "page,\n" + "},"
+    json_data += """{url: """ + f'"{AssetPath}{PagePath}{file_name}",\n' + "name: " +f'"{PageTitle}",\n' + "contents: " + '"ADD PAGE CONTENTS", \n ' + "published: " + '"ADD PUBLISHED DATE",\n' +  "type: " + '"page",\n' + "}"
 	
 
     # Create page slug 
@@ -491,7 +492,7 @@ for file in getListOfFiles(dirName):
     # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
     json_data += """
     {
-url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription}",\n' + "published: " + f'"{BlogDate}",\n' + "},"
+url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "contents: " + f'"{BlogDescription}",\n' + "published: " + f'"{html.unescape(BlogDate)}",\n' + "},"
 	
     #try:
      #   file_contents = file_contents.split("=================END OF SEO SETTINGS============",1)[1]
