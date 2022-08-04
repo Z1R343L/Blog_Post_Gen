@@ -727,14 +727,14 @@ for file in getListOfFiles(dirName):
     path=os.path.dirname(file)
     file_path = os.path.basename(path)	
     print("File Suf" + Path(file).suffix)
-    if Path(file).suffix == "js":
+    if Path(file).suffix == ".js":
       minified_js = f.read()
       if file_path == "assets":
         JS_File = "assets/"  
       else:
         JS_File = "assets/" + path.split("assets/")[1]  + "/" + minified_js
       f.write(JS_File)
-    if Path(file).suffix == "css":
+    if Path(file).suffix == ".css":
       # Open file		
       css_text = f.read()
       f.close()
@@ -761,8 +761,6 @@ for file in getListOfFiles(dirName):
       if Path(file).suffix == ".css":
 	      break
       # Copy & move all the other files to /assets/ folder. 
-      path=os.path.dirname(file)
-      file_path = os.path.basename(path)
       ## Check if file path contains anything after /assets/  	   
       if file_path == "assets":
 	      Output_Folder = "assets/" + os.path.basename(file)
