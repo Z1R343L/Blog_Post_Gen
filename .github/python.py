@@ -272,6 +272,110 @@ except IOError:
 
 
 
+
+
+########################################
+#             Create Pages             #
+########################################    
+
+
+## Create pages (not including blog route pages) 
+
+content = {}
+var = {}
+dirName = ".github/cms/custom_pages"
+
+for file in getListOfFiles(dirName):
+  with open(file, 'r') as f:
+    
+
+    for line in f:
+        if ":" in line:
+          name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
+          var[name] = str(value).rstrip() # needs a value added    
+    globals().update(var)
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
+   # file_contents = f.read()
+    Facebook_Meta = ""
+    Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
+    data = var 
+
+    try:
+      SiteTitle = data["SEO_Title"]
+    except:
+      SiteTitle = "Author Page"
+
+
+    try:
+      PageTitle = data["PageTitle"]
+    except:
+      PageTitle = "Author"
+    try:
+      PagePath = data["PagePath"]
+    except:
+      PagePath = "pages/"   
+
+
+
+
+    # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
+    json_data += """
+    {
+url: """ + f'"{AssetPath}{PagePath}{file_name}",\n' + "name: " +f'"{PageTitle}",\n' + "contents: " + f'"ADD PAGE CONTENTS",\n' + "published: " + f'" ADD PUBLISHED DATE ",\n' +  "type: " + "page",\n' + "},"
+	
+
+    # Create page slug 
+    try:
+      PageSlug = data["PageSlug"]
+      page_slugs += f'if (window.location.href = "{Site_URL}{PageSlug}")' + "{" + f'window.location.href = "http://{Site_URL}/{PageSlug}/{Path(file).stem}"' + "}"
+    # pass if no page slug found to make  
+    except:
+      pass  
+
+
+    try:
+      PageLayout = data["PageLayout"]
+    except:
+      PageLayout = "custom_page_default.html"      
+    outputFolder = PagePath
+    os.makedirs(outputFolder, exist_ok=True)
+    file_name = outputFolder + Path(file).stem + ".html"  
+    search_page_template = env.get_template(PageLayout)
+    try:
+        with open(file_name, 'w') as fh:
+          search_page_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
+          fh.write(search_page_template)
+	    
+    except IOError:
+        sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
+    var.clear()
+    content.clear()
+
+
+
+
+########################################
+#          End of Create Pages         #
+########################################    
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
 ########################################
 #               BLOG                   #
 ########################################      
@@ -616,6 +720,7 @@ except IOError:
 
 
 
+
 ########################################
 #            Documentation             #
 ########################################      
@@ -658,79 +763,6 @@ except IOError:
 
 
 
-
-## Make Custom Pages 
-content = {}
-var = {}
-dirName = ".github/cms/custom_pages"
-
-for file in getListOfFiles(dirName):
-  with open(file, 'r') as f:
-    
-
-    for line in f:
-        if ":" in line:
-          name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
-          var[name] = str(value).rstrip() # needs a value added    
-    globals().update(var)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
-      blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
-   # file_contents = f.read()
-    Facebook_Meta = ""
-    Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
-    data = var 
-
-    try:
-      SiteTitle = data["SEO_Title"]
-    except:
-      SiteTitle = "Author Page"
-
-
-    try:
-      PageTitle = data["PageTitle"]
-    except:
-      PageTitle = "Author"
-    try:
-      PagePath = data["PagePath"]
-    except:
-      PagePath = "pages/"   
-
-
-    # Create page slug 
-    try:
-      PageSlug = data["PageSlug"]
-      page_slugs += f'if (window.location.href = "{Site_URL}{PageSlug}")' + "{" + f'window.location.href = "http://{Site_URL}/{PageSlug}/{Path(file).stem}"' + "}"
-    # pass if no page slug found to make  
-    except:
-      pass  
-
-
-    try:
-      PageLayout = data["PageLayout"]
-    except:
-      PageLayout = "custom_page_default.html"      
-    outputFolder = PagePath
-    os.makedirs(outputFolder, exist_ok=True)
-    file_name = outputFolder + Path(file).stem + ".html"  
-    search_page_template = env.get_template(PageLayout)
-    try:
-        with open(file_name, 'w') as fh:
-          search_page_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
-          fh.write(search_page_template)
-	    
-    except IOError:
-        sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
-    var.clear()
-    content.clear()
-
-
-
-
-	
 
 
 ########################################
