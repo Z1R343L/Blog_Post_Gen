@@ -742,7 +742,7 @@ for file in getListOfFiles(dirName):
     else:
       # Don't copy un-minified CSS files	
       if Path(file).suffix == "css":
-	break
+	      break
       # Copy & move all the other files to /assets/ folder. 
       path=os.path.dirname(file)
       file_path = os.path.basename(path)
