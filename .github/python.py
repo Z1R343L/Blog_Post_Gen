@@ -723,7 +723,7 @@ dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    if pathlib.Path(file).suffix == "css":
+    if Path(file).suffix == "css":
       # Open file		
       css_text = f.read()
       f.close()
