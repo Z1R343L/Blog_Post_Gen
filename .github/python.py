@@ -726,14 +726,18 @@ for file in getListOfFiles(dirName):
     ## These are used for below	
     path=os.path.dirname(file)
     file_path = os.path.basename(path)	
-    print("File Suf" + Path(file).suffix)
+   
+    ## Minify JS Files
     if Path(file).suffix == ".js":
       minified_js = f.read()
       if file_path == "assets":
-        JS_File = "assets/"  
+        JS_FileName = "assets/" + os.path.basename(file)
       else:
-        JS_File = "assets/" + path.split("assets/")[1]  + "/" + minified_js
-      f.write(JS_File)
+        JS_FileName = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
+      JS_File = open(JS_FileName, "w")
+      JS_File.write(css_minified)
+      JS_File.close()
+    ## Minify CSS Files
     if Path(file).suffix == ".css":
       # Open file		
       css_text = f.read()
@@ -742,30 +746,31 @@ for file in getListOfFiles(dirName):
       r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
       css_minified = r.text
      
-       ## Check if file path contains anything after /assets/  	   
+       ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
 	      Output_Folder = "assets/" 
       else:   
-	      ## File path contains something after /assets/ + adding path. 
+	      ### File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
       
       file_name = Output_Folder + Path(file).stem + ".min.css"
-      f2 = open(file_name, "w")
-      f2.write(css_minified)
-      f2.close()
+      CSS_File = open(file_name, "w")
+      CSS_File.write(css_minified)
+      CSS_File.close()
     else:
-      # Don't copy un-minified JS files
+      ## Copy all files from .github/assets/ to /assets/	
+      ### Don't copy un-minified JS files
       if Path(file).suffix == ".js":
 	      break
-      # Don't copy un-minified CSS files
+      ### Don't copy un-minified CSS files
       if Path(file).suffix == ".css":
 	      break
-      # Copy & move all the other files to /assets/ folder. 
-      ## Check if file path contains anything after /assets/  	   
+      ### Copy & move all the other files to /assets/ folder. 
+      ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
 	      Output_Folder = "assets/" + os.path.basename(file)
       else:   
-	      ## File path contains something after /assets/ + adding path. 
+	      ### File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
       shutil.copyfile(file, Output_Folder)
 
