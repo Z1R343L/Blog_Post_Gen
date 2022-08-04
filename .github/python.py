@@ -321,6 +321,10 @@ for file in getListOfFiles(dirName):
       PagePath = "pages/"   
 
 
+    outputFolder = PagePath
+    os.makedirs(outputFolder, exist_ok=True)
+    file_name = outputFolder + Path(file).stem + ".html"  
+
 
 
     # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
@@ -340,9 +344,6 @@ for file in getListOfFiles(dirName):
       PageLayout = data["PageLayout"]
     except:
       PageLayout = "custom_page_default.html"      
-    outputFolder = PagePath
-    os.makedirs(outputFolder, exist_ok=True)
-    file_name = outputFolder + Path(file).stem + ".html"  
     search_page_template = env.get_template(PageLayout)
     try:
         with open(file_name, 'w') as fh:
