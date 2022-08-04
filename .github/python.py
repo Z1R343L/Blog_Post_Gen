@@ -31,10 +31,10 @@ from jsmin import jsmin
 
 
 
+
 ########################################
 #              List(s)                 #
 ########################################    
-
 
 # Variables to append / add for usage later in this script
 
@@ -57,6 +57,7 @@ page_slugs = ""
 ########################################
 #          End of Lists(s)             #
 ########################################    
+
 
 
 
@@ -115,6 +116,7 @@ def creation_date(path_to_file, blog_date_format):
 ########################################
 #          End of Function(s)          #
 ########################################    
+
 
 
 
@@ -220,7 +222,6 @@ with open(permalinks_file) as f:
    ## For links like github.com/MarketingPipeline (does not add asset path infront) if not False
     
 
-
 ########################################
 #      END OF SITE SETTINGS            #
 ########################################    
@@ -229,10 +230,6 @@ with open(permalinks_file) as f:
 
 
 
-
-########################################
-#           SITE SETTINGS              #
-########################################    
 
 
 
@@ -272,9 +269,14 @@ except IOError:
 
 
 
+
+
+
 ########################################
 #               BLOG                   #
 ########################################      
+
+# TODO - add a function to turn blog ON / OFF
 
 ## Make folder for blog posts
 outputFolder = "pages/blog/"
@@ -478,9 +480,15 @@ for file in getListOfFiles(dirName):
 
 
 
+
+
+
+
 ########################################
 #            Search Route              #
 ########################################      
+
+# TO DO - add function to turn search route on or off.
 
 ## Create search route page
 search_page_template = env.get_template('search-route.html')
@@ -605,6 +613,9 @@ except IOError:
 
 
 
+
+
+
 ########################################
 #            Documentation             #
 ########################################      
@@ -640,6 +651,10 @@ except IOError:
 ########################################
 #         End of  Documentation        #
 ########################################      
+
+
+
+
 
 
 
@@ -750,6 +765,13 @@ except IOError:
 
 
 
+
+
+
+########################################
+#              Page Slugs              #
+########################################    
+
 ## Create Page Slugs JS file
 page_slugs_file_name = "assets/js/page-slugs.min.js"
 try:
@@ -759,6 +781,11 @@ try:
         f.write(minified)
 except Exceptation as e:
     print(e)  
+
+########################################
+#           End of Page Slugs          #
+########################################    
+
 
 
 
@@ -853,13 +880,55 @@ ret = subprocess.run(command, capture_output=True, shell=True)
 ########################################    
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+########################################
+#           Sitemap Generator          #
+########################################   
+
+# To do - add another try statement here and except error that python command is not found
+
+try:
+    ## Commit changes to CMS content (pages / posts / minifed CSS & JS)	
+    command = """python .github/sitemap_generator.py"""
+    ret = subprocess.run(command, capture_output=True, shell=True)
+except:
+    command = """python3 .github/sitemap_generator.py"""
+    ret = subprocess.run(command, capture_output=True, shell=True)
+
+
+########################################
+#        End of Sitemap Generator      #
+########################################   
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 ########################################
 #            Commit Changes            #
 ########################################   
 
 if GitHub_Hosted == "True":
-    # Commit changes to CMS content	
+    ## Commit changes to CMS content (pages / posts / minifed CSS & JS)	
     command = """git config --global user.name "github-actions[bot]"; git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"; git add -A; git commit -m "Updated CMS Content" ; git push"""
     ret = subprocess.run(command, capture_output=True, shell=True)
 else:
