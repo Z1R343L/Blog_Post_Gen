@@ -137,6 +137,6 @@ window.addEventListener("load", (event) => {
   }
 });
 
-window.addEventListener("pagehide", (event) => {
+window.addEventListener("unload", (event) => {
   headerObserver.disconnect();
 });
