@@ -744,7 +744,8 @@ for file in getListOfFiles(dirName):
       f2.write(css_minified)
       f2.close()
     else:
-      # Don't copy un-minified CSS files	
+      # Don't copy un-minified CSS files
+      print(Path(file).suffix + "fds")
       if Path(file).suffix == "css":
 	      break
       # Copy & move all the other files to /assets/ folder. 
