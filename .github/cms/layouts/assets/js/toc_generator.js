@@ -137,6 +137,6 @@ window.addEventListener("load", (event) => {
   }
 });
 
-window.addEventListener("unload", (event) => {
+window.addEventListener("visibilitychange", (event) => {
   headerObserver.disconnect();
 });
