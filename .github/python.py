@@ -730,7 +730,7 @@ for file in getListOfFiles(dirName):
     if Path(file).suffix == "js":
       minified_js = f.read()
       if file_path == "assets":
-		    JS_File = "assets/" + 
+		    JS_File = "assets/"  
       else:
 	      JS_File = "assets/" + path.split("assets/")[1]  + "/" + minified_js
       f.write(JS_File)
