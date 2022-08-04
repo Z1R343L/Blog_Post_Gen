@@ -719,6 +719,11 @@ except IOError:
 
 
 
+
+########################################
+#             Minify Assets            #
+########################################    
+
 dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
@@ -731,9 +736,9 @@ for file in getListOfFiles(dirName):
     if Path(file).suffix == ".js":
       minified_js = f.read()
       if file_path == "assets":
-        JS_FileName = "assets/" + os.path.basename(file)
+        JS_FileName = "assets/" +  Path(file).stem + ".min.js"
       else:
-        JS_FileName = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
+        JS_FileName = "assets/" + path.split("assets/")[1]  + "/" +  Path(file).stem + ".min.js"
       JS_File = open(JS_FileName, "w")
       JS_File.write(minified_js)
       JS_File.close()
@@ -789,12 +794,16 @@ for file in getListOfFiles(dirName):
         # else nothing
 	
 	
-# Optimize all images in assets path
+## Optimize all images in assets path
 command = """optimize-images ./assets/"""
 ret = subprocess.run(command, capture_output=True, shell=True)
     
 	
-    
+########################################
+#             Minify Assets            #
+########################################    
+	
+	
 
 ########################################
 #            Commit Changes            #
