@@ -734,7 +734,8 @@ for file in getListOfFiles(dirName):
    
     ## Minify JS Files
     if Path(file).suffix == ".js":
-      minified_js = f.read()
+      js_file = f.read()
+      minified_js = jsmin(js_file)
       if file_path == "assets":
         JS_FileName = "assets/" +  Path(file).stem + ".min.js"
       else:
