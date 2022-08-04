@@ -723,19 +723,7 @@ dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    # Copy & move already minifed CSS files	
-    if ".min.css" in file:
-      path=os.path.dirname(file)
-      file_path = os.path.basename(path)
-      ## Check if file path contains anything after /assets/  	   
-      if file_path == "assets":
-	      Output_Folder = "assets/" 
-      else:   
-	      ## File path contains something after /assets/ + adding path. 
-	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
-      shutil.copyfile(file, Output_Folder)
-      break
-    if ".css" in file:
+    if pathlib.Path(file).suffix = "css":
       # Open file		
       css_text = f.read()
       f.close()
@@ -750,6 +738,19 @@ for file in getListOfFiles(dirName):
       else:   
 	      ## File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+
+    else:
+      # Copy & move all the other files to /assets/ folder. 
+      path=os.path.dirname(file)
+      file_path = os.path.basename(path)
+      ## Check if file path contains anything after /assets/  	   
+      if file_path == "assets":
+	      Output_Folder = "assets/" 
+      else:   
+	      ## File path contains something after /assets/ + adding path. 
+	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+      shutil.copyfile(file, Output_Folder)
+
 	     # print(path)
 	     # print(Path(file).stem + "hello") 
 	      # path.split("/assets/")[1] 
