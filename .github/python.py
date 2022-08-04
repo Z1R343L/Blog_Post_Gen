@@ -735,7 +735,7 @@ for file in getListOfFiles(dirName):
       else:
         JS_FileName = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
       JS_File = open(JS_FileName, "w")
-      JS_File.write(css_minified)
+      JS_File.write(minified_js)
       JS_File.close()
     ## Minify CSS Files
     if Path(file).suffix == ".css":
