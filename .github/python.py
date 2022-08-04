@@ -755,7 +755,7 @@ page_slugs_file_name = "assets/js/page-slugs.min.js"
 try:
     with codecs.open(page_slugs_file_name, 'w', encoding='utf-8') as f:
        # minify the JS file
-        minified = jsmin(page_slugs}
+        minified = jsmin(page_slugs)
         f.write(minified)
 except as e:
     print(e)  
