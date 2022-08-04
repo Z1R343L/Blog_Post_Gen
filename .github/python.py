@@ -723,6 +723,18 @@ dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
+     ## These are used for below	
+     path=os.path.dirname(file)
+     file_path = os.path.basename(path)	
+    if Path(file).suffix == "js":
+      minified_js = f.read()
+      if file_path == "assets":
+		JS_File = "assets/" + 
+      else:
+	        JS_File = "assets/" + path.split("assets/")[1]  + "/" + minified_js
+      f.write(JS_File)
+	
+	 
     if Path(file).suffix == "css":
       # Open file		
       css_text = f.read()
@@ -730,8 +742,7 @@ for file in getListOfFiles(dirName):
       ## Send API request for minified CSS	
       r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
       css_minified = r.text
-      path=os.path.dirname(file)
-      file_path = os.path.basename(path)
+     
        ## Check if file path contains anything after /assets/  	   
       if file_path == "assets":
 	      Output_Folder = "assets/" 
