@@ -219,7 +219,7 @@ if var['Parse_Emojis'] == "True":
   except:
    Emoji_Class = None
   try:
-   Emoji_Type = var['Emoji_Class']
+   Emoji_Type = var['Emoji_Type']
   except:
    Emoji_Type = None
 else:
@@ -796,11 +796,11 @@ documentation_template = env.get_template('documentation.html')
 documenation_file_contents = ".github/cms/docs/how_to_setup.md"
 try:
     with open(documenation_file_contents, 'r') as f:
-	# Testing Emoji Parser
-	if Parse_Emojis == True:
-		documenation_file_contents = ParseEmoji(f.read(),Emoji_Type,Emoji_Class)
-	else:
-	        documenation_file_contents = f.read()
+      # Testing Emoji Parser
+	    if Parse_Emojis == True:
+        documenation_file_contents = ParseEmoji(f.read(),Emoji_Type,Emoji_Class)
+	    else:
+	      documenation_file_contents = f.read()
         
         
 except IOError:
