@@ -333,6 +333,18 @@ You will require python for this project & some sort of package / script to moni
   To change the content in the documentation page  go to <code>.github/cms/documentation.md</code>
   
   and edit the documentation.md (markdown) file with your changes!
+  
+  
+# Emoji Parser
+  
+
+## How To Parse Emoji's
+  
+  To parse emojis keyword matches like this <code>&#58;yum&#58;</code> in your pages so that they get rendered into this :yum:
+  
+  Go to settings.md and set Emoji_Parser to <code>True</code>
+  
+  
  
   
 </github-md>
