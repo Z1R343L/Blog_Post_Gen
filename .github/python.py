@@ -72,7 +72,7 @@ page_slugs = ""
 #            Function(s)               #
 ########################################    
 
-## function to get all files in directory
+## Function to get all files in directory
 def getListOfFiles(dirName):
     listOfFile = os.listdir(dirName)
     allFiles = list()
@@ -89,6 +89,53 @@ def getListOfFiles(dirName):
     return allFiles
 
 
+
+import re
+
+
+# Define Emoji Data To Use
+EmojiData = {
+	"yum": "😋 ",
+	"heart": "sd",
+	"s": "delectus aut autem",
+	"ad": "false"
+}
+    
+        
+# Function to Parse & Replace Emojis With Image Or Unicode
+
+
+# Example of usage (text, replace types = Unicode, Image, class name for images)
+ 
+	# Replace with image URL (JSON data) & add css class 
+#print(ParseEmoji("<script> so dam :yum: :yum: :heart: </script>", "Image", "my_class_name"))	
+  
+	 # Replace with unicode emoji (JSON data)
+#print(ParseEmoji("<script> so dam :yum: :yum: :heart: </script>"))	
+
+def ParseEmoji(text, type=None, Class=None):
+    # Regex to remove HTML from string
+    Text_With_Any_HTML_Removed = re.compile(r'<.*?>')
+    # Remove all HTML from string
+    Text_With_Any_HTML_Removed= Text_With_Any_HTML_Removed.sub('',text)
+    # For all regex matches of :VALUE: in text
+    for Regex_Match in re.findall(':(.*?):', Text_With_Any_HTML_Removed):
+        # For each key name in JSON Emoji Data
+        for Key_Name in EmojiData.items():
+            # if Regex Match is a Keyname
+            if Regex_Match in EmojiData:
+                # Replace with the Keyname Value
+                if type == "Image":
+                    if Class:
+                        text = text.replace(f':{Regex_Match}:', str(f'<img class="{Class}" src="{EmojiData[Regex_Match]}">'))
+                    else:
+                        text = text.replace(f':{Regex_Match}:', str(f'<img src="{EmojiData[Regex_Match]}">'))
+                else:
+                    text = text.replace(f':{Regex_Match}:', str(EmojiData[Regex_Match])) 
+    return text
+            
+        
+        
 
 ## Function to get File Creation Dates
 # https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
@@ -163,6 +210,22 @@ except:
   sys.exit()
 
 
+	
+
+if var['Parse_Emojis'] == "True":
+  Parse_Emojis = True
+  try:
+   Emoji_Class = var['Emoji_Class']
+  except:
+   Emoji_Class = None
+  try:
+   Emoji_Type = var['Emoji_Class']
+  except:
+   Emoji_Type = None
+else:
+  Parse_Emojis = False
+	
+	
 
 
 
@@ -733,7 +796,11 @@ documentation_template = env.get_template('documentation.html')
 documenation_file_contents = ".github/cms/docs/how_to_setup.md"
 try:
     with open(documenation_file_contents, 'r') as f:
-        documenation_file_contents = f.read()
+	# Testing Emoji Parser
+	if Parse_Emojis == True:
+		documenation_file_contents = ParseEmoji(f.read(),Emoji_Type,Emoji_Class)
+	else:
+	        documenation_file_contents = f.read()
         
         
 except IOError:
