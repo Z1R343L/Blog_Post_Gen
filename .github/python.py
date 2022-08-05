@@ -797,10 +797,10 @@ documenation_file_contents = ".github/cms/docs/how_to_setup.md"
 try:
     with open(documenation_file_contents, 'r') as f:
       # Testing Emoji Parser
-	    if Parse_Emojis == True:
-        documenation_file_contents = ParseEmoji(f.read(),Emoji_Type,Emoji_Class))
-	    else:
-	      documenation_file_contents = f.read()
+	      if Parse_Emojis == True:
+          documenation_file_contents = ParseEmoji(f.read(),Emoji_Type,Emoji_Class)
+	      else:
+	        documenation_file_contents = f.read()
         
         
 except IOError:
