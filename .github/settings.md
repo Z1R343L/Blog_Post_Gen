@@ -14,4 +14,20 @@ Blog_Post_Date_Format:%b, %d, %Y at %-I&#58;%M%p
 
 GitHub_Hosted:True
 
+<code> Emoji Settings</code>
+
+<code>Parse Emoji Keyword Matches?</code>
+
+Parse_Emojis:True
+
+<code>Emoji Type (Unicode or Image)</code>
+  
+Emoji_Type:Unicode
+
+<code>Emoji Class (To Add To Image Type)</code>
+
+Emoji_Class:None
+
+
+
 =================END OF SETTINGS============
