@@ -67,6 +67,7 @@ page_slugs = ""
 ########################################    
 
 ## Function to get all files in directory & sub-folders
+## Function to get all files in directory & sub-folders
 def getListOfFiles(dirName):
     allFiles = list()
     # Iterate over all the entries
@@ -76,7 +77,7 @@ def getListOfFiles(dirName):
               break
             else:
               print(os.path.join(path, file))
-	            allFiles += os.path.join(path, file)
+	          allFiles += os.path.join(path, file)
 		
     return allFiles
 
