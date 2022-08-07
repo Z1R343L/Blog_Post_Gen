@@ -72,6 +72,8 @@ def getListOfFiles(dirName):
     # Iterate over all the entries
     for path, subdirs, filenames in os.walk(dirName):
         for file in filenames:
+            if path == ".":
+              break
 	          print(os.path.join(path, file))
 	          allFiles += os.path.join(path, file)
 		
