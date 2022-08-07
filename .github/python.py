@@ -72,12 +72,12 @@ def getListOfFiles(dirName):
     allFiles = list()
     # Iterate over all the entries
     for path, subdirs, filenames in os.walk(dirName):
-        for file in filenames:
-            if path == ".":
-              break
-            else:
-              print(os.path.join(path, file))
-	            allFiles += os.path.join(path, file)
+      for file in filenames:
+        if path == ".":
+          break
+        else:
+          print(os.path.join(path, file))
+	        allFiles += os.path.join(path, file)
 		
     return allFiles
 
