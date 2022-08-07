@@ -183,7 +183,7 @@ def creation_date(path_to_file, blog_date_format):
 
 ## Set the time zone
 
-os.environ["TZ"] = "ET"
+os.environ["TZ"] = "US/Eastern"
 
 ## Open main settings file
 settings_file = ".github/settings.md" 
