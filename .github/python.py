@@ -20,14 +20,10 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 import datetime
 from jsmin import jsmin
-
+import pytz
 ########################################
 #          End of Import(s)            #
 ########################################    
-
-
-
-
 
 
 
@@ -154,11 +150,11 @@ def creation_date(path_to_file, blog_date_format):
         stat = os.stat(path_to_file)
         try:
           Date = stat.st_birthtime	
-          Post_Time = datetime.datetime.fromtimestamp(Date).strftime(blog_date_format)
+          Post_Time = datetime.datetime.fromtimestamp(Date, tzinfo=utc).strftime(blog_date_format)
           return Post_Time
         except AttributeError:
           Date = stat.st_mtime	
-          Post_Time = datetime.datetime.fromtimestamp(Date).strftime(blog_date_format)
+          Post_Time = datetime.datetime.fromtimestamp(Date, tzinfo=utc).strftime(blog_date_format)
           return Post_Time
 
 
@@ -183,7 +179,8 @@ def creation_date(path_to_file, blog_date_format):
 
 ## Set the time zone
 
-os.environ["TZ"] = "US/Eastern"
+est = pytz.timezone('US/Eastern')
+utc = pytz.utc
 
 ## Open main settings file
 settings_file = ".github/settings.md" 
