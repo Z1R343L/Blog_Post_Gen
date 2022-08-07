@@ -153,11 +153,11 @@ def creation_date(path_to_file, blog_date_format):
     else:
         stat = os.stat(path_to_file)
         try:
-          Date = datetime(stat.st_birthtime)	
+          Date = datetime.datetime(stat.st_birthtime)	
           Post_Time = Date.strftime(blog_date_format)
           return Post_Time
         except AttributeError:
-          Date = datetime(stat.st_mtime)	
+          Date = datetime.datetime(stat.st_mtime)	
           Post_Time = Date.strftime(blog_date_format)
           return Post_Time
 
