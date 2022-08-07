@@ -70,7 +70,7 @@ You will require python for this project & some sort of package / script to moni
     Change the "Blog_Post_Date_Format" to your prefered date format, example:
   
   
-  **Warning:** Do NOT use : in date formats. 
+  **Warning:** Do NOT use : in date formats. Instead use a HTML entiny for <code>:</code>
   
   <code>Blog_Post_Date_Format: %d, %Y</code>
   
@@ -342,8 +342,18 @@ You will require python for this project & some sort of package / script to moni
   
   To parse emojis keyword matches like this <code>&#58;yum&#58;</code> in your pages so that they get rendered into this :yum:
   
-  Go to settings.md and set Emoji_Parser to <code>True</code>
+  Inside of the settings folder - go to <code>emoji_parser.md</code> and set <code>Parse_Emojis</code> to <code>True</code>
+
   
+## How to add your own emoji keywords
+  
+  
+  To add your own keyword & emoji values go into <code>emojis.json</code> inside of the settings folder and add your word & value to the JSON data.
+  
+  Note: to use both - Unicode Emoji's & Image Classes, you will need to include your new values added with any HTML image classes encoded. 
+
+  
+
   
  
   
