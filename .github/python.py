@@ -72,7 +72,7 @@ page_slugs = ""
 def getListOfFiles(dirName):
     allFiles = list()
     # Iterate over all the entries
-    for path, subdirs, files in os.walk(dirName):
+    for path, subdirs, filenames in os.walk(dirName):
         allFiles += [os.path.join(dirpath, file) for file in filenames]
     return allFiles
 
