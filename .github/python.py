@@ -73,6 +73,8 @@ def getListOfFiles(dirName):
     for path, subdirs, filenames in os.walk(dirName):
         for file in filenames:
 	          print(os.path.join(path, file))
+		  if path == ".":
+			break
 	          allFiles += os.path.join(path, file)
 		
     return allFiles
