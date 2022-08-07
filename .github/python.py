@@ -77,7 +77,7 @@ def getListOfFiles(dirName):
           break
         else:
           print(os.path.join(path, file))
-	        allFiles += os.path.join(path, file)
+	  allFiles += os.path.join(path, file)
 		
     return allFiles
 
