@@ -212,6 +212,35 @@ except:
 
 	
 
+if var['Blog_Post_Date_Format']:
+  blog_date_format = var['Blog_Post_Date_Format']
+else:
+  blog_date_format= '%d, %b %Y'
+
+
+
+
+## Check if hosted on GitHub
+  ### To Run Git Commands If True (For pushing commits etc)
+if var['GitHub_Hosted']:
+  GitHub_Hosted = var['GitHub_Hosted']
+else:
+  GitHub_Hosted = "False"
+	
+	
+
+## Open Emoji Parser settings file
+settings_file = ".github/emoji_parser.md" 
+with open(settings_file, 'r') as f:
+  for line in f:
+   ## Make JSON Key Values
+   if ":" in line:
+    name, value = line.split('=================END OF SETTINGS============')[0].split(':')  
+    var[name] = str(value).rstrip()   
+  globals().update(var)
+
+
+	
 if var['Parse_Emojis'] == "True":
   Parse_Emojis = True
   try:
@@ -228,21 +257,6 @@ else:
 	
 
 
-
-if var['Blog_Post_Date_Format']:
-  blog_date_format = var['Blog_Post_Date_Format']
-else:
-  blog_date_format= '%d, %b %Y'
-
-
-
-
-## Check if hosted on GitHub
-  ### To Run Git Commands If True (For pushing commits etc)
-if var['GitHub_Hosted']:
-  GitHub_Hosted = var['GitHub_Hosted']
-else:
-  GitHub_Hosted = "False"
 
 
 ## Get the footer contents
