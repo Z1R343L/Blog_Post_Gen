@@ -180,6 +180,11 @@ def creation_date(path_to_file, blog_date_format):
 #           SITE SETTINGS              #
 ########################################    
 
+
+## Set the time zone
+
+os.environ["TZ"] = "UTC"
+
 ## Open main settings file
 settings_file = ".github/settings.md" 
 with open(settings_file, 'r') as f:
