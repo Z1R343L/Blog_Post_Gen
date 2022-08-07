@@ -69,20 +69,20 @@ page_slugs = ""
 ## Function to get all files in directory & sub-folders
 
 def getListOfFiles(dirName):
+    listOfFile = os.listdir(dirName)
     allFiles = list()
     # Iterate over all the entries
-    for path, subdirs, filenames in os.walk(dirName):
-        for file in filenames:
-            if path == ".":
-                break
-            if subdirs == ".":
-                break			
-            if filename == ".":
-                break				
-            else:
-		            allFiles += os.path.join(path, file) 
-    return allFiles
+    for entry in listOfFile:
+        # Create full path
+        fullPath = os.path.join(dirName, entry)
+        # If Directory Exists - Make File If Not Ignore File Name Used.
+        if os.path.isdir(fullPath):
+            allFiles = allFiles + getListOfFiles(fullPath)
+        else:
+            allFiles.append(fullPath)
+	print(allFiles)
 
+    return allFiles
 
 
 import re
