@@ -919,7 +919,9 @@ except Exceptation as e:
 ########################################    
 
 dirName = ".github/cms/layouts/assets/"
+
 for file in getListOfFiles(dirName):
+  print(file)
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
@@ -973,21 +975,6 @@ for file in getListOfFiles(dirName):
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
       shutil.copyfile(file, Output_Folder)
 
-	     # print(path)
-	     # print(Path(file).stem + "hello") 
-	      # path.split("/assets/")[1] 
-	
-	
-	
-      #  Output_Folder = "assets/"  
-       # if file_path = "assets":
-	#  Output_Folder = "assets/"
-	#else:
-	#  Output_Folder = path.split("/assets/")[1] 
-        # Split everything after "assets" in "path"
-        # else nothing
-	
-	
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
 ret = subprocess.run(command, capture_output=True, shell=True)
