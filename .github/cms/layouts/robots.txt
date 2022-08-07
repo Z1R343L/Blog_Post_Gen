@@ -1,1 +1,11 @@
+User-agent: *
+Disallow:marketingpip.github.io/Blog_Post_Gen/pages/blog/blog_post_1
+
+User-agent: *
+Disallow:/Blog_Post_Gen/pages/blog/blog_post_1
+
+
+User-agent: *
+Disallow: /Blog_Post_Gen/pages/blog/blog_post_1
+
 {{robots_txt_disallow}}
