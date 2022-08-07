@@ -937,7 +937,7 @@ for file in getListOfFiles(dirName):
         JS_FileName = "assets/" +  Path(file).stem + ".min.js"
       else:
         JS_FileName = "assets/" + path.split("assets/")[1]  + "/" +  Path(file).stem + ".min.js"
-	      print(JS_FileName)
+        print(JS_FileName)
       JS_File = open(JS_FileName, "w")
       JS_File.write(minified_js)
       JS_File.close()
