@@ -279,7 +279,7 @@ def writeXmlSitemap(files, baseUrl, dropExtension=False) :
 
 if __name__ == "__main__" :
     websiteRoot = "."
-    baseUrl = "test.com"
+    baseUrl = "marketingpip.github.io/Blog_Post_Gen/"
     includeHTML = "true"
     includePDF =  "true"
     sitemapFormat = "xml"
