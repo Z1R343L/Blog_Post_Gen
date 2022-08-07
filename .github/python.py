@@ -155,6 +155,7 @@ def creation_date(path_to_file, blog_date_format):
           return Post_Time
         except AttributeError:
           Date = stat.st_mtime
+          print(Date)
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
 
