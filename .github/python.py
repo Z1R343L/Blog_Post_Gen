@@ -926,12 +926,10 @@ for file in getListOfFiles(dirName):
     path=os.path.dirname(file)
     print(file)
     file_path = os.path.basename(path)	
-    if ".min.js" in file:
-	break
-    if ".min.css" in file:
-	break
     ## Minify JS Files
     if Path(file).suffix == ".js":
+      if ".min.js" in file:
+        break
       js_file = f.read()
       minified_js = jsmin(js_file)
       if file_path == "assets":
@@ -944,6 +942,8 @@ for file in getListOfFiles(dirName):
       JS_File.close()
     ## Minify CSS Files
     if Path(file).suffix == ".css":
+      if ".min.css" in file:
+        break  
       # Open file		
       css_text = f.read()
       f.close()
