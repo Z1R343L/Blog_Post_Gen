@@ -68,21 +68,15 @@ page_slugs = ""
 #            Function(s)               #
 ########################################    
 
-## Function to get all files in directory
+## Function to get all files in directory & sub-folders
 def getListOfFiles(dirName):
-    listOfFile = os.listdir(dirName)
     allFiles = list()
     # Iterate over all the entries
-    for entry in listOfFile:
-       #  Create full path
-        fullPath = os.path.join(dirName, entry)
-        # If entry is a directory then get the list of files in this directory
-        if os.path.isdir(fullPath):
-            allFiles = allFiles + getListOfFiles(fullPath)
-        else:
+    for path, subdirs, files in os.walk(dirName):
+        for name in files:
             allFiles.append(fullPath)
-
     return allFiles
+
 
 
 
