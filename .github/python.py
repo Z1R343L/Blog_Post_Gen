@@ -926,7 +926,7 @@ for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
-    print(Path(file).suffix)
+    print(file)
     file_path = os.path.basename(path)	
    
     ## Minify JS Files
