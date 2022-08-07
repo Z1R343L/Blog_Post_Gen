@@ -918,13 +918,11 @@ except Exceptation as e:
 #             Minify Assets            #
 ########################################    
 
-dirName = ".github/cms/layouts/assets"
-
+dirName = ".github/cms/layouts/assets/"
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
-    print(file)
     file_path = os.path.basename(path)	
    
     ## Minify JS Files
@@ -935,7 +933,6 @@ for file in getListOfFiles(dirName):
         JS_FileName = "assets/" +  Path(file).stem + ".min.js"
       else:
         JS_FileName = "assets/" + path.split("assets/")[1]  + "/" +  Path(file).stem + ".min.js"
-        print(JS_FileName)
       JS_File = open(JS_FileName, "w")
       JS_File.write(minified_js)
       JS_File.close()
