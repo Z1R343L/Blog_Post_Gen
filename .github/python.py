@@ -80,7 +80,6 @@ def getListOfFiles(dirName):
             allFiles = allFiles + getListOfFiles(fullPath)
         else:
             allFiles.append(fullPath)
-	print(allFiles)
 
     return allFiles
 
