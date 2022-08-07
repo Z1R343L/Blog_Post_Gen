@@ -911,7 +911,7 @@ except Exceptation as e:
 #             Minify Assets            #
 ########################################    
 
-dirName = ".github/cms/layouts/assets/"
+dirName = ".github/cms/layouts/assets"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
