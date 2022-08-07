@@ -74,7 +74,7 @@ def getListOfFiles(dirName):
     # Iterate over all the entries
     for path, subdirs, files in os.walk(dirName):
         for name in files:
-            allFiles.append(fullPath)
+            allFiles.append(os.path.join(path, name))
     return allFiles
 
 
