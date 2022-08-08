@@ -458,6 +458,13 @@ for file in getListOfFiles(dirName):
     except:
       PagePath = "pages/"   
 
+
+    outputFolder = PagePath
+    os.makedirs(outputFolder, exist_ok=True)
+    file_name = outputFolder + Path(file).stem + ".html"  
+
+	
+    # Create Breadcrumbs	
     try:
       CreateBreadCrumbs = data["Breadcrumbs"]
       if CreateBreadCrumbs == "True":
@@ -467,11 +474,6 @@ for file in getListOfFiles(dirName):
         BreadCrumbs = None
     except:
       BreadCrumbs = None
-
-    outputFolder = PagePath
-    os.makedirs(outputFolder, exist_ok=True)
-    file_name = outputFolder + Path(file).stem + ".html"  
-
 
 
     # For writing JSON data for github.com/MarketingPipeline/Static-Search.js
