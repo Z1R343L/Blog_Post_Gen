@@ -159,6 +159,60 @@ def creation_date(path_to_file, blog_date_format):
 
 
 
+## Function to create breadcrumbs
+
+
+# TODO - add settings file for breadcrumb links
+## Option to set element + create class
+def generate_bc(homepage_url, url):
+    separator = " "
+    if '//' in url:
+        url = url[url.index('//') + 2:]
+
+    url = url.rstrip('/')
+
+    try:
+        for i, c in enumerate(url):
+            if c in ['?', '#']:
+                url = url[0:i]
+                break
+
+        menus = url.split('/')[1:]
+        if menus and 'index.' == menus[-1][0:6]:
+            menus = menus[:-1]
+        if not menus:
+            return '<li class="active">HOME</li>'
+
+        breadcrumb = f'<li><a href="{homepage_url}">HOME</a></li>'
+
+        for i, e in enumerate(menus[:-1]):
+            breadcrumb += separator + f'<li><a href="{homepage_url}/' +'{}/">{}</a></li>'.format('/'.join(menus[:i + 1]), get_element_name(e))
+
+        breadcrumb += separator + '<li aria-current="active">{}</li>'.format(get_element_name(menus[-1]))
+        return breadcrumb
+    except:
+        return url
+
+
+
+## Not really a clue what this is for 
+ignore_words = ["the", "of", "in", "from", "by", "with", "and", "or", "for", "to", "at", "a"]
+
+
+def get_element_name(element):
+    acronyms = element.split('-')
+    for i, c in enumerate(acronyms[-1]):
+        if c == '.':
+            acronyms[-1] = acronyms[-1][:i]
+            break
+
+    if len(element) > 30:
+        for i, c in reversed(list(enumerate(acronyms))):
+            if c in ignore_words:
+                acronyms.pop(i)
+        return ''.join([s[0].upper() for s in acronyms])
+
+    return ' '.join([s.upper() for s in acronyms])
 
 
 ########################################
@@ -404,6 +458,14 @@ for file in getListOfFiles(dirName):
     except:
       PagePath = "pages/"   
 
+    try:
+      CreateBreadCrumbs = data["Breadcrumbs"]
+      if CreateBreadCrumbs == "True":
+        BreadCrumbs = generate_bc(Site_URL, f'{Site_URL}/outputFolder{Path(file).stem}.html')
+      else:
+        BreadCrumbs = ""
+    except:
+      BreadCrumbs = ""
 
     outputFolder = PagePath
     os.makedirs(outputFolder, exist_ok=True)
@@ -431,7 +493,7 @@ for file in getListOfFiles(dirName):
     page_template = env.get_template(PageLayout)
     try:
         with open(file_name, 'w') as fh:
-          page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
+          page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath, BreadCrumbs=BreadCrumbs, footer_contents=footer_contents)	
           fh.write(page_template)
 	    
     except IOError:
