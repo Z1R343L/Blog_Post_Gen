@@ -462,7 +462,7 @@ for file in getListOfFiles(dirName):
       CreateBreadCrumbs = data["Breadcrumbs"]
       if CreateBreadCrumbs == "True":
         BreadCrumbs = generate_bc(Site_URL, f'{Site_URL}/outputFolder{Path(file).stem}.html')
-	      print(BreadCrumbs)
+        print(BreadCrumbs)
       else:
         BreadCrumbs = ""
     except:
