@@ -4,7 +4,7 @@ Asset_Path:/Blog_Post_Gen/
 
 Site_Name:Simply Static
 
-Site_URL:marketingpip.github.io/Blog_Post_Gen/
+Site_URL:marketingpip.github.io/Blog_Post_Gen
 
 <code>Blog Post Date Format (**Default format** = %d, %b %Y) </code>
 
