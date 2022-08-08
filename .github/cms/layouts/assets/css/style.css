@@ -962,3 +962,23 @@ pre[class*="language-"] {
 .reading-time__label {
 font-weight: 700;
 }
+
+
+
+/* Breadcrumbs */
+
+breadcrumbs {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 10px 0;
+    padding: 0;
+    list-style-type: none;
+}
+breadcrumbs [aria-current="page"] {
+    color: var(--breadcrumbs-current-color, var(--color-text-alt, rgba(0, 0, 0, 0.68)));
+}
+breadcrumbs li + li::before {
+    content: var(--breadcrumbs-divider, "  /  ");
+    color: var(--breadcrumbs-divider-color, #ccc);
+    white-space: pre;
+}
