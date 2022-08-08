@@ -464,9 +464,9 @@ for file in getListOfFiles(dirName):
         BreadCrumbs = generate_bc(Site_URL, f'{Site_URL}/outputFolder{Path(file).stem}.html')
         print(BreadCrumbs)
       else:
-        BreadCrumbs = ""
+        BreadCrumbs = None
     except:
-      BreadCrumbs = ""
+      BreadCrumbs = None
 
     outputFolder = PagePath
     os.makedirs(outputFolder, exist_ok=True)
