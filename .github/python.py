@@ -468,7 +468,7 @@ for file in getListOfFiles(dirName):
     try:
       CreateBreadCrumbs = data["Breadcrumbs"]
       if CreateBreadCrumbs == "True":
-        BreadCrumbs = generate_bc(f'https://{Site_URL}{AssetPath}', f'https://{Site_URL}{AssetPath}{outputFolder}{Path(file).stem}.html')
+        BreadCrumbs = generate_bc(f'https://{Site_URL}', f'https://{Site_URL}{outputFolder}{Path(file).stem}.html')
         print(BreadCrumbs)
       else:
         BreadCrumbs = None
