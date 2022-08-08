@@ -483,7 +483,7 @@ for file in getListOfFiles(dirName):
     # Create page slug 
     try:
       PageSlug = data["PageSlug"]
-      page_slugs += f'if (document.location == "https://{Site_URL}/{PageSlug}" || document.location == "http://{Site_URL}/{PageSlug}")' + "{" + f'window.location.href = "http://{Site_URL}{PageSlug}/{Path(file).stem}"' + "}"
+      page_slugs += f'if (document.location == "https://{Site_URL}/{PageSlug}" || document.location == "http://{Site_URL}/{PageSlug}")' + "{" + f'window.location.href = "http://{Site_URL}/{PageSlug}/{Path(file).stem}"' + "}"
     # pass if no page slug found to make  
     except:
       pass  
