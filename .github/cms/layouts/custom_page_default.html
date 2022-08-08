@@ -29,10 +29,19 @@
     <main>
 
 <!---BreadCrumbs---> 
-     {% if CreateBreadCrumbs == "True"  %}
-     <breadcrumbs>{{BreadCrumbs}}</breadcrumbs>
-	
-{% endif %}	    
+ {% if Breadcrumbs == ""  %}
+	    
+{% else %}
+	    
+<breadcrumbs>{{BreadCrumbs}}</breadcrumbs>
+	    
+{% endif %}	
+	    
+	  
+		    <h1>{{BlogTitle}} t</h1>
+	  
+	       
+	    
 	    
 	    
 <article>
