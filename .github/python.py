@@ -606,6 +606,7 @@ for file in getListOfFiles(dirName):
     except:
       BlogDate= creation_date(file, blog_date_format)
 
+    print("Reading", file)
 
     try:
       BlogTitle = data["BlogTitle"]
