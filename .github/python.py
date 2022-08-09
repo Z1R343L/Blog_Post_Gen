@@ -25,6 +25,11 @@ import pytz
 #          End of Import(s)            #
 ########################################    
 
+from crtime import get_crtimes_in_dir
+
+for fname, date in get_crtimes_in_dir(".github/", raise_on_error=True, as_epoch=False):
+    print(fname, date)
+# file_a.py Mon Mar 18 20:51:18 CET 2019
 
 
 
@@ -147,12 +152,12 @@ def creation_date(path_to_file, blog_date_format):
     else:
         try:
           # file creation timestamp in float
-          Date = os.path.st_birthtime(path_to_file)
+          Date = os.path.ctime(path_to_file)
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
         except AttributeError:
           # file modification timestamp of a file
-          Date = os.path.st_birthtime(path_to_file)
+          Date = os.path.ctime(path_to_file)
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
 
