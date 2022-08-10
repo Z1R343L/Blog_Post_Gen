@@ -10,12 +10,12 @@ jobs:
 
     steps: 
     - uses: actions/checkout@v2
-
+      with:
+        fetch-depth: 0 
 
      # Setup Python
     - run: sudo apt-get install python3 python3-pip
     - run: pip install optimize-images jsmin pytz crtime
-    - uses: actions/checkout@v2
     - name: Convert Markdown To HTML 
     # Run the Python Script
       run: |
