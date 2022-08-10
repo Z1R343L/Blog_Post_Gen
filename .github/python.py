@@ -82,22 +82,6 @@ def getListOfFiles(dirName):
     return allFiles
 
 
-
-
-def lastmod(f) :
-    """Required for GitHub Hosted : Determines the date when the file was last modified and
-    returns a string with the date formatted as required for
-    the lastmod tag in the blog posts for:
-    f - filename
-    """
-    mod = subprocess.run(['git', 'log', '-1', '--format=%cI', f],
-                    stdout=subprocess.PIPE,
-                    universal_newlines=True).stdout.strip()
-    if len(mod) == 0 :
-        mod = datetime.now().astimezone().replace(microsecond=0).isoformat()
-    return mod
-
-
 import re
 
 
@@ -144,7 +128,23 @@ def ParseEmoji(text, type=None, Class=None):
             
         
 
-        
+
+	
+## Function to get File Creation Dates (GitHub)
+def lastmod(f) :
+    """Required for GitHub Hosted : Determines the date when the file was last modified and
+    returns a string with the date formatted as required for
+    the lastmod tag in the blog posts for:
+    f - filename
+    """
+    mod = subprocess.run(['git', 'log', '-1', '--format=%cI', f],
+                    stdout=subprocess.PIPE,
+                    universal_newlines=True).stdout.strip()
+    if len(mod) == 0 :
+        mod = datetime.now().astimezone().replace(microsecond=0).isoformat()
+    return mod
+
+	
 
 ## Function to get File Creation Dates
 # https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
@@ -157,19 +157,22 @@ def creation_date(path_to_file, blog_date_format, hosted_on_github):
     Default blog date format is  -- '%d, %b %Y'
     
     """
+    # Required for GitHub Hosted - file modification timestamp
     if hosted_on_github == 'True':
-        return lastmod(path_to_file)
+	Date = lastmod(path_to_file)
+        Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
+	return Post_Time 
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
     else:
         stat = os.stat(path_to_file)	
         try:
-          # file creation timestamp in float
+          # file creation timestamp 
           Date = stat.st_birthtime
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
         except AttributeError:
-          # file modification timestamp of a file
+          # file modification timestamp
           Date = stat.st_mtime
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
