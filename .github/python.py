@@ -151,12 +151,12 @@ def creation_date(path_to_file, blog_date_format):
         stat = os.stat(path_to_file)	
         try:
           # file creation timestamp in float
-          Date = stat.st_birthtime()
+          Date = stat.st_birthtime
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
         except AttributeError:
           # file modification timestamp of a file
-          Date = stat.st_mtime()
+          Date = stat.st_mtime
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
 
