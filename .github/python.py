@@ -148,7 +148,7 @@ def ParseEmoji(text, type=None, Class=None):
 
 ## Function to get File Creation Dates
 # https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
-def creation_date(path_to_file, blog_date_format, GitHub_Hosted):
+def creation_date(path_to_file, blog_date_format, hosted_on_github):
     """
     Try to get the date that a file was created, falling back to when it was
     last modified if that isn't possible.
@@ -157,7 +157,7 @@ def creation_date(path_to_file, blog_date_format, GitHub_Hosted):
     Default blog date format is  -- '%d, %b %Y'
     
     """
-    if GitHub_Hosted == 'True':
+    if hosted_on_github == 'True':
         return lastmod(path_to_file)
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
@@ -174,10 +174,6 @@ def creation_date(path_to_file, blog_date_format, GitHub_Hosted):
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
 
-
-for file in getListOfFiles(".github/"):
-    print(creation_date(file, '%d, %b %Y', GitHub_Hosted))
-# file_a.py Mon Mar 18 20:51:18 CET 2019
 
 
 ## Function to create breadcrumbs
