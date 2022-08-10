@@ -9,7 +9,7 @@ BlogTitle:Hello Wgorld
 
 <code>Blog Post Date</code>
 
-BlogDate:
+
 
 
 <code>Blog Author</code>
