@@ -148,18 +148,19 @@ def creation_date(path_to_file, blog_date_format):
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
     else:
+	stat = os.stat(path_to_file)	
         try:
           # file creation timestamp in float
-          Date = os.path.getctime(path_to_file)
+          Date = stat.st_birthtime(path_to_file)
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
         except AttributeError:
           # file modification timestamp of a file
-          Date = os.path.getmtime(path_to_file)
+          Date = stat.st_mtime(path_to_file)
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
 
-        
+
 for file in getListOfFiles(".github/"):
     print(creation_date(file, '%d, %b %Y'))
 # file_a.py Mon Mar 18 20:51:18 CET 2019
