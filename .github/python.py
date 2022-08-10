@@ -160,7 +160,7 @@ def creation_date(path_to_file, blog_date_format):
 
 
 for file in getListOfFiles(".github/"):
-    print(creation_date(file))
+    print(creation_date(file, '%d, %b %Y'))
 # file_a.py Mon Mar 18 20:51:18 CET 2019
 
 
