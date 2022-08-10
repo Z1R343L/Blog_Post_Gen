@@ -157,10 +157,11 @@ def creation_date(path_to_file, blog_date_format, hosted_on_github):
     Default blog date format is  -- '%d, %b %Y'
     
     """
-    # Required for GitHub Hosted - file modification timestamp 
+
+    # Required for GitHub Hosted - file modification timestamp
     if hosted_on_github == 'True':
         Date = lastmod(path_to_file)
-        Post_Time = datetime.datetime.strptime(Date, '%Y-%m-%dT%H:%M:%S:%z').strftime(blog_date_format)
+        Post_Time = datetime.datetime.strptime(Date, '%Y-%m-%dT%I:%M:%S-%H:%M').strftime(blog_date_format)
         return Post_Time
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
