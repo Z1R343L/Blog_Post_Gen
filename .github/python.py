@@ -84,6 +84,18 @@ def getListOfFiles(dirName):
 
 
 
+def lastmod(f) :
+    """Required for GitHub Hosted : Determines the date when the file was last modified and
+    returns a string with the date formatted as required for
+    the lastmod tag in the blog posts for:
+    f - filename
+    """
+    mod = subprocess.run(['git', 'log', '-1', '--format=%cI', f],
+                    stdout=subprocess.PIPE,
+                    universal_newlines=True).stdout.strip()
+    if len(mod) == 0 :
+        mod = datetime.now().astimezone().replace(microsecond=0).isoformat()
+    return mod
 
 
 import re
@@ -145,6 +157,8 @@ def creation_date(path_to_file, blog_date_format):
     Default blog date format is  -- '%d, %b %Y'
     
     """
+    if GitHub_Hosted == 'True':
+        return lastmod(path_to_file)
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
     else:
@@ -611,7 +625,8 @@ for file in getListOfFiles(dirName):
     try:
       BlogDate = data["BlogDate"]
     except:
-      BlogDate= creation_date(file, blog_date_format)
+      # Get Last Modified File Date - File / Blog Date Format & Is GitHub Hosted?
+      BlogDate= creation_date(file, blog_date_format, GitHub_Hosted)
 
     print("Reading", file)
 
