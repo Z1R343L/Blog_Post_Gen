@@ -148,7 +148,7 @@ def ParseEmoji(text, type=None, Class=None):
 
 ## Function to get File Creation Dates
 # https://stackoverflow.com/questions/237079/how-do-i-get-file-creation-and-modification-date-times
-def creation_date(path_to_file, blog_date_format):
+def creation_date(path_to_file, blog_date_format, GitHub_Hosted):
     """
     Try to get the date that a file was created, falling back to when it was
     last modified if that isn't possible.
