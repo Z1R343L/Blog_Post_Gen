@@ -136,15 +136,12 @@ def lastmod(f) :
     returns a string with the date formatted as required for
     the lastmod tag in the blog posts for:
     f - filename
-    
-    -1 returns last Commit For Git Log 
-    rev-list returns First Commit
     """
-    mod = subprocess.run(['git', 'log', 'rev-list', '--format=%cI', f],
+    mod = subprocess.run(['git', 'log', '-1', '--format=%cI', f],
                     stdout=subprocess.PIPE,
                     universal_newlines=True).stdout.strip()
     if len(mod) == 0 :
-        mod = datetime.now().astimezone().replace(microsecond=0).isoformat()
+        mod = datetime.datetime.now().astimezone().replace(microsecond=0).isoformat()
     return mod
 
 	
