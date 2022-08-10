@@ -131,6 +131,7 @@ def ParseEmoji(text, type=None, Class=None):
     return text
             
         
+
         
 
 ## Function to get File Creation Dates
@@ -149,16 +150,16 @@ def creation_date(path_to_file, blog_date_format):
     else:
         try:
           # file creation timestamp in float
-          Date = os.path.ctime(path_to_file)
+          Date = os.path.getctime(path_to_file)
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
         except AttributeError:
           # file modification timestamp of a file
-          Date = os.path.ctime(path_to_file)
+          Date = os.path.getmtime(path_to_file)
           Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
           return Post_Time
 
-
+        
 for file in getListOfFiles(".github/"):
     print(creation_date(file, '%d, %b %Y'))
 # file_a.py Mon Mar 18 20:51:18 CET 2019
