@@ -25,10 +25,9 @@ import pytz
 #          End of Import(s)            #
 ########################################    
 
-from crtime import get_crtimes_in_dir
 
-for fname, date in get_crtimes_in_dir(".github/", raise_on_error=True, as_epoch=False):
-    print(fname, date)
+for file in getListOfFiles(".github/"):
+    print(creation_date)
 # file_a.py Mon Mar 18 20:51:18 CET 2019
 
 
