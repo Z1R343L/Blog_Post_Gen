@@ -160,7 +160,7 @@ def creation_date(path_to_file, blog_date_format, hosted_on_github):
     # Required for GitHub Hosted - file modification timestamp
     if hosted_on_github == 'True':
         Date = lastmod(path_to_file)
-        Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
+        Post_Time = datetime.datetime.strptime(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
         return Post_Time
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
