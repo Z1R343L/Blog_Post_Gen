@@ -148,7 +148,7 @@ def creation_date(path_to_file, blog_date_format):
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
     else:
-	stat = os.stat(path_to_file)	
+	      stat = os.stat(path_to_file)	
         try:
           # file creation timestamp in float
           Date = stat.st_birthtime(path_to_file)
