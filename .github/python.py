@@ -83,9 +83,6 @@ def getListOfFiles(dirName):
 
 
 
-for file in getListOfFiles(".github/"):
-    print(creation_date)
-# file_a.py Mon Mar 18 20:51:18 CET 2019
 
 
 
@@ -162,6 +159,9 @@ def creation_date(path_to_file, blog_date_format):
           return Post_Time
 
 
+for file in getListOfFiles(".github/"):
+    print(creation_date(file))
+# file_a.py Mon Mar 18 20:51:18 CET 2019
 
 
 ## Function to create breadcrumbs
