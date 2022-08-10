@@ -136,8 +136,11 @@ def lastmod(f) :
     returns a string with the date formatted as required for
     the lastmod tag in the blog posts for:
     f - filename
+    
+    -1 returns last Commit For Git Log 
+    rev-list returns First Commit
     """
-    mod = subprocess.run(['git', 'log', '-1', '--format=%cI', f],
+    mod = subprocess.run(['git', 'log', 'rev-list', '--format=%cI', f],
                     stdout=subprocess.PIPE,
                     universal_newlines=True).stdout.strip()
     if len(mod) == 0 :
@@ -161,7 +164,7 @@ def creation_date(path_to_file, blog_date_format, hosted_on_github):
     # Required for GitHub Hosted - file modification timestamp
     if hosted_on_github == 'True':
         Date = lastmod(path_to_file)
-        Post_Time = datetime.datetime.strptime(Date, '%Y-%m-%dT%H:%M:%S%z').strftime(blog_date_format)
+        Post_Time = datetime.datetime.strptime(Date, '%Y-%m-%dT%H:%M:%S:%z').strftime(blog_date_format)
         return Post_Time
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
