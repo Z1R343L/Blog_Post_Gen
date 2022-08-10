@@ -140,7 +140,7 @@ def lastmod(f) :
     -1 returns last Commit For Git Log 
    --reverse returns First Commit
     """
-    mod = subprocess.run(['git', 'log', '--format=%cI', '--reverse', f],
+    mod = subprocess.run(['git', 'log', '-1', '--format=%cI' f],
                     stdout=subprocess.PIPE,
                     universal_newlines=True).stdout.strip()
     if len(mod) == 0 :
