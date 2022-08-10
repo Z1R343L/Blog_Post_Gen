@@ -26,12 +26,6 @@ import pytz
 ########################################    
 
 
-for file in getListOfFiles(".github/"):
-    print(creation_date)
-# file_a.py Mon Mar 18 20:51:18 CET 2019
-
-
-
 
 ########################################
 #              List(s)                 #
@@ -86,6 +80,13 @@ def getListOfFiles(dirName):
             allFiles.append(fullPath)
 
     return allFiles
+
+
+
+for file in getListOfFiles(".github/"):
+    print(creation_date)
+# file_a.py Mon Mar 18 20:51:18 CET 2019
+
 
 
 import re
