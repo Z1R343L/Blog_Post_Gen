@@ -1087,8 +1087,7 @@ for file in getListOfFiles(dirName):
 	      #Output_Folder = "assets/" + os.path.basename(file)
       else:   
 	      ### File path contains something after /assets/ + adding path. 
-	      print("h")
-	      #Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
+	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
       #shutil.copyfile(file, Output_Folder)
 
 ## Optimize all images in assets path
