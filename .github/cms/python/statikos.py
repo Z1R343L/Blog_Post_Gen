@@ -344,7 +344,7 @@ else:
 
 
 ## Get the footer contents
-footer_file = ".github/settings/footer.md"
+footer_file = ".github/cms/settings/footer.md"
 with open(footer_file) as f:
   footer_contents = f.read()
 
@@ -353,7 +353,7 @@ with open(footer_file) as f:
 ## Create menu links
 
 
-permalinks_file= ".github/settings/navlinks.md"
+permalinks_file= ".github/cms/settings/navlinks.md"
 permalinks_file_contents = None
 menu=""
 ## Regex match for menu links
