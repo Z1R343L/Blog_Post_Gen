@@ -312,7 +312,16 @@ if var['GitHub_Hosted']:
 else:
   GitHub_Hosted = "False"
 	
+
+
+
+## Minify HTML?
+if var['Minify_HTML'] == "True":
+  HTML_Page = minify_html.minify(page_template, do_not_minify_doctype=True)
+else:
+  HTML_Page = page_template
 	
+		
 
 ## Open Emoji Parser settings file
 settings_file = ".github/cms/settings/emoji_parser.md" 
@@ -522,7 +531,7 @@ for file in getListOfFiles(dirName):
     try:
         with open(file_name, 'w') as fh:
           page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath, BreadCrumbs=BreadCrumbs, footer_contents=footer_contents)	
-          fh.write(minify_html.minify(page_template, do_not_minify_doctype=True))
+          fh.write(HTML_Page)
 		  
 	    
     except IOError:
