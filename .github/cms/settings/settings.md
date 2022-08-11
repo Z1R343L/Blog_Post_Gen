@@ -16,7 +16,7 @@ GitHub_Hosted:True
 
 <code>Minify HTML</code>
 
-Minify_HTML:False
+Minify_HTML:True
 
 
 =================END OF SETTINGS============
