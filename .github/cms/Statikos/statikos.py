@@ -21,6 +21,7 @@ from jinja2 import Environment, FileSystemLoader
 import datetime
 from jsmin import jsmin
 import pytz
+import minify_html
 ########################################
 #          End of Import(s)            #
 ########################################    
@@ -521,7 +522,8 @@ for file in getListOfFiles(dirName):
     try:
         with open(file_name, 'w') as fh:
           page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath, BreadCrumbs=BreadCrumbs, footer_contents=footer_contents)	
-          fh.write(page_template)
+          fh.write(minify_html.minify(page_template, do_not_minify_doctype=True))
+		  
 	    
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
