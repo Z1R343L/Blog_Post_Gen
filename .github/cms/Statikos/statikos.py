@@ -106,7 +106,7 @@ Emoji_Data_File = open('.github/cms/settings/emoji_data/emojis.json')
   
 ## return JSON Data as 
 # a dictionary
-EmojiData = json.load(f)
+EmojiData = json.load(Emoji_Data_File)
 
 
 def ParseEmoji(text, type=None, Class=None):
