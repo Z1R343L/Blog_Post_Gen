@@ -1029,7 +1029,7 @@ except Exceptation as e:
 dirName = ".github/cms/layouts/assets/js/"
 
 for file in getListOfFiles(dirName):
-  with open(file, 'r') as f:
+  with open(file) as f:
     ## These are used for below	
     path=os.path.dirname(file)
     print(f"Trying to minify {file}")
