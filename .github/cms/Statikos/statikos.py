@@ -1056,7 +1056,7 @@ for file in getListOfFiles(dirName):
         r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
         css_minified = r.text
       except:
-        print(f"Could not minify {file")
+        print(f"Could not minify {file}")
      
        ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
