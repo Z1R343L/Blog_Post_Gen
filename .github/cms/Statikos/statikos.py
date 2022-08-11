@@ -687,8 +687,10 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     try:
         with open(file_name, 'w') as fh:
           output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
-          fh.write(output_from_parsed_template)
-	    
+          if Minify_HTML == "True":
+            fh.write(minify_html.minify(output_from_parsed_template, do_not_minify_doctype=True))
+          else:
+            fh.write(output_from_parsed_template)    
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
