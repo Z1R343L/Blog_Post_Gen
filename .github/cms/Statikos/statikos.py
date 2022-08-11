@@ -1065,7 +1065,8 @@ for file in getListOfFiles(dirName):
 	      Output_Folder = "assets/" 
       else:   
 	      ### File path contains something after /assets/ + adding path. 
-	     # Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+	      print("hello")
+	      #Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
       
       file_name = Output_Folder + Path(file).stem + ".min.css"
       CSS_File = open(file_name, "w")
