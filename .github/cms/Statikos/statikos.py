@@ -1032,7 +1032,7 @@ for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
-    print(file)
+    print(f"Trying to minify {file}")
     file_path = os.path.basename(path)	
     ## Minify JS Files
     if Path(file).suffix == ".js":
@@ -1052,8 +1052,11 @@ for file in getListOfFiles(dirName):
       css_text = f.read()
       f.close()
       ## Send API request for minified CSS	
-      r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
-      css_minified = r.text
+      try:
+        r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
+        css_minified = r.text
+      except:
+        print(f"Could not minify {file")
      
        ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
