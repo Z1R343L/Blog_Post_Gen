@@ -316,10 +316,10 @@ else:
 
 
 ## Minify HTML?
-if var['Minify_HTML'] == "True":
-  HTML_Page = minify_html.minify(page_template, do_not_minify_doctype=True)
+if var['Minify_HTML']:
+  Minify_HTML = var['Minify_HTML']
 else:
-  HTML_Page = page_template
+  Minify_HTML = "False"
 	
 		
 
@@ -530,8 +530,11 @@ for file in getListOfFiles(dirName):
     page_template = env.get_template(PageLayout)
     try:
         with open(file_name, 'w') as fh:
-          page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath, BreadCrumbs=BreadCrumbs, footer_contents=footer_contents)	
-          fh.write(HTML_Page)
+          page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath, BreadCrumbs=BreadCrumbs, footer_contents=footer_contents)
+	  if Minify_HTML == "True":
+           fh.write(minify_html.minify(page_template, do_not_minify_doctype=True))
+	  else:
+	   fh.write(page_template)
 		  
 	    
     except IOError:
