@@ -1083,7 +1083,7 @@ for file in getListOfFiles(dirName):
       ### Copy & move all the other files to /assets/ folder. 
       ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
-	      print("hel"
+	      print("hel")
 	      #Output_Folder = "assets/" + os.path.basename(file)
       else:   
 	      ### File path contains something after /assets/ + adding path. 
