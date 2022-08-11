@@ -264,7 +264,7 @@ est = pytz.timezone('US/Eastern')
 utc = pytz.utc
 
 ## Open main settings file
-settings_file = ".github/settings.md" 
+settings_file = ".github/cms/settings/settings.md" 
 with open(settings_file, 'r') as f:
   for line in f:
    ## Make JSON Key Values
@@ -314,7 +314,7 @@ else:
 	
 
 ## Open Emoji Parser settings file
-settings_file = ".github/emoji_parser.md" 
+settings_file = ".github/cms/settings/emoji_parser.md" 
 with open(settings_file, 'r') as f:
   for line in f:
    ## Make JSON Key Values
@@ -344,7 +344,7 @@ else:
 
 
 ## Get the footer contents
-footer_file = ".github/footer.md"
+footer_file = ".github/settings/footer.md"
 with open(footer_file) as f:
   footer_contents = f.read()
 
@@ -353,7 +353,7 @@ with open(footer_file) as f:
 ## Create menu links
 
 
-permalinks_file= "navlinks.md"
+permalinks_file= ".github/settings/navlinks.md"
 permalinks_file_contents = None
 menu=""
 ## Regex match for menu links
@@ -404,7 +404,7 @@ env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
 template = env.get_template('index.html')
 
 # Open Index File Content
-index_file_contents = ".github/index.md"
+index_file_contents = ".github/cms/pages/index.md"
 try:
     with open(index_file_contents, 'r') as f:
         index_file_contents = f.read()
@@ -445,7 +445,7 @@ except IOError:
 
 content = {}
 var = {}
-dirName = ".github/cms/custom_pages"
+dirName = ".github/cms/pages"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
@@ -1096,11 +1096,11 @@ ret = subprocess.run(command, capture_output=True, shell=True)
 ## Run the sitemap generator
 try:
     ## Try to see if Python is avaliable on system
-    command = """python .github/generate_sitemap.py"""
+    command = """python .github/cms/python/utils/generate_sitemap.py"""
     ret = subprocess.run(command, capture_output=True, shell=True)
 except:
     # If not try Python 3 (I am sure there is a better method of detection for this) 	
-    command = """python3 .github/generate_sitemap.py"""
+    command = """python3 .github/cms/python/utils/generate_sitemap.py"""
     ret = subprocess.run(command, capture_output=True, shell=True)
 
 
