@@ -86,13 +86,6 @@ def getListOfFiles(dirName):
 import re
 
 
-# Define Emoji Data To Use
-EmojiData = {
-	"yum": "😋 ",
-	"heart": "sd",
-	"s": "delectus aut autem",
-	"ad": "false"
-}
     
         
 # Function to Parse & Replace Emojis With Image Or Unicode
@@ -105,6 +98,16 @@ EmojiData = {
   
 	 # Replace with unicode emoji (JSON data)
 #print(ParseEmoji("<script> so dam :yum: :yum: :heart: </script>"))	
+
+# Define Emoji Data To Use
+
+## Opening Emoji JSON file
+Emoji_Data_File = open('.github/cms/settings/emoji_data/emojis.json')
+  
+## return JSON Data as 
+# a dictionary
+EmojiData = json.load(f)
+
 
 def ParseEmoji(text, type=None, Class=None):
     # Regex to remove HTML from string
