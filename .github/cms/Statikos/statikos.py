@@ -1036,7 +1036,8 @@ for file in getListOfFiles(dirName):
     print(f"Trying to minify {file}")
     file_path = os.path.basename(path)	
     ## Minify JS Files
-    if Path(file).suffix == ".js":
+    FileSuffix = os.path.splitext(file)[1]
+    if FileSuffix == ".js":
       js_file = f.read()
       minified_js = jsmin(js_file)
       if file_path == "assets":
@@ -1064,7 +1065,7 @@ for file in getListOfFiles(dirName):
 	      Output_Folder = "assets/" 
       else:   
 	      ### File path contains something after /assets/ + adding path. 
-	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+	     # Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
       
       file_name = Output_Folder + Path(file).stem + ".min.css"
       CSS_File = open(file_name, "w")
@@ -1073,10 +1074,10 @@ for file in getListOfFiles(dirName):
     else:
       ## Copy all files from .github/assets/ to /assets/	
       ### Don't copy un-minified JS files
-      if Path(file).suffix == ".js":
+      if FileSuffix == ".js":
 	      break
       ### Don't copy un-minified CSS files
-      if Path(file).suffix == ".css":
+      if FileSuffix == ".css":
 	      break
       ### Copy & move all the other files to /assets/ folder. 
       ### Check if file path contains anything after /assets/  	   
