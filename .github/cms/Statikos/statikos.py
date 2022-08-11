@@ -1026,7 +1026,7 @@ except Exceptation as e:
 #             Minify Assets            #
 ########################################    
 
-dirName= ".github/cms/blog_posts"
+dirName= ".github/cms/layouts/assets"
 #dirName = ".github/cms/layouts/assets/js/"
 
 for file in getListOfFiles(dirName):
@@ -1065,8 +1065,7 @@ for file in getListOfFiles(dirName):
 	      Output_Folder = "assets/" 
       else:   
 	      ### File path contains something after /assets/ + adding path. 
-	      print("hello")
-	      #Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
       
       file_name = Output_Folder + Path(file).stem + ".min.css"
       CSS_File = open(file_name, "w")
@@ -1087,9 +1086,8 @@ for file in getListOfFiles(dirName):
 	      #Output_Folder = "assets/" + os.path.basename(file)
       else:   
 	      ### File path contains something after /assets/ + adding path. 
-	      print("h")
-	     # Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
-      #shutil.copyfile(file, Output_Folder)
+	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
+      shutil.copyfile(file, Output_Folder)
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
