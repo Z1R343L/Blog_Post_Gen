@@ -1083,11 +1083,13 @@ for file in getListOfFiles(dirName):
       ### Copy & move all the other files to /assets/ folder. 
       ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
-	      Output_Folder = "assets/" + os.path.basename(file)
+	      print("hel"
+	      #Output_Folder = "assets/" + os.path.basename(file)
       else:   
 	      ### File path contains something after /assets/ + adding path. 
-	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
-      shutil.copyfile(file, Output_Folder)
+	      print("h")
+	      #Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
+      #shutil.copyfile(file, Output_Folder)
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
