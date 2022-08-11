@@ -14,6 +14,9 @@ Blog_Post_Date_Format:%b, %d, %Y at %-I&#58;%M%p
 
 GitHub_Hosted:True
 
+<code>Minify HTML</code>
+
+Minify_HTML:False
 
 
 =================END OF SETTINGS============
