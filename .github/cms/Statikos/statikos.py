@@ -1026,68 +1026,12 @@ except Exceptation as e:
 #             Minify Assets            #
 ########################################    
 
-dirName= ".github/cms/layouts/test"
-#dirName = ".github/cms/layouts/assets/js/"
 
-for root, dirs, file in os.walk(".github/cms/layouts/assets/js"):
-  with open(file) as f:
-    ## These are used for below	
-    path=os.path.dirname(file)
-    print(f"Trying to minify {file}")
-    file_path = os.path.basename(path)	
-    ## Minify JS Files
-    FileSuffix = os.path.splitext(file)[1]
-    if FileSuffix == ".js":
-      js_file = f.read()
-      minified_js = jsmin(js_file)
-      #if file_path == "assets":
-      #  JS_FileName = "assets/" +  Path(file).stem + ".min.js"
-      #else:
-       # JS_FileName = "assets/" + path.split("assets/")[1]  + "/" +  Path(file).stem + ".min.js"
-       # print(JS_FileName)
-      #JS_File = open(JS_FileName, "w")
-      #JS_File.write(minified_js)
-     # JS_File.close()
-    ## Minify CSS Files
-    if Path(file).suffix == ".css":
-      # Open file		
-      css_text = f.read()
-      f.close()
-      ## Send API request for minified CSS	
-      try:
-        r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
-        css_minified = r.text
-      except:
-        print(f"Could not minify {file}")
-     
-       ### Check if file path contains anything after /assets/  	   
-     # if file_path == "assets":
-	     # Output_Folder = "assets/" 
-      #else:   
-	     # ### File path contains something after /assets/ + adding path. 
-	      #Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
-      
-     # file_name = Output_Folder + Path(file).stem + ".min.css"
-     # CSS_File = open(file_name, "w")
-      #CSS_File.write(css_minified)
-      #CSS_File.close()
-    else:
-      ## Copy all files from .github/assets/ to /assets/	
-      ### Don't copy un-minified JS files
-      if FileSuffix == ".js":
-	      break
-      ### Don't copy un-minified CSS files
-      if FileSuffix == ".css":
-	      break
-      ### Copy & move all the other files to /assets/ folder. 
-      ### Check if file path contains anything after /assets/  	   
-      #if file_path == "assets":
-	    #  print("hel")
-	      #Output_Folder = "assets/" + os.path.basename(file)
-     # else:   
-	      ### File path contains something after /assets/ + adding path. 
-	    #  Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
-     # shutil.copyfile(file, Output_Folder)
+dirName = ".github/cms/layouts/assets/js"
+
+for path, subdirs, files in os.walk(dirName):
+    for name in files:
+        print(os.path.join(path, name))
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
