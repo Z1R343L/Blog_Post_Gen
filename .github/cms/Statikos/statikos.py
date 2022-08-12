@@ -1062,7 +1062,7 @@ for file in getListOfFiles(dirName):
      
        ### Check if file path contains anything after /assets/  	   
      # if file_path == "assets":
-	      Output_Folder = "assets/" 
+	     # Output_Folder = "assets/" 
       #else:   
 	     # ### File path contains something after /assets/ + adding path. 
 	      #Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
