@@ -1029,7 +1029,7 @@ except Exceptation as e:
 dirName= ".github/cms/layouts/test"
 #dirName = ".github/cms/layouts/assets/js/"
 
-for file in getListOfFiles(dirName):
+for root, dirs, file in os.walk(".github/cms/layouts/assets/js"):
   with open(file) as f:
     ## These are used for below	
     path=os.path.dirname(file)
