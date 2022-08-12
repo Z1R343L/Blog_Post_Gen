@@ -1061,16 +1061,16 @@ for file in getListOfFiles(dirName):
         print(f"Could not minify {file}")
      
        ### Check if file path contains anything after /assets/  	   
-      if file_path == "assets":
+     # if file_path == "assets":
 	      Output_Folder = "assets/" 
-      else:   
-	      ### File path contains something after /assets/ + adding path. 
-	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+      #else:   
+	     # ### File path contains something after /assets/ + adding path. 
+	      #Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
       
-      file_name = Output_Folder + Path(file).stem + ".min.css"
-      CSS_File = open(file_name, "w")
-      CSS_File.write(css_minified)
-      CSS_File.close()
+     # file_name = Output_Folder + Path(file).stem + ".min.css"
+     # CSS_File = open(file_name, "w")
+      #CSS_File.write(css_minified)
+      #CSS_File.close()
     else:
       ## Copy all files from .github/assets/ to /assets/	
       ### Don't copy un-minified JS files
@@ -1081,13 +1081,13 @@ for file in getListOfFiles(dirName):
 	      break
       ### Copy & move all the other files to /assets/ folder. 
       ### Check if file path contains anything after /assets/  	   
-      if file_path == "assets":
-	      print("hel")
+      #if file_path == "assets":
+	    #  print("hel")
 	      #Output_Folder = "assets/" + os.path.basename(file)
-      else:   
+     # else:   
 	      ### File path contains something after /assets/ + adding path. 
-	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
-      shutil.copyfile(file, Output_Folder)
+	    #  Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
+     # shutil.copyfile(file, Output_Folder)
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
