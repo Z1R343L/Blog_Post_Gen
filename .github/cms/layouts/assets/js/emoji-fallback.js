@@ -1,9 +1,3 @@
-// Emoji Fallback Support 
-// by github.com/MarketingPipeline
-
-//// What this does 
-// requires Twemoji in document - if no emoji support - replace with images
-
 var emojis = (function() {
 // Modernizr Test
 var emojiSupported = (function() { 
