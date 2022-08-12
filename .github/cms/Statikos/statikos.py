@@ -1027,7 +1027,7 @@ except Exceptation as e:
 ########################################    
 
 
-dirName = ".github/cms/layouts/assets/js"
+dirName = ".github/cms/layouts/assets/"
 
 for path, subdirs, files in os.walk(dirName):
     for name in files:
