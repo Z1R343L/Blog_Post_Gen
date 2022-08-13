@@ -1032,11 +1032,54 @@ dirName = ".github/cms/layouts/assets/"
 for path, subdirs, files in os.walk(dirName):
     for name in files:
         file = os.path.join(path, name)
-        try:
-          with open(file) as f:
-            print("opened file" + file)
-        except Exception as e:
-            print("error" + e)
+        with open(file) as f:
+          ## These are used for below	
+          path=os.path.dirname(file)
+          print(f"Trying to minify {file}")
+          file_path = os.path.basename(path)	
+          ## Minify JS Files
+          FileSuffix = os.path.splitext(file)[1]
+          if FileSuffix == ".js":
+            js_file = f.read()
+            minified_js = jsmin(js_file)
+            if file_path == "assets":
+              JS_FileName = "assets/" +  Path(file).stem + ".min.js"
+            else:
+              JS_FileName = "assets/" + path.split("assets/")[1]  + "/" +  Path(file).stem + ".min.js"
+              print(JS_FileName)
+            JS_File = open(JS_FileName, "w")
+            JS_File.write(minified_js)
+            JS_File.close()
+          if FileSuffix == ".css":
+           # Open file		
+            css_text = f.read()
+            f.close()
+            ## Send API request for minified CSS	
+            try:
+              r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
+              css_minified = r.text
+            except:
+              print(f"Could not minify {file}")
+
+            if file_path == "assets":
+              Output_Folder = "assets/"
+            else:
+              Output_Folder = "assets/" + path.split("assets/")[1]  + "/"
+            file_name = Output_Folder + Path(file).stem + ".min.css"
+            CSS_File = open(file_name, "w")
+            CSS_File.write(css_minified)
+            CSS_File.close()
+          else:
+            if FileSuffix == ".js":
+              break
+            if FileSuffix == ".css":
+	            break
+            if file_path == "assets":
+              Output_Folder = "assets/" + os.path.basename(file)
+            else:
+              Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
+            shutil.copyfile(file, Output_Folder)
+
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
