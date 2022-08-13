@@ -1032,7 +1032,8 @@ dirName = ".github/cms/layouts/assets/"
 for path, subdirs, files in os.walk(dirName):
     for name in files:
         file = os.path.join(path, name)
-        with open(file) as f:
+        try:
+          with open(file) as f:
           ## These are used for below	
           path=os.path.dirname(file)
           print(f"Trying to minify {file}")
@@ -1079,7 +1080,8 @@ for path, subdirs, files in os.walk(dirName):
             else:
               Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
             shutil.copyfile(file, Output_Folder)
-
+        except:
+          print("Something went wrong opeing file. ")
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
