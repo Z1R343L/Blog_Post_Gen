@@ -1034,7 +1034,7 @@ for path, subdirs, files in os.walk(dirName):
         file = os.path.join(path, name)
         try:
           with open(file) as f:
-            print("opened file")
+            print("opened file" + file)
         except Exception as e:
             print("error" + e)
 
