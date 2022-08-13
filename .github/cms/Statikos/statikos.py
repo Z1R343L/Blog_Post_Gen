@@ -1031,6 +1031,7 @@ except Exceptation as e:
 dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
+  print("Trying to minify " + file)
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
