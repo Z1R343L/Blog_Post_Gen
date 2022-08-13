@@ -1032,9 +1032,9 @@ dirName = ".github/cms/layouts/assets/"
 for path, subdirs, files in os.walk(dirName):
     for name in files:
         file = os.path.join(path, name)
+        print("opening file" + file)
         with open(file) as f:
           ## These are used for below	
-          path=os.path.dirname(file)
           print(f"Trying to minify {file}")
           file_path = os.path.basename(path)	
           ## Minify JS Files
