@@ -712,10 +712,7 @@ outputFolder = "pages/blog/author/"
 os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-    try:
-      content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
-      content = f.read()
+
 
     
 
@@ -745,6 +742,10 @@ for file in getListOfFiles(dirName):
       PageTitle = "Author"
 
     file_name = outputFolder + Path(file).stem + ".html"   
+    try:
+      content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
+      content = f.read()	
     try:
         with open(file_name, 'w') as fh:
           output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,blog_content=content,footer_contents=footer_contents)	
