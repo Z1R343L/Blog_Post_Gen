@@ -469,10 +469,10 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
-      blog_content = f.read()
+  #  try:
+   #   blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+   # except:
+    #  blog_content = f.read()
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -579,7 +579,7 @@ os.makedirs(outputFolder, exist_ok=True)
 
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
-content = {}
+
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     if "/author/" in file:
@@ -690,7 +690,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
     var.clear()
-    content.clear()
+   
 
 
 	
