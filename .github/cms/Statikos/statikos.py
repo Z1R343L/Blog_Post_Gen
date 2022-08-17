@@ -86,6 +86,13 @@ def getListOfFiles(dirName):
 import re
 
 
+# Define Emoji Data To Use
+EmojiData = {
+	"yum": "😋 ",
+	"heart": "sd",
+	"s": "delectus aut autem",
+	"ad": "false"
+}
     
         
 # Function to Parse & Replace Emojis With Image Or Unicode
@@ -98,16 +105,6 @@ import re
   
 	 # Replace with unicode emoji (JSON data)
 #print(ParseEmoji("<script> so dam :yum: :yum: :heart: </script>"))	
-
-# Define Emoji Data To Use
-
-## Opening Emoji JSON file
-Emoji_Data_File = open('.github/cms/settings/emoji_data/emojis.json')
-  
-## return JSON Data as 
-# a dictionary
-EmojiData = json.load(Emoji_Data_File)
-
 
 def ParseEmoji(text, type=None, Class=None):
     # Regex to remove HTML from string
@@ -166,7 +163,7 @@ def creation_date(path_to_file, blog_date_format, hosted_on_github):
     """
 
     # Required for GitHub Hosted - file modification timestamp
-    if hosted_on_github == 'Trueee':
+    if hosted_on_github == 'True':
         Date = lastmod(path_to_file)
         Post_Time = datetime.datetime.strptime(Date, '%Y-%m-%dT%H:%M:%S%z').strftime(blog_date_format)
         return Post_Time
@@ -1026,18 +1023,14 @@ except Exceptation as e:
 #             Minify Assets            #
 ########################################    
 
-
-
 dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
-  print("Trying to minify " + file)
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
-    print(Path(file).suffix)
+    print(file)
     file_path = os.path.basename(path)	
-   
     ## Minify JS Files
     if Path(file).suffix == ".js":
       js_file = f.read()
@@ -1046,6 +1039,7 @@ for file in getListOfFiles(dirName):
         JS_FileName = "assets/" +  Path(file).stem + ".min.js"
       else:
         JS_FileName = "assets/" + path.split("assets/")[1]  + "/" +  Path(file).stem + ".min.js"
+        print(JS_FileName)
       JS_File = open(JS_FileName, "w")
       JS_File.write(minified_js)
       JS_File.close()
@@ -1085,8 +1079,6 @@ for file in getListOfFiles(dirName):
 	      ### File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
       shutil.copyfile(file, Output_Folder)
-
-
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
