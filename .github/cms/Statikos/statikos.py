@@ -599,11 +599,11 @@ for file in getListOfFiles(dirName):
     
 	
     ## Get input after 	(ERROR HERE)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
+    #try:
+    #  blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+   # except:
     # If no settings - get the whole file contents		
-      blog_content = f.read()
+   #   blog_content = f.read()
 	
    # file_contents = f.read()
     Facebook_Meta = ""
@@ -681,7 +681,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=blog_content,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,footer_contents=footer_contents)	
           if Minify_HTML == "True":
             fh.write(minify_html.minify(output_from_parsed_template, do_not_minify_doctype=True))
           else:
@@ -742,13 +742,13 @@ for file in getListOfFiles(dirName):
       PageTitle = "Author"
 
     file_name = outputFolder + Path(file).stem + ".html"   
-    try:
-      content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
-      content = f.read()	
+    #try:
+     # content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    #except:
+     # content = f.read()	
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,blog_content=content,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
