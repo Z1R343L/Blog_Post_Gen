@@ -456,7 +456,7 @@ except IOError:
 
 ## Create pages (not including blog route pages) 
 
-
+content = {}
 var = {}
 dirName = ".github/cms/pages"
 
@@ -469,10 +469,12 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-  #  try:
-   #   blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-   # except:
-    #  blog_content = f.read()
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -539,7 +541,7 @@ for file in getListOfFiles(dirName):
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
-    
+    content.clear()
 
 
 
@@ -579,7 +581,7 @@ os.makedirs(outputFolder, exist_ok=True)
 
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
-
+content = {}
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     if "/author/" in file:
@@ -599,12 +601,13 @@ for file in getListOfFiles(dirName):
     
 	
     ## Get input after 	(ERROR HERE)
-    #try:
-    #  blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-   # except:
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
     # If no settings - get the whole file contents		
-   #   blog_content = f.read()
-	
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
@@ -615,6 +618,11 @@ for file in getListOfFiles(dirName):
    # AssetPath = ""
    
     data = var 
+
+    try:
+      Blog_Contents = content["Blog_Content_Key"]
+    except:
+      Blog_Contents = ""
 
 
     try:
@@ -681,7 +689,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
           if Minify_HTML == "True":
             fh.write(minify_html.minify(output_from_parsed_template, do_not_minify_doctype=True))
           else:
@@ -690,7 +698,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
     var.clear()
-   
+    content.clear()
 
 
 	
@@ -707,13 +715,12 @@ except IOError:
 
 ## Create Blog Author Pages
 blog_author_template = env.get_template('blog-author.html')
+content = {}
 dirName = ".github/cms/blog_posts/author"
 outputFolder = "pages/blog/author/"
 os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
-
-
     
 
     for line in f:
@@ -724,7 +731,12 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-
+    try:
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    except:
+      blog_content = f.read()
+    content['Blog_Content_Key'] = str(blog_content)
+    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -742,10 +754,6 @@ for file in getListOfFiles(dirName):
       PageTitle = "Author"
 
     file_name = outputFolder + Path(file).stem + ".html"   
-    #try:
-     # content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    #except:
-     # content = f.read()	
     try:
         with open(file_name, 'w') as fh:
           output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
@@ -754,6 +762,7 @@ for file in getListOfFiles(dirName):
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
+    content.clear()
 
 ########################################
 #            End of Blog               #
@@ -963,7 +972,7 @@ output_from_parsed_template = template.render(robots_txt_disallow=robots_txt_dis
 try:
     with open(robots_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
-except:
+except IOError:
     sys.exit('Robots.txt layout does not exist, or has no content.  Exiting')  
 
 ########################################
@@ -1022,7 +1031,6 @@ except Exceptation as e:
 dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
-  print("Trying to minify " + file)
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
@@ -1130,7 +1138,7 @@ except:
 	
 	
 	
-print(robots_txt_disallow)	
+	
 	
 	
 
@@ -1149,4 +1157,3 @@ else:
 ########################################
 #          End of Commit Changes       #
 ########################################   
-
