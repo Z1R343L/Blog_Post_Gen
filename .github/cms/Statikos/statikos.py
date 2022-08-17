@@ -456,7 +456,7 @@ except IOError:
 
 ## Create pages (not including blog route pages) 
 
-content = {}
+
 var = {}
 dirName = ".github/cms/pages"
 
@@ -473,8 +473,6 @@ for file in getListOfFiles(dirName):
       blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
       blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -541,7 +539,7 @@ for file in getListOfFiles(dirName):
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
-    content.clear()
+    
 
 
 
@@ -602,12 +600,11 @@ for file in getListOfFiles(dirName):
 	
     ## Get input after 	(ERROR HERE)
     try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+      blog_content = file.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
     # If no settings - get the whole file contents		
-      blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
+      blog_content = file.read()
+	
    # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
@@ -618,11 +615,6 @@ for file in getListOfFiles(dirName):
    # AssetPath = ""
    
     data = var 
-
-    try:
-      Blog_Contents = content["Blog_Content_Key"]
-    except:
-      Blog_Contents = ""
 
 
     try:
@@ -689,7 +681,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=blog_content,footer_contents=footer_contents)	
           if Minify_HTML == "True":
             fh.write(minify_html.minify(output_from_parsed_template, do_not_minify_doctype=True))
           else:
@@ -721,9 +713,9 @@ os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+      content = file.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
-      blog_content = f.read()
+      content = file.read()
 
     
 
@@ -755,7 +747,7 @@ for file in getListOfFiles(dirName):
     file_name = outputFolder + Path(file).stem + ".html"   
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,blog_content=blog_content,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,blog_content=content,footer_contents=footer_contents)	
           fh.write(output_from_parsed_template)
 	    
     except IOError:
