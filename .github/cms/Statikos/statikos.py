@@ -86,13 +86,6 @@ def getListOfFiles(dirName):
 import re
 
 
-# Define Emoji Data To Use
-EmojiData = {
-	"yum": "😋 ",
-	"heart": "sd",
-	"s": "delectus aut autem",
-	"ad": "false"
-}
     
         
 # Function to Parse & Replace Emojis With Image Or Unicode
@@ -105,6 +98,16 @@ EmojiData = {
   
 	 # Replace with unicode emoji (JSON data)
 #print(ParseEmoji("<script> so dam :yum: :yum: :heart: </script>"))	
+
+# Define Emoji Data To Use
+
+## Opening Emoji JSON file
+Emoji_Data_File = open('.github/cms/settings/emoji_data/emojis.json')
+  
+## return JSON Data as 
+# a dictionary
+EmojiData = json.load(Emoji_Data_File)
+
 
 def ParseEmoji(text, type=None, Class=None):
     # Regex to remove HTML from string
@@ -163,7 +166,7 @@ def creation_date(path_to_file, blog_date_format, hosted_on_github):
     """
 
     # Required for GitHub Hosted - file modification timestamp
-    if hosted_on_github == 'True':
+    if hosted_on_github == 'Trueee':
         Date = lastmod(path_to_file)
         Post_Time = datetime.datetime.strptime(Date, '%Y-%m-%dT%H:%M:%S%z').strftime(blog_date_format)
         return Post_Time
@@ -453,7 +456,7 @@ except IOError:
 
 ## Create pages (not including blog route pages) 
 
-content = {}
+
 var = {}
 dirName = ".github/cms/pages"
 
@@ -466,12 +469,10 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
-      blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
+  #  try:
+   #   blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+   # except:
+    #  blog_content = f.read()
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -538,7 +539,7 @@ for file in getListOfFiles(dirName):
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
-    content.clear()
+    
 
 
 
@@ -578,7 +579,7 @@ os.makedirs(outputFolder, exist_ok=True)
 
 env = Environment(loader=FileSystemLoader('.github/cms/layouts/blog'))
 blog_post_template = env.get_template('blog-post.html')
-content = {}
+
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     if "/author/" in file:
@@ -598,13 +599,12 @@ for file in getListOfFiles(dirName):
     
 	
     ## Get input after 	(ERROR HERE)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
+    #try:
+    #  blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+   # except:
     # If no settings - get the whole file contents		
-      blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
+   #   blog_content = f.read()
+	
    # file_contents = f.read()
     Facebook_Meta = ""
     BlogTitle = "Blog Post"
@@ -615,11 +615,6 @@ for file in getListOfFiles(dirName):
    # AssetPath = ""
    
     data = var 
-
-    try:
-      Blog_Contents = content["Blog_Content_Key"]
-    except:
-      Blog_Contents = ""
 
 
     try:
@@ -686,7 +681,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     #    pass    
     try:
         with open(file_name, 'w') as fh:
-          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
+          output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,footer_contents=footer_contents)	
           if Minify_HTML == "True":
             fh.write(minify_html.minify(output_from_parsed_template, do_not_minify_doctype=True))
           else:
@@ -695,7 +690,7 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
     var.clear()
-    content.clear()
+   
 
 
 	
@@ -712,12 +707,13 @@ except IOError:
 
 ## Create Blog Author Pages
 blog_author_template = env.get_template('blog-author.html')
-content = {}
 dirName = ".github/cms/blog_posts/author"
 outputFolder = "pages/blog/author/"
 os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
+
+
     
 
     for line in f:
@@ -728,12 +724,7 @@ for file in getListOfFiles(dirName):
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
     globals().update(var)
-    try:
-      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
-    except:
-      blog_content = f.read()
-    content['Blog_Content_Key'] = str(blog_content)
-    globals().update(content)
+
    # file_contents = f.read()
     Facebook_Meta = ""
     Facebook_Meta += """<meta property="og:title" content="Blog Post">"""
@@ -751,6 +742,10 @@ for file in getListOfFiles(dirName):
       PageTitle = "Author"
 
     file_name = outputFolder + Path(file).stem + ".html"   
+    #try:
+     # content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
+    #except:
+     # content = f.read()	
     try:
         with open(file_name, 'w') as fh:
           output_from_parsed_template = blog_author_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,footer_contents=footer_contents)	
@@ -759,7 +754,6 @@ for file in getListOfFiles(dirName):
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
-    content.clear()
 
 ########################################
 #            End of Blog               #
@@ -961,7 +955,7 @@ except IOError:
 #           Robots.txt File            #
 ########################################    
 
-template = env.get_template('robots.txt')
+template = env.get_template('.github/cms/layouts/robots.txt')
 
 robots_file_name = "robots.txt"
 output_from_parsed_template = template.render(robots_txt_disallow=robots_txt_disallow)
@@ -1023,14 +1017,18 @@ except Exceptation as e:
 #             Minify Assets            #
 ########################################    
 
+
+
 dirName = ".github/cms/layouts/assets/"
 
 for file in getListOfFiles(dirName):
+  print("Trying to minify " + file)
   with open(file, 'r') as f:
     ## These are used for below	
     path=os.path.dirname(file)
-    print(file)
+    print(Path(file).suffix)
     file_path = os.path.basename(path)	
+   
     ## Minify JS Files
     if Path(file).suffix == ".js":
       js_file = f.read()
@@ -1039,7 +1037,6 @@ for file in getListOfFiles(dirName):
         JS_FileName = "assets/" +  Path(file).stem + ".min.js"
       else:
         JS_FileName = "assets/" + path.split("assets/")[1]  + "/" +  Path(file).stem + ".min.js"
-        print(JS_FileName)
       JS_File = open(JS_FileName, "w")
       JS_File.write(minified_js)
       JS_File.close()
@@ -1079,6 +1076,8 @@ for file in getListOfFiles(dirName):
 	      ### File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
       shutil.copyfile(file, Output_Folder)
+
+
 
 ## Optimize all images in assets path
 command = """optimize-images ./assets/"""
