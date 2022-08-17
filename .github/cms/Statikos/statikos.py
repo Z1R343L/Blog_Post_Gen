@@ -21,6 +21,7 @@ from jinja2 import Environment, FileSystemLoader
 import datetime
 from jsmin import jsmin
 import pytz
+import minify_html
 ########################################
 #          End of Import(s)            #
 ########################################    
@@ -85,13 +86,6 @@ def getListOfFiles(dirName):
 import re
 
 
-# Define Emoji Data To Use
-EmojiData = {
-	"yum": "😋 ",
-	"heart": "sd",
-	"s": "delectus aut autem",
-	"ad": "false"
-}
     
         
 # Function to Parse & Replace Emojis With Image Or Unicode
@@ -104,6 +98,16 @@ EmojiData = {
   
 	 # Replace with unicode emoji (JSON data)
 #print(ParseEmoji("<script> so dam :yum: :yum: :heart: </script>"))	
+
+# Define Emoji Data To Use
+
+## Opening Emoji JSON file
+Emoji_Data_File = open('.github/cms/settings/emoji_data/emojis.json')
+  
+## return JSON Data as 
+# a dictionary
+EmojiData = json.load(Emoji_Data_File)
+
 
 def ParseEmoji(text, type=None, Class=None):
     # Regex to remove HTML from string
@@ -264,7 +268,7 @@ est = pytz.timezone('US/Eastern')
 utc = pytz.utc
 
 ## Open main settings file
-settings_file = ".github/settings.md" 
+settings_file = ".github/cms/settings/settings.md" 
 with open(settings_file, 'r') as f:
   for line in f:
    ## Make JSON Key Values
@@ -311,10 +315,19 @@ if var['GitHub_Hosted']:
 else:
   GitHub_Hosted = "False"
 	
+
+
+
+## Minify HTML?
+if var['Minify_HTML']:
+  Minify_HTML = var['Minify_HTML']
+else:
+  Minify_HTML = "False"
 	
+		
 
 ## Open Emoji Parser settings file
-settings_file = ".github/emoji_parser.md" 
+settings_file = ".github/cms/settings/emoji_parser.md" 
 with open(settings_file, 'r') as f:
   for line in f:
    ## Make JSON Key Values
@@ -344,7 +357,7 @@ else:
 
 
 ## Get the footer contents
-footer_file = ".github/footer.md"
+footer_file = ".github/cms/settings/footer.md"
 with open(footer_file) as f:
   footer_contents = f.read()
 
@@ -353,7 +366,7 @@ with open(footer_file) as f:
 ## Create menu links
 
 
-permalinks_file= "navlinks.md"
+permalinks_file= ".github/cms/settings/navlinks.md"
 permalinks_file_contents = None
 menu=""
 ## Regex match for menu links
@@ -404,7 +417,7 @@ env = Environment(loader=FileSystemLoader('.github/cms/layouts'))
 template = env.get_template('index.html')
 
 # Open Index File Content
-index_file_contents = ".github/index.md"
+index_file_contents = ".github/cms/pages/index.md"
 try:
     with open(index_file_contents, 'r') as f:
         index_file_contents = f.read()
@@ -445,7 +458,7 @@ except IOError:
 
 content = {}
 var = {}
-dirName = ".github/cms/custom_pages"
+dirName = ".github/cms/pages"
 
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
@@ -520,9 +533,11 @@ for file in getListOfFiles(dirName):
     page_template = env.get_template(PageLayout)
     try:
         with open(file_name, 'w') as fh:
-          page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath, BreadCrumbs=BreadCrumbs, footer_contents=footer_contents)	
-          fh.write(page_template)
-	    
+          page_template = page_template.render(Site_Name=Site_Name,menu=menu,SiteTitle=SiteTitle,PageTitle=PageTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath, BreadCrumbs=BreadCrumbs, footer_contents=footer_contents)
+          if Minify_HTML == "True":
+            fh.write(minify_html.minify(page_template, do_not_minify_doctype=True))
+          else:
+            fh.write(page_template)
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))  
     var.clear()
@@ -675,8 +690,10 @@ url: """ + f'"{AssetPath}{file_name}",\n' + "name: " +f'"{BlogTitle}",\n' + "con
     try:
         with open(file_name, 'w') as fh:
           output_from_parsed_template = blog_post_template.render(menu=menu,Site_Name=Site_Name,SiteTitle=SiteTitle,Facebook_Meta=Facebook_Meta,AssetPath=AssetPath,BlogTitle=BlogTitle,BlogAuthor=BlogAuthor, BlogAuthor_LowerCase = BlogAuthor_LowerCase,BlogDate=BlogDate,Blog_Contents=Blog_Contents,footer_contents=footer_contents)	
-          fh.write(output_from_parsed_template)
-	    
+          if Minify_HTML == "True":
+            fh.write(minify_html.minify(output_from_parsed_template, do_not_minify_doctype=True))
+          else:
+            fh.write(output_from_parsed_template)    
     except IOError:
         sys.exit(u'Unable to write to files: {0}'.format(file_contents))
     # Delete the JSON keys made for the file & start loop again till done	
@@ -1009,16 +1026,18 @@ except Exceptation as e:
 #             Minify Assets            #
 ########################################    
 
-dirName = ".github/cms/layouts/assets/"
+dirName= ".github/cms/layouts/assets"
+#dirName = ".github/cms/layouts/assets/js/"
 
 for file in getListOfFiles(dirName):
-  with open(file, 'r') as f:
+  with open(file) as f:
     ## These are used for below	
     path=os.path.dirname(file)
-    print(file)
+    print(f"Trying to minify {file}")
     file_path = os.path.basename(path)	
     ## Minify JS Files
-    if Path(file).suffix == ".js":
+    FileSuffix = os.path.splitext(file)[1]
+    if FileSuffix == ".js":
       js_file = f.read()
       minified_js = jsmin(js_file)
       if file_path == "assets":
@@ -1035,8 +1054,11 @@ for file in getListOfFiles(dirName):
       css_text = f.read()
       f.close()
       ## Send API request for minified CSS	
-      r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
-      css_minified = r.text
+      try:
+        r = requests.post("https://www.toptal.com/developers/cssminifier/api/raw", data={"input":css_text})
+        css_minified = r.text
+      except:
+        print(f"Could not minify {file}")
      
        ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
@@ -1052,15 +1074,16 @@ for file in getListOfFiles(dirName):
     else:
       ## Copy all files from .github/assets/ to /assets/	
       ### Don't copy un-minified JS files
-      if Path(file).suffix == ".js":
+      if FileSuffix == ".js":
 	      break
       ### Don't copy un-minified CSS files
-      if Path(file).suffix == ".css":
+      if FileSuffix == ".css":
 	      break
       ### Copy & move all the other files to /assets/ folder. 
       ### Check if file path contains anything after /assets/  	   
       if file_path == "assets":
-	      Output_Folder = "assets/" + os.path.basename(file)
+	      print("hel")
+	      #Output_Folder = "assets/" + os.path.basename(file)
       else:   
 	      ### File path contains something after /assets/ + adding path. 
 	      Output_Folder = "assets/" + path.split("assets/")[1]  + "/" + os.path.basename(file)
@@ -1096,11 +1119,11 @@ ret = subprocess.run(command, capture_output=True, shell=True)
 ## Run the sitemap generator
 try:
     ## Try to see if Python is avaliable on system
-    command = """python .github/generate_sitemap.py"""
+    command = """python .github/cms/python/utils/generate_sitemap.py"""
     ret = subprocess.run(command, capture_output=True, shell=True)
 except:
     # If not try Python 3 (I am sure there is a better method of detection for this) 	
-    command = """python3 .github/generate_sitemap.py"""
+    command = """python3 .github/cms/python/utils/generate_sitemap.py"""
     ret = subprocess.run(command, capture_output=True, shell=True)
 
 
