@@ -21,3 +21,5 @@ OG_Type: test two
 OG_Description: test one
 
 =================END OF SEO SETTINGS============
+
+My old friend
