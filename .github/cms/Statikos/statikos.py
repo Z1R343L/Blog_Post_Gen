@@ -724,9 +724,6 @@ for file in getListOfFiles(dirName):
     
 
     for line in f:
-# Check line for <meta name="robots" content="noindex">, etc
-        if re.search("<meta\s+name.+robots.+content.+noindex", line):
-	        robots_txt_disallow += Path(file).stem 
         if ":" in line:
           name, value = line.split('=================END OF SEO SETTINGS============')[0].split(':')  # Needs replaced with regex match 
           var[name] = str(value).rstrip() # needs a value added    
