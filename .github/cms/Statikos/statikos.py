@@ -600,10 +600,10 @@ for file in getListOfFiles(dirName):
 	
     ## Get input after 	(ERROR HERE)
     try:
-      blog_content = file.read().split("=================END OF SEO SETTINGS============",1)[1]    
+      blog_content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
     # If no settings - get the whole file contents		
-      blog_content = file.read()
+      blog_content = f.read()
 	
    # file_contents = f.read()
     Facebook_Meta = ""
@@ -713,9 +713,9 @@ os.makedirs(outputFolder, exist_ok=True)
 for file in getListOfFiles(dirName):
   with open(file, 'r') as f:
     try:
-      content = file.read().split("=================END OF SEO SETTINGS============",1)[1]    
+      content = f.read().split("=================END OF SEO SETTINGS============",1)[1]    
     except:
-      content = file.read()
+      content = f.read()
 
     
 
