@@ -1,7 +1,7 @@
 =================START OF SEO SETTINGS============
 
 
-Robots_Index:True
+Robots_Index:False
 
 <code>Blog Title</code>
 
