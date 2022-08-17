@@ -955,7 +955,7 @@ except IOError:
 #           Robots.txt File            #
 ########################################    
 
-template = env.get_template('.github/cms/layouts/robots.txt')
+template = env.get_template('robots.txt')
 
 robots_file_name = "robots.txt"
 output_from_parsed_template = template.render(robots_txt_disallow=robots_txt_disallow)
@@ -963,7 +963,7 @@ output_from_parsed_template = template.render(robots_txt_disallow=robots_txt_dis
 try:
     with open(robots_file_name, 'w') as fh:
         fh.write(output_from_parsed_template)
-except IOError:
+except:
     sys.exit('Robots.txt layout does not exist, or has no content.  Exiting')  
 
 ########################################
