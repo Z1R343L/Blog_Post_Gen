@@ -627,10 +627,11 @@ for file in getListOfFiles(dirName):
 
     try:
       Robots_Index = data["Robots_Index"]
+      print("Working..", Robots_Index)
       if Robots_Index == "False":
         robots_txt_disallow += "User-agent: *\nDisallow:" + outputFolder + Path(file).stem 
-    except:
-      pass
+    except Exception as e:
+      print("Error reading robots", e)
 
 
 
