@@ -1,7 +1,9 @@
 =================START OF SEO SETTINGS============
 
 
-Robots_Index:False
+<code>Hide in robots.txt?</code>
+
+Robots:False
 
 <code>Blog Title</code>
 
