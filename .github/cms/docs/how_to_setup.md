@@ -3,9 +3,17 @@
   
 # How To Install
   
+
+  
+<blockquote> Note: This project is CURRENTLY only public to find developers and not ready for production. NOR is all this info accurate..</blockquote>
+  <br>
+  
   Download options:
-  Make a template from this repo
+  
+  Make a template from this repo 
+  
   Download as a ZIP
+  
   Clone this repo to your own!
 
 
