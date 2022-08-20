@@ -136,13 +136,13 @@ def createExtensionSet(includeHTML, includePDF, additionalExt) :
         fileExtensionsToInclude = additionalExt | HTML_EXTENSIONS
     else :
         fileExtensionsToInclude = additionalExt
-        
+
     if includePDF :
         fileExtensionsToInclude.add("pdf")
-    
+
     return fileExtensionsToInclude
     
-def robotsBlocked(f, blockedPaths=[]) :
+def robotsBlocked(f, blockedPaths=[]):
     """Checks if robots are blocked from acessing the
     url.
     Keyword arguments:
@@ -156,9 +156,7 @@ def robotsBlocked(f, blockedPaths=[]) :
         for b in blockedPaths :
             if f2.startswith(b) :
                 return True
-    if not isHTMLFile(f) : 
-        return False
-    return hasMetaRobotsNoindex(f)
+    return hasMetaRobotsNoindex(f) if isHTMLFile(f) else False
 
 def parseRobotsTxt(robotsFile="robots.txt") :
     """Parses a robots.txt if present in the root of the
@@ -215,22 +213,19 @@ def lastmod(f) :
         mod = datetime.now().astimezone().replace(microsecond=0).isoformat()
     return mod
 
-def urlstring(f, baseUrl, dropExtension=False) :
+def urlstring(f, baseUrl, dropExtension=False):
     """Forms a string with the full url from a filename and base url.
     Keyword arguments:
     f - filename
     baseUrl - address of the root of the website
     dropExtension - true to drop extensions of .html from the filename in urls
     """
-    if f[0]=="." :
-        u = f[1:]
-    else :
-        u = f
+    u = f[1:] if f[0]=="." else f
     u = sortname(u, dropExtension)
-    if len(u) >= 1 and u[0]=="/" and len(baseUrl) >= 1 and baseUrl[-1]=="/" :
+    if len(u) >= 1 and u[0]=="/" and len(baseUrl) >= 1 and baseUrl[-1]=="/":
         u = u[1:]
-    elif (len(u)==0 or u[0]!="/") and (len(baseUrl)==0 or baseUrl[-1]!="/") :
-        u = "/" + u
+    elif (len(u)==0 or u[0]!="/") and (len(baseUrl)==0 or baseUrl[-1]!="/"):
+        u = f"/{u}"
     return baseUrl + u
 
 xmlSitemapEntryTemplate = """<url>
@@ -277,7 +272,7 @@ def writeXmlSitemap(files, baseUrl, dropExtension=False) :
         sitemap.write('</urlset>\n')
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
     websiteRoot = "."
     baseUrl = "marketingpip.github.io/Blog_Post_Gen/"
     includeHTML = "true"
@@ -288,7 +283,7 @@ if __name__ == "__main__" :
 
     os.chdir(websiteRoot)
     blockedPaths = parseRobotsTxt()
-    
+
     allFiles = gatherfiles(createExtensionSet(includeHTML, includePDF, additionalExt))
     files = [ f for f in allFiles if not robotsBlocked(f, blockedPaths) ]
     urlsort(files, dropExtension)
@@ -303,6 +298,6 @@ if __name__ == "__main__" :
         writeTextSitemap(files, baseUrl, dropExtension)
         pathToSitemap += "sitemap.txt"
 
-    print("::set-output name=sitemap-path::" + pathToSitemap)
-    print("::set-output name=url-count::" + str(len(files)))
-    print("::set-output name=excluded-count::" + str(len(allFiles)-len(files)))
+    print(f"::set-output name=sitemap-path::{pathToSitemap}")
+    print(f"::set-output name=url-count::{len(files)}")
+    print(f"::set-output name=excluded-count::{str(len(allFiles) - len(files))}")
