@@ -69,7 +69,7 @@ page_slugs = ""
 
 def getListOfFiles(dirName):
     listOfFile = os.listdir(dirName)
-    allFiles = list()
+    allFiles = []
     # Iterate over all the entries
     for entry in listOfFile:
         # Create full path
@@ -118,16 +118,24 @@ def ParseEmoji(text, type=None, Class=None):
     for Regex_Match in re.findall(':(.*?):', Text_With_Any_HTML_Removed):
         # For each key name in JSON Emoji Data
         for Key_Name in EmojiData.items():
-            # if Regex Match is a Keyname
             if Regex_Match in EmojiData:
-                # Replace with the Keyname Value
                 if type == "Image":
-                    if Class:
-                        text = text.replace(f':{Regex_Match}:', str(f'<img class="{Class}" src="{EmojiData[Regex_Match]}">'))
-                    else:
-                        text = text.replace(f':{Regex_Match}:', str(f'<img src="{EmojiData[Regex_Match]}">'))
+                    text = (
+                        text.replace(
+                            f':{Regex_Match}:',
+                            str(
+                                f'<img class="{Class}" src="{EmojiData[Regex_Match]}">'
+                            ),
+                        )
+                        if Class
+                        else text.replace(
+                            f':{Regex_Match}:',
+                            str(f'<img src="{EmojiData[Regex_Match]}">'),
+                        )
+                    )
+
                 else:
-                    text = text.replace(f':{Regex_Match}:', str(EmojiData[Regex_Match])) 
+                    text = text.replace(f':{Regex_Match}:', str(EmojiData[Regex_Match]))
     return text
             
         
@@ -172,18 +180,17 @@ def creation_date(path_to_file, blog_date_format, hosted_on_github):
         return Post_Time
     if platform.system() == 'Windows':
         return os.path.getctime(path_to_file)
-    else:
-        stat = os.stat(path_to_file)	
-        try:
-          # file creation timestamp 
-          Date = stat.st_birthtime
-          Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
-          return Post_Time
-        except AttributeError:
-          # file modification timestamp
-          Date = stat.st_mtime
-          Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
-          return Post_Time
+    stat = os.stat(path_to_file)
+    try:
+      # file creation timestamp 
+      Date = stat.st_birthtime
+      Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
+      return Post_Time
+    except AttributeError:
+      # file modification timestamp
+      Date = stat.st_mtime
+      Post_Time = datetime.datetime.fromtimestamp(Date, pytz.timezone('US/Eastern')).strftime(blog_date_format)
+      return Post_Time
 
 
 
@@ -202,11 +209,11 @@ def generate_bc(homepage_url, url):
     try:
         for i, c in enumerate(url):
             if c in ['?', '#']:
-                url = url[0:i]
+                url = url[:i]
                 break
 
         menus = url.split('/')[1:]
-        if menus and 'index.' == menus[-1][0:6]:
+        if menus and menus[-1][:6] == 'index.':
             menus = menus[:-1]
         if not menus:
             return '<li class="active">HOME</li>'
@@ -214,9 +221,17 @@ def generate_bc(homepage_url, url):
         breadcrumb = f'<li><a href="{homepage_url}">HOME</a></li>'
 
         for i, e in enumerate(menus[:-1]):
-            breadcrumb += separator + f'<li><a href="{homepage_url}/' +'{}/">{}</a></li>'.format('/'.join(menus[:i + 1]), get_element_name(e))
+            breadcrumb += (
+                f'{separator}<li><a href="{homepage_url}/'
+                + f"""{'/'.join(menus[:i + 1])}/">{get_element_name(e)}</a></li>"""
+            )
 
-        breadcrumb += separator + '<li aria-current="active">{}</li>'.format(get_element_name(menus[-1]))
+
+        breadcrumb += (
+            separator
+            + f'<li aria-current="active">{get_element_name(menus[-1])}</li>'
+        )
+
         return breadcrumb
     except:
         return url
